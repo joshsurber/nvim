@@ -216,6 +216,7 @@ return require('packer').startup(function(use)
 		run = ':TSUpdate',
 		config = function()
 			require'nvim-treesitter.configs'.setup {
+				auto_install = false,
 				highlight = { enable = true },
 				-- incremental_selection = { enable = true },
 				textobjects = { enable = true },
