@@ -30,9 +30,8 @@ return require('packer').startup(function(use)
 	use 'tpope/vim-fugitive'
 	use 'tpope/vim-obsession'
 	use 'tpope/vim-repeat'
-	use 'tpope/vim-vinegar'
+	-- use 'tpope/vim-vinegar'
 	use 'wellle/targets.vim' -- improve text objects
-	-- use 'm4xshen/autoclose.nvim'
 	use 'ap/vim-css-color'                 --" View colors in CSS
 	use 'ellisonleao/gruvbox.nvim'
 	use 'luisiacc/gruvbox-baby' -- , {'branch': 'main'}
@@ -96,12 +95,9 @@ return require('packer').startup(function(use)
 	}
 	use { 'windwp/nvim-ts-autotag',
 		-- use 'AndrewRadev/tagalong.vim'         --" Modify HTML tags in pairs
+		disable = true,
 		config = function ()
-			require'nvim-treesitter.configs'.setup {
-				autotag = {
-					enable = true,
-				}
-			}
+			require('nvim-ts-autotag').setup()
 		end
 	}
 	use { 'uga-rosa/ccc.nvim',
@@ -256,21 +252,26 @@ return require('packer').startup(function(use)
 		},
 		config = function()
 			local lsp = require('lsp-zero')
-			-- local cmp = require('cmp')
+			local cmp = require('cmp')
+			local cmp_select = {behavior = cmp.SelectBehavior.Select}
+
+			lsp.on_attach(function(client, bufnr)
+				local noremap = {buffer = bufnr, remap = false}
+				local bind = vim.keymap.set
+
+				bind('n', '##', '<cmd>lua vim.lsp.buf.rename()<cr>', noremap)
+				bind('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>', noremap)
+				bind('n', 'K', 'K', noremap)
+
+			end)
 
 			lsp.preset('recommended')
-			--[[ lsp.setup_nvim_cmp({
-				mapping = {
-
-					['<CR>'] = function(fallback)
-						if cmp.visible() then
-							cmp.confirm()
-						else
-							fallback() -- If you use vim-endwise, this fallback will behave the same as vim-endwise.
-						end
-					end
-				}
-			}) ]]
+			lsp.setup_nvim_cmp({
+				mapping = lsp.defaults.cmp_mappings({
+					['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+					['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+				})
+			})
 			lsp.nvim_workspace()
 			lsp.setup()
 		end
