@@ -39,6 +39,21 @@ A.nvim_create_autocmd({"BufLeave","FocusLost","InsertEnter"}, {
     end
 })
 
+ -- Do not use smart case in command line mode
+local dynamic_smartcase = A.nvim_create_augroup('dynamic_smartcase', { clear = true })
+A.nvim_create_autocmd('CmdLineEnter', {
+	group = dynamic_smartcase,
+    callback = function ()
+        A.nvim_set_option('smartcase', false)
+    end
+})
+A.nvim_create_autocmd('CmdLineLeave', {
+	group = dynamic_smartcase,
+    callback = function ()
+        A.nvim_set_option('smartcase', true)
+    end
+})
+
 -- Remove extra whitespace
 vim.cmd "match ErrorMsg '\\s\\+$'"
 A.nvim_create_autocmd('BufWritePre', {
