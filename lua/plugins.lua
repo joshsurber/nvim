@@ -1,8 +1,8 @@
 local ensure_packer = function()
 	local fn = vim.fn
-	local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+	local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+		fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
 		vim.cmd [[packadd packer.nvim]]
 		return true
 	end
@@ -24,24 +24,28 @@ return require('packer').startup(function(use)
 	-- use 'tpope/vim-sleuth'
 	-- use 'alvan/vim-closetag'
 	-- use 'flazz/vim-colorschemes' -- pretty much all vim colorschemes
-
-	use 'wbthomason/packer.nvim'
-	use 'tpope/vim-eunuch'                 -- Unix utilities
-	use 'tpope/vim-fugitive'
-	use 'tpope/vim-obsession'
-	use 'tpope/vim-repeat'
-	-- use 'tpope/vim-vinegar'
-	use 'wellle/targets.vim' -- improve text objects
-	use 'ap/vim-css-color'                 --" View colors in CSS
-	use 'ellisonleao/gruvbox.nvim'
-	use 'luisiacc/gruvbox-baby' -- , {'branch': 'main'}
-	-- use 'hail2u/vim-css3-syntax'
 	-- use 'junegunn/vim-peekaboo'            --" Show registers when summoned
-	-- use 'mattn/emmet-vim'
-	use 'nvim-treesitter/nvim-treesitter-context'
 
-	use { 'MunifTanjim/prettier.nvim',
-		disabled = true,
+	use 'wbthomason/packer.nvim' -- You are here
+	use 'tpope/vim-eunuch' -- Unix utilities
+	use 'tpope/vim-fugitive' -- Git integration
+	use 'tpope/vim-obsession' -- Easy session management
+	use 'tpope/vim-repeat' -- Do it again
+	use 'tpope/vim-vinegar' -- Make Netrw suck less
+	use 'tpope/vim-liquid' -- Support for liquid templates
+	use 'wellle/targets.vim' -- improve text objects
+	use 'ap/vim-css-color' --" View colors in CSS
+	use 'ellisonleao/gruvbox.nvim' -- Nice, dark theme
+	use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS
+	use 'mattn/emmet-vim' -- Emmet
+	use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code
+	use "p00f/nvim-ts-rainbow" -- Rainbox parentheses
+	use { 'norcalli/nvim-colorizer.lua', -- Highlight colors in a file
+		config = function()
+			require 'colorizer'.setup()
+		end
+	}
+	use { 'MunifTanjim/prettier.nvim', -- Format code
 		-- use 'prettier/vim-prettier', { 'do': 'yarn install' }
 		requires = {
 			'neovim/nvim-lspconfig',
@@ -71,10 +75,23 @@ return require('packer').startup(function(use)
 			null_ls.setup({
 				on_attach = function(client, bufnr)
 					if client.server_capabilities.documentFormattingProvider then
+						print('supports')
 						vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.formatting()<CR>")
 
 						-- format on save
 						vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+						vim.api.nvim_create_autocmd('BufWritePost', {
+							callback = function()
+								vim.lsp.buf.formatting()
+							end
+						})
+					else
+						print('doesnt support')
+						vim.api.nvim_create_autocmd('BufWritePost', {
+							callback = function()
+								vim.lsp.buf.formatting()
+							end
+						})
 					end
 
 					if client.server_capabilities.documentRangeFormattingProvider then
@@ -84,8 +101,8 @@ return require('packer').startup(function(use)
 			})
 		end
 	}
-	use { 'kylechui/nvim-surround',
-		-- use 'tpope/vim-surround'
+	use { 'kylechui/nvim-surround', -- Suround things
+		-- use 'tpope/vim-surround' REPLACED
 		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
 		config = function()
 			require("nvim-surround").setup({
@@ -93,28 +110,21 @@ return require('packer').startup(function(use)
 			})
 		end
 	}
-	use { 'windwp/nvim-ts-autotag',
-		-- use 'AndrewRadev/tagalong.vim'         --" Modify HTML tags in pairs
-		disable = true,
-		config = function ()
+	use { 'windwp/nvim-ts-autotag', -- Auto close tags and rename in pairs
+		-- use 'AndrewRadev/tagalong.vim' -- REPLACED
+		-- disable = true,
+		config = function()
 			require('nvim-ts-autotag').setup()
 		end
 	}
-	use { 'uga-rosa/ccc.nvim',
-		-- use 'vim-scripts/CSSMinister'          --" Convert color formats
-		disable = true,
-		config = function ()
+	use { 'windwp/nvim-autopairs', -- Match brackets
+		config = function()
+			require("nvim-autopairs").setup({
 
-			-- Enable true color
-			vim.opt.termguicolors = true
-			local ccc = require("ccc")
-			local mapping = ccc.mapping
-			ccc.setup({
-				-- Your favorite settings
 			})
 		end
 	}
-	use { 'akinsho/toggleterm.nvim',
+	use { 'akinsho/toggleterm.nvim', -- Easy terminal access
 		tag = '*',
 		config = function()
 			require("toggleterm").setup({
@@ -124,13 +134,13 @@ return require('packer').startup(function(use)
 			})
 		end
 	}
-	use { 'numToStr/Comment.nvim',
-		-- use 'tpope/vim-commentary'
+	use { 'numToStr/Comment.nvim', -- Comment and uncomment lines
+		-- use 'tpope/vim-commentary' -- REPLACED
 		config = function()
 			require('Comment').setup()
 		end
 	}
-	use { 'lukas-reineke/indent-blankline.nvim',
+	use { 'lukas-reineke/indent-blankline.nvim', -- Track indents
 		config = function()
 			require('indent_blankline').setup({
 				char = '▏',
@@ -141,7 +151,7 @@ return require('packer').startup(function(use)
 			})
 		end
 	}
-	use { 'nvim-lualine/lualine.nvim',
+	use { 'nvim-lualine/lualine.nvim', -- Statusline
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
 		config = function()
 			require('lualine').setup({
@@ -150,11 +160,9 @@ return require('packer').startup(function(use)
 			})
 		end
 	}
-	use { 'windwp/nvim-autopairs',
-		config = function() require("nvim-autopairs").setup {} end
-	}
-	use { 'nvim-telescope/telescope.nvim', tag = '0.1.0',
-		requires = { {'nvim-lua/plenary.nvim'} },
+	use { 'nvim-telescope/telescope.nvim', -- Fuzzy file finder
+		tag = '0.1.0',
+		requires = { { 'nvim-lua/plenary.nvim' } },
 		config = function()
 			local builtin = require('telescope.builtin')
 			vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -163,10 +171,11 @@ return require('packer').startup(function(use)
 			vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 		end
 	}
-	use { 'lewis6991/gitsigns.nvim',
-		-- use 'airblade/vim-gitgutter'
+	use { 'lewis6991/gitsigns.nvim', -- Track git changes in gutter
+		-- use 'airblade/vim-gitgutter' -- REPLACED
+		disable = true,
 		config = function()
-			require('gitsigns').setup{
+			require('gitsigns').setup {
 				on_attach = function(bufnr)
 					local gs = package.loaded.gitsigns
 
@@ -178,88 +187,89 @@ return require('packer').startup(function(use)
 
 					-- Navigation
 					map('n', ']c', function()
-					if vim.wo.diff then return ']c' end
+						if vim.wo.diff then return ']c' end
 						vim.schedule(function() gs.next_hunk() end)
 						return '<Ignore>'
-					end, {expr=true})
+					end, { expr = true })
 
 					map('n', '[c', function()
-					if vim.wo.diff then return '[c' end
+						if vim.wo.diff then return '[c' end
 						vim.schedule(function() gs.prev_hunk() end)
 						return '<Ignore>'
-					end, {expr=true})
+					end, { expr = true })
 
 					-- Actions
-					map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-					map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+					map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+					map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
 					map('n', '<leader>hS', gs.stage_buffer)
 					map('n', '<leader>hu', gs.undo_stage_hunk)
 					map('n', '<leader>hR', gs.reset_buffer)
 					map('n', '<leader>hp', gs.preview_hunk)
-					map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+					map('n', '<leader>hb', function() gs.blame_line { full = true } end)
 					map('n', '<leader>tb', gs.toggle_current_line_blame)
 					map('n', '<leader>hd', gs.diffthis)
 					map('n', '<leader>hD', function() gs.diffthis('~') end)
 					map('n', '<leader>td', gs.toggle_deleted)
 
 					-- Text object
-					map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+					map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
 				end
 			}
 		end
 	}
-	use { 'nvim-treesitter/nvim-treesitter',
+	use { 'nvim-treesitter/nvim-treesitter', -- Language awareness
 		run = ':TSUpdate',
 		config = function()
-			require'nvim-treesitter.configs'.setup {
-				auto_install = false,
+			require 'nvim-treesitter.configs'.setup {
+				auto_install = true,
 				highlight = { enable = true },
 				-- incremental_selection = { enable = true },
 				textobjects = { enable = true },
 				indent = { enable = true },
 			}
-			vim.opt.foldmethod     = 'expr'
-			vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
+			vim.opt.foldmethod = 'expr'
+			vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
 			---WORKAROUND
-			vim.api.nvim_create_autocmd({'BufEnter','BufAdd','BufNew','BufNewFile','BufWinEnter'}, {
+			vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
 				group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
 				callback = function()
-					vim.opt.foldmethod     = 'expr'
-					vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
+					vim.opt.foldmethod = 'expr'
+					vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
 				end
 			})
 			---ENDWORKAROUND
 		end
 	}
-	use { 'VonHeikemen/lsp-zero.nvim',
+	use { 'VonHeikemen/lsp-zero.nvim', -- Simple LSP setup
 		requires = {
 			-- LSP Support
-			{'neovim/nvim-lspconfig'},
-			{'williamboman/mason.nvim'},
-			{'williamboman/mason-lspconfig.nvim'},
+			{ 'neovim/nvim-lspconfig' },
+			{ 'williamboman/mason.nvim' },
+			{ 'williamboman/mason-lspconfig.nvim' },
 
 			-- Autocompletion
-			{'hrsh7th/nvim-cmp'},
-			{'hrsh7th/cmp-buffer'},
-			{'hrsh7th/cmp-path'},
-			{'saadparwaiz1/cmp_luasnip'},
-			{'hrsh7th/cmp-nvim-lsp'},
-			{'hrsh7th/cmp-nvim-lua'},
+			{ 'hrsh7th/nvim-cmp' },
+			{ 'hrsh7th/cmp-buffer' },
+			{ 'hrsh7th/cmp-path' },
+			{ 'saadparwaiz1/cmp_luasnip' },
+			{ 'hrsh7th/cmp-nvim-lsp' },
+			{ 'hrsh7th/cmp-nvim-lua' },
 
 			-- Snippets
-			{'L3MON4D3/LuaSnip'},
-			{'rafamadriz/friendly-snippets'},
+			{ 'L3MON4D3/LuaSnip' },
+			{ 'rafamadriz/friendly-snippets' },
 		},
 		config = function()
 			local lsp = require('lsp-zero')
 			local cmp = require('cmp')
-			local cmp_select = {behavior = cmp.SelectBehavior.Select}
+			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 			lsp.on_attach(function(client, bufnr)
-				local noremap = {buffer = bufnr, remap = false}
+				local noremap = { buffer = bufnr, remap = false }
 				local bind = vim.keymap.set
 
 				bind('n', '##', '<cmd>lua vim.lsp.buf.rename()<cr>', noremap)
+				bind('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', noremap)
 				bind('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>', noremap)
 				bind('n', 'K', 'K', noremap)
 
