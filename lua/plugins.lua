@@ -19,111 +19,17 @@ autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 augroup end
 ]])
 
-return require('packer').startup(function(use)
-	-- use 'tpope/vim-sensible'
-	-- use 'tpope/vim-sleuth'
-	-- use 'alvan/vim-closetag'
-	-- use 'flazz/vim-colorschemes' -- pretty much all vim colorschemes
-	-- use 'junegunn/vim-peekaboo'            --" Show registers when summoned
 
+return require('packer').startup(function(use)
+
+	--[[ neovim settings ]]
 	use 'wbthomason/packer.nvim' -- You are here
-	use 'tpope/vim-eunuch' -- Unix utilities
-	use 'tpope/vim-fugitive' -- Git integration
+	-- use 'tpope/vim-sleuth'
 	use 'tpope/vim-obsession' -- Easy session management
 	use 'tpope/vim-repeat' -- Do it again
 	use 'tpope/vim-vinegar' -- Make Netrw suck less
-	use 'tpope/vim-liquid' -- Support for liquid templates
 	use 'wellle/targets.vim' -- improve text objects
-	use 'ap/vim-css-color' --" View colors in CSS
 	use 'ellisonleao/gruvbox.nvim' -- Nice, dark theme
-	use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS
-	use 'mattn/emmet-vim' -- Emmet
-	use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code
-	use "p00f/nvim-ts-rainbow" -- Rainbox parentheses
-	use { 'norcalli/nvim-colorizer.lua', -- Highlight colors in a file
-		config = function()
-			require 'colorizer'.setup()
-		end
-	}
-	use { 'MunifTanjim/prettier.nvim', -- Format code
-		-- use 'prettier/vim-prettier', { 'do': 'yarn install' }
-		requires = {
-			'neovim/nvim-lspconfig',
-			'jose-elias-alvarez/null-ls.nvim'
-		},
-		config = function()
-			local null_ls = require("null-ls")
-			local prettier = require("prettier")
-
-			prettier.setup({
-				bin = 'prettier', -- or `'prettierd'` (v0.22+)
-				filetypes = {
-					"css",
-					"graphql",
-					"html",
-					"javascript",
-					"javascriptreact",
-					"json",
-					"less",
-					"markdown",
-					"scss",
-					"typescript",
-					"typescriptreact",
-					"yaml",
-				},
-			})
-			null_ls.setup({
-				on_attach = function(client, bufnr)
-					if client.server_capabilities.documentFormattingProvider then
-						print('supports')
-						vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.formatting()<CR>")
-
-						-- format on save
-						vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
-						vim.api.nvim_create_autocmd('BufWritePost', {
-							callback = function()
-								vim.lsp.buf.formatting()
-							end
-						})
-					else
-						print('doesnt support')
-						vim.api.nvim_create_autocmd('BufWritePost', {
-							callback = function()
-								vim.lsp.buf.formatting()
-							end
-						})
-					end
-
-					if client.server_capabilities.documentRangeFormattingProvider then
-						vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
-					end
-				end,
-			})
-		end
-	}
-	use { 'kylechui/nvim-surround', -- Suround things
-		-- use 'tpope/vim-surround' REPLACED
-		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
-		end
-	}
-	use { 'windwp/nvim-ts-autotag', -- Auto close tags and rename in pairs
-		-- use 'AndrewRadev/tagalong.vim' -- REPLACED
-		-- disable = true,
-		config = function()
-			require('nvim-ts-autotag').setup()
-		end
-	}
-	use { 'windwp/nvim-autopairs', -- Match brackets
-		config = function()
-			require("nvim-autopairs").setup({
-
-			})
-		end
-	}
 	use { 'akinsho/toggleterm.nvim', -- Easy terminal access
 		tag = '*',
 		config = function()
@@ -131,23 +37,6 @@ return require('packer').startup(function(use)
 				open_mapping = '<C-g>',
 				direction = 'horizontal',
 				shade_terminals = true
-			})
-		end
-	}
-	use { 'numToStr/Comment.nvim', -- Comment and uncomment lines
-		-- use 'tpope/vim-commentary' -- REPLACED
-		config = function()
-			require('Comment').setup()
-		end
-	}
-	use { 'lukas-reineke/indent-blankline.nvim', -- Track indents
-		config = function()
-			require('indent_blankline').setup({
-				char = '▏',
-				show_trailing_blankline_indent = false,
-				show_first_indent_level = false,
-				use_treesitter = true,
-				show_current_context = false
 			})
 		end
 	}
@@ -160,6 +49,9 @@ return require('packer').startup(function(use)
 			})
 		end
 	}
+
+	--[[ SYSTEM INTEGRATION ]]
+	use 'tpope/vim-eunuch' -- Unix utilities
 	use { 'nvim-telescope/telescope.nvim', -- Fuzzy file finder
 		tag = '0.1.0',
 		requires = { { 'nvim-lua/plenary.nvim' } },
@@ -171,9 +63,11 @@ return require('packer').startup(function(use)
 			vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 		end
 	}
+
+	--[[ GIT INTEGRATION ]]
+	use 'tpope/vim-fugitive' -- Git integration
 	use { 'lewis6991/gitsigns.nvim', -- Track git changes in gutter
-		-- use 'airblade/vim-gitgutter' -- REPLACED
-		disable = true,
+		-- disable = true,
 		config = function()
 			require('gitsigns').setup {
 				on_attach = function(bufnr)
@@ -217,6 +111,82 @@ return require('packer').startup(function(use)
 			}
 		end
 	}
+
+	--[[ GENERAL CODING ]]
+	use "p00f/nvim-ts-rainbow" -- Rainbox parentheses
+	use { 'jose-elias-alvarez/null-ls.nvim', -- Inject 3rd party executables into LSP
+		requires = {
+			'neovim/nvim-lspconfig',
+			'nvim-lua/plenary.nvim'
+		},
+		config = function()
+			local null_ls = require("null-ls")
+			-- local fmt = null_ls.builtins.formatting
+			-- local dgn = null_ls.builtins.diagnostics
+			local codeaction = null_ls.builtins.code_actions
+			local completion = null_ls.builtins.completion
+			local diagnostics = null_ls.builtins.diagnostics
+			local formatting = null_ls.builtins.formatting
+			local hover = null_ls.builtins.hover
+
+			null_ls.setup({
+				sources = {
+					-- fmt.stylua,
+					formatting.prettier.with({ extra_filetypes = { "liquid" }, }),
+				},
+			})
+		end,
+	}
+	use { 'numToStr/Comment.nvim', -- Comment and uncomment lines
+		config = function()
+			require('Comment').setup()
+		end
+	}
+	use { 'kylechui/nvim-surround', -- Suround things
+		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end
+	}
+	use { 'lukas-reineke/indent-blankline.nvim', -- Track indents
+		config = function()
+			require('indent_blankline').setup({
+				char = '▏',
+				show_trailing_blankline_indent = false,
+				show_first_indent_level = false,
+				use_treesitter = true,
+				show_current_context = false
+			})
+		end
+	}
+
+	--[[ WEB DEVELOPMENT SPECIFIC ]]
+	use 'tpope/vim-liquid' -- Support for liquid templates
+	use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS
+	use 'mattn/emmet-vim' -- Emmet
+	use { 'windwp/nvim-ts-autotag', -- Auto close tags and rename in pairs
+		-- disable = true,
+		config = function()
+			require('nvim-ts-autotag').setup()
+		end
+	}
+	use { 'windwp/nvim-autopairs', -- Match brackets
+		config = function()
+			require("nvim-autopairs").setup()
+		end
+	}
+	use { 'norcalli/nvim-colorizer.lua', -- Highlight colors in a file
+		disable = true,
+		config = function()
+			require 'colorizer'.setup()
+		end
+	}
+	use 'uga-rosa/ccc.nvim'
+
+	--[[ TREESITTER STUFF ]]
+	use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code
 	use { 'nvim-treesitter/nvim-treesitter', -- Language awareness
 		run = ':TSUpdate',
 		config = function()
@@ -240,6 +210,8 @@ return require('packer').startup(function(use)
 			---ENDWORKAROUND
 		end
 	}
+
+	--[[ LSP STUFF ]]
 	use { 'VonHeikemen/lsp-zero.nvim', -- Simple LSP setup
 		requires = {
 			-- LSP Support
@@ -287,9 +259,7 @@ return require('packer').startup(function(use)
 		end
 	}
 
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if packer_bootstrap then
+	if packer_bootstrap then -- // Automatically set up your configuration after cloning packer.nvim
 		require('packer').sync()
 	end
 end)
