@@ -15,8 +15,8 @@ local function vmap(shortcut, command) map('v', shortcut, command) end
 vim.keymap.del('', 'Y')
 
 -- Easy access to edit init.lua
-nmap("<leader>ve", ":edit $MYVIMRC<cr>")
-nmap("<leader>vs", ":source $MYVIMRC<cr>")
+nmap("<leader>ve", ":tabedit $MYVIMRC<cr>")
+nmap("<leader>vs", ":source $MYVIMRC<cr>:PackerSync<cr>")
 nmap("<leader>vp", ":PackerSync<cr>")
 
 -- Window nav and resizing
