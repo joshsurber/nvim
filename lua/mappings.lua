@@ -83,7 +83,7 @@ vmap('<leader>Y', '"+Y')
 
 -- Change modes easier
 imap("jk", "<esc>")
--- vmap("jk", "<esc>")
+vmap("jkjk", "<esc>")
 tmap("<Esc>", "<C-\\><C-n>")
 
 -- Save and quit easier
