@@ -3,7 +3,8 @@ set fdm=expr fde=getline(v\:lnum)=~'^\\s*$'&&getline(v\:lnum+1)=~'\\S'?'<1'\:1
 ]]
 
 -- Convenience functions for setting mappings
-local function map(mode, shortcut, command) vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true }) end
+local function map(mode, shortcut, command) vim.keymap.set(mode, shortcut, command, { noremap = true, silent = true }) end
+
 local function cmap(shortcut, command) map('c', shortcut, command) end
 local function imap(shortcut, command) map('i', shortcut, command) end
 local function nmap(shortcut, command) map('n', shortcut, command) end
@@ -11,7 +12,7 @@ local function tmap(shortcut, command) map('t', shortcut, command) end
 local function vmap(shortcut, command) map('v', shortcut, command) end
 
 -- You can have my Y when you pry it from my cold, dead hands!
-vim.api.nvim_del_keymap('', 'Y')
+vim.keymap.del('', 'Y')
 
 -- Easy access to edit init.lua
 nmap("<leader>ve", ":edit $MYVIMRC<cr>")

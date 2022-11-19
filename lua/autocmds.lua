@@ -14,12 +14,12 @@ A.nvim_create_autocmd('TermOpen', {
 
 -- Help window on right, navigate helptags with enter and backspace
 A.nvim_create_autocmd('FileType', {
-    pattern = "help",
-    callback = function ()
-        vim.cmd "wincmd L"
-        vim.api.nvim_buf_set_keymap(0, 'n','<CR>','<C-]>', { noremap = true, silent = true })
-        vim.api.nvim_buf_set_keymap(0, 'n','<BS>','<C-T>', { noremap = true, silent = true })
-    end
+	pattern = "help",
+	callback = function()
+		vim.cmd "wincmd L"
+		vim.keymap.set('n', '<CR>', '<C-]>', { noremap = true, silent = true, buffer = true })
+		vim.keymap.set('n', '<BS>', '<C-T>', { noremap = true, silent = true, buffer = true })
+	end
 })
 
 -- Use relativenumber in current window only
