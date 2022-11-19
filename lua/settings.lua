@@ -33,7 +33,7 @@ o.softtabstop = -1 -- If negative, shiftwidth value is used
 o.cindent = true
 
 -- Spellcheck
-o.spell =  true -- Spellcheck by default
+o.spell = true -- Spellcheck by default
 o.dictionary = "/usr/share/dict/words"
 
 -- Wildmode ie completion
@@ -41,7 +41,7 @@ o.wildmode = "list:longest,full" -- Expand as much as possible, then show the li
 o.wildignorecase = true -- Case insensitive completion
 
 -- Cursors and scrolling
-o.cursorline = true  -- Highlight current line
+o.cursorline = true -- Highlight current line
 o.scrolloff = 3
 o.sidescrolloff = 3
 
@@ -71,7 +71,7 @@ o.splitright = true
 o.keywordprg = ':help' -- 'K' searches vim docs
 o.lazyredraw = true -- Don't redraw screen while executing macros
 o.timeout = false -- Time out on key codes but not mappings. Basically this makes terminal Vim work sanely.
-o.swapfile = false-- How often does vim crash anyway?
+o.swapfile = false -- How often does vim crash anyway?
 --o.path+=** -- Allows for fuzzy-like :find-ing
 -- o.clipboard = 'unnamedplus' Makes neovim and host OS clipboard play nicely with each other
 -- After using it, I prefer the mappings I have set up to <leader>y/p
