@@ -70,10 +70,10 @@ vmap('<', '<gv')
 vmap('=', '=gv')
 
 -- Easier access to system clipboard
-nmap('<leader>p', '"+p')
+nmap('<leader>p', '"+p==')
 nmap('<leader>y', '"+y')
 vmap('<leader>y', '"+y')
-nmap('<leader>P', '"+P')
+nmap('<leader>P', '"+P==')
 nmap('<leader>Y', '"+Y')
 vmap('<leader>Y', '"+Y')
 
