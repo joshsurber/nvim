@@ -42,8 +42,7 @@ nmap("k", "gk")
 map("", "<C-z>", ":set wrap!<CR>:set wrap?<CR>")
 
 --  Folding
-nmap("<leader><leader>", "za")
-vmap("<leader><leader>", "za")
+map({ 'n', 'v' }, "<leader><leader>", "za")
 
 -- Searching nicities
 nmap('*', '*N') -- Fix * (Keep the cursor position, don't move to next match)

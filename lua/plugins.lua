@@ -293,3 +293,4 @@ return require('packer').startup(function(use)
 		require('packer').sync()
 	end
 end)
+-- vim: foldlevel=1
