@@ -24,12 +24,21 @@ return require('packer').startup(function(use)
 
 	--[[ neovim settings ]]
 	use 'wbthomason/packer.nvim' -- You are here
-	-- use 'tpope/vim-sleuth'
 	use 'tpope/vim-obsession' -- Easy session management
 	use 'tpope/vim-repeat' -- Do it again
 	use 'tpope/vim-vinegar' -- Make Netrw suck less
 	use 'wellle/targets.vim' -- improve text objects
-	use 'ellisonleao/gruvbox.nvim' -- Nice, dark theme
+	use 'tpope/vim-sleuth'
+	use { 'karb94/neoscroll.nvim',
+		config = function()
+			require('neoscroll').setup()
+		end
+	}
+	use { 'ellisonleao/gruvbox.nvim',
+		config = function()
+			vim.cmd [[ colorscheme gruvbox]]
+		end
+	}
 	use { 'akinsho/toggleterm.nvim', -- Easy terminal access
 		tag = '*',
 		config = function()
@@ -46,6 +55,7 @@ return require('packer').startup(function(use)
 			require('lualine').setup({
 				theme = 'gruvbox',
 				icons_enabled = true,
+				sections = { lualine_c = { "%{ObsessionStatus()}" } }
 			})
 		end
 	}
@@ -61,6 +71,7 @@ return require('packer').startup(function(use)
 			vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 			vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 			vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+			vim.keymap.set('n', '<leader>fv', builtin.vim_options, {})
 		end
 	}
 
@@ -165,7 +176,7 @@ return require('packer').startup(function(use)
 	--[[ WEB DEVELOPMENT SPECIFIC ]]
 	use 'tpope/vim-liquid' -- Support for liquid templates
 	use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS
-	use 'mattn/emmet-vim' -- Emmet
+	use 'uga-rosa/ccc.nvim'
 	use { 'windwp/nvim-ts-autotag', -- Auto close tags and rename in pairs
 		-- disable = true,
 		config = function()
@@ -183,7 +194,6 @@ return require('packer').startup(function(use)
 			require 'colorizer'.setup()
 		end
 	}
-	use 'uga-rosa/ccc.nvim'
 
 	--[[ TREESITTER STUFF ]]
 	use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code

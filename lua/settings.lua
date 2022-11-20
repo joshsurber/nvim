@@ -45,8 +45,6 @@ o.cursorline = true -- Highlight current line
 o.scrolloff = 3
 o.sidescrolloff = 3
 
-o.foldtext = "v:folddashes.substitute(getline(v:foldstart),'/\\\\*\\\\\\|\\\\*/\\\\\\|{{{\\\\d\\\\=','','g')"
-
 -- Line numbers
 o.number = true
 o.relativenumber = true -- Current line actual line number, other relative to cursor

@@ -46,7 +46,7 @@ nmap("j", "gj")
 nmap("k", "gk")
 map("", "<C-z>", ":set wrap!<CR>:set wrap?<CR>")
 
---  Folding
+-- Folding
 map({ 'n', 'v' }, "<leader><leader>", "za")
 
 -- Searching nicities
@@ -56,8 +56,8 @@ nmap('N', 'Nzz') -- ...keep the cursor in center
 nmap("<leader>\\", "<cmd>noh<cr>") --  remove search highlighting
 nmap("<esc>", "<cmd>noh<cr>") --  remove search highlighting
 
---  Fix oddities with visual selections
---  Fix linewise visual selection of various text objects
+-- Fix oddities with visual selections
+-- Fix linewise visual selection of various text objects
 nmap("VV", "V")
 nmap("Vit", "vitVkoj")
 nmap("Vat", "vatV")
@@ -83,7 +83,7 @@ vmap('<leader>Y', '"+Y')
 
 -- Change modes easier
 imap("jk", "<esc>")
-vmap("jkjk", "<esc>")
+-- vmap("jkjk", "<esc>")
 tmap("<Esc>", "<C-\\><C-n>")
 
 -- Save and quit easier
@@ -95,12 +95,12 @@ nmap("QQ", ":q<cr>")
 
 -- Move line up and down in NORMAL and VISUAL modes
 -- -- Reference: https://vim.fandom.com/wiki/Moving_lines_up_or_down
-nmap('<C-j>', '<CMD>move .+1<CR>==')
-nmap('<C-k>', '<CMD>move .-2<CR>==')
-vmap('<C-j>', ":move '>+1<CR>gv=gv")
-vmap('<C-k>', ":move '<-2<CR>gv=gv")
-imap('<C-j>', '<Esc>:m .+1<CR>==gi')
-imap('<C-k>', '<Esc>:m .-2<CR>==gi')
+nmap('<A-j>', '<CMD>move .+1<CR>==')
+nmap('<A-k>', '<CMD>move .-2<CR>==')
+vmap('<A-j>', ":move '>+1<CR>gv=gv")
+vmap('<A-k>', ":move '<-2<CR>gv=gv")
+imap('<A-j>', '<Esc>:m .+1<CR>==gi')
+imap('<A-k>', '<Esc>:m .-2<CR>==gi')
 
 -- Simplify accessing keys chorded to my escape key
 map('!', '<A-ESC>', '~') -- Tilde is a third layer on my esc key. Fuck that
