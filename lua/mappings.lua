@@ -42,8 +42,8 @@ nmap('<leader>o', 'o<ESC>cc<ESC>')
 nmap('<leader>O', 'O<ESC>cc<ESC>')
 
 -- Lines wrap. Deal with it...
-nmap("j", "gj")
-nmap("k", "gk")
+nmap("<DOWN>", "gj")
+nmap("<UP>", "gk")
 map("", "<C-z>", ":set wrap!<CR>:set wrap?<CR>")
 
 -- Folding
