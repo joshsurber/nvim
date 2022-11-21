@@ -207,12 +207,15 @@ return require('packer').startup(function(use)
 				textobjects = { enable = true },
 				indent = { enable = true },
 			}
-			vim.opt.foldmethod = 'expr'
-			vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
+			if not vim.wo.diff then
+				vim.opt.foldmethod = 'expr'
+				vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
+			end
 			---WORKAROUND
 			vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
 				group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
 				callback = function()
+					if vim.wo.diff then return end
 					vim.opt.foldmethod = 'expr'
 					vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
 				end
