@@ -2,16 +2,14 @@
 
 vim.g.mapleader = " "
 
-require('plugins')
-require('settings')
-require('mappings')
-require('autocmds')
-
---" If we haven't installed gruvbox yet, use a build-in colorscheme
--- vim.o.background = "dark" -- or "light" for light mode
-vim.cmd [[silent! colorscheme evening]]
-vim.cmd [[silent! colorscheme gruvbox]]
--- vim.cmd [[silent! colorscheme gruvbox-baby]]
+require 'user.plugins'
+require 'user.settings'
+require 'user.mappings'
+require 'user.autocmds'
+require 'user.colorscheme'
+require 'user.bufferline'
+require 'user.telescope'
+require 'user.gitsigns'
 
 -- Neovide config
 vim.o.guifont = "CascadiaCode_Nerd_Font,Cascadia_Code_PL,Hack:h10"

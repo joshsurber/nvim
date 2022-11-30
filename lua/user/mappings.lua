@@ -106,8 +106,13 @@ imap('<A-k>', '<Esc>:m .-2<CR>==gi')
 map('!', '<A-ESC>', '~') -- Tilde is a third layer on my esc key. Fuck that
 imap('<A-\'>', '`') -- Backtick is also a function layer on esc. To hell with that shit
 
-nmap('Q', '@q') --run default macro (recorded with qq)
+-- nmap('Q', '@q') --run default macro (recorded with qq)
 
 nmap("<tab>", "%")
+
+nmap('<S-h>',	':bprev<cr>')
+nmap( '[b',		':bprev<cr>')
+nmap('<S-l>',	':bnext<cr>')
+nmap(']b',		':bnext<cr>')
 
 nmap('<C-e>', ':Lexplore<CR>')
