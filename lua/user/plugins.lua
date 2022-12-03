@@ -29,62 +29,29 @@ return require('packer').startup(function(use)
 
 	--[[ neovim settings ]]
 	use 'moll/vim-bbye' -- Close buffer without exit
-	use 'tpope/vim-obsession' -- Easy session management
+	-- use 'tpope/vim-obsession' -- Easy session management
 	use 'tpope/vim-repeat' -- Do it again
 	use 'tpope/vim-vinegar' -- Make Netrw suck less
 	use 'wellle/targets.vim' -- improve text objects
 	use 'tpope/vim-sleuth' -- Automagically determine tabwidth etc
-	use { 'karb94/neoscroll.nvim',
-		config = function()
-			require('neoscroll').setup()
-		end
-	}
-	use { 'ellisonleao/gruvbox.nvim',
-		config = function()
-			vim.cmd [[ colorscheme gruvbox]]
-		end
-	}
-	use { 'akinsho/toggleterm.nvim', -- Easy terminal access
-		tag = '*',
-		config = function()
-			require("toggleterm").setup({
-				open_mapping = '<C-g>',
-				direction = 'horizontal',
-				shade_terminals = true
-			})
-		end
-	}
-	use { 'nvim-lualine/lualine.nvim', -- Statusline
-		config = function()
-			require('lualine').setup({
-				theme = 'gruvbox',
-				icons_enabled = true,
-				sections = { lualine_c = { "%{ObsessionStatus()}" } }
-			})
-		end
-	}
+	use 'karb94/neoscroll.nvim' -- Smooth scrolling
+	use 'ellisonleao/gruvbox.nvim'
+	use 'akinsho/toggleterm.nvim' -- Easy terminal access
+	use 'nvim-lualine/lualine.nvim' -- Statusline
+	use 'rmagatti/auto-session'
 
 	--[[ SYSTEM INTEGRATION ]]
 	use 'tpope/vim-eunuch' -- Unix utilities
-	use { 'nvim-telescope/telescope.nvim', tag = '0.1.0', } -- Fuzzy file finder
+	use 'nvim-telescope/telescope.nvim' -- Fuzzy file finder
 	use 'akinsho/bufferline.nvim'
-
 
 	--[[ GIT INTEGRATION ]]
 	use 'tpope/vim-fugitive' -- Git integration
 	use 'lewis6991/gitsigns.nvim' -- Track git changes in gutter
 
 	--[[ GENERAL CODING ]]
-	use { 'numToStr/Comment.nvim', -- Comment and uncomment lines
-		config = function()
-			require('Comment').setup()
-		end
-	}
-	use { 'kylechui/nvim-surround', -- Suround things
-		config = function()
-			require("nvim-surround").setup()
-		end
-	}
+	use 'numToStr/Comment.nvim' -- Comment and uncomment lines
+	use 'kylechui/nvim-surround' -- Suround things
 	use { 'lukas-reineke/indent-blankline.nvim', -- Track indents
 		config = function()
 			require('indent_blankline').setup({
