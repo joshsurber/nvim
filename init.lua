@@ -1,5 +1,3 @@
---" Personal vimrc from Josh Surber http://github.com/joshsurber
-
 vim.g.mapleader = " "
 
 require 'user.plugins'
@@ -10,6 +8,9 @@ require 'user.colorscheme'
 require 'user.bufferline'
 require 'user.telescope'
 require 'user.gitsigns'
+require 'user.treesitter'
+require 'user.lsp.lsp-zero'
+require 'user.lsp.null-ls'
 
 -- Neovide config
 vim.o.guifont = "CascadiaCode_Nerd_Font,Cascadia_Code_PL,Hack:h10"

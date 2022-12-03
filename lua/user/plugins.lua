@@ -33,7 +33,7 @@ return require('packer').startup(function(use)
 	use 'tpope/vim-repeat' -- Do it again
 	use 'tpope/vim-vinegar' -- Make Netrw suck less
 	use 'wellle/targets.vim' -- improve text objects
-	use 'tpope/vim-sleuth'
+	use 'tpope/vim-sleuth' -- Automagically determine tabwidth etc
 	use { 'karb94/neoscroll.nvim',
 		config = function()
 			require('neoscroll').setup()
@@ -66,9 +66,7 @@ return require('packer').startup(function(use)
 
 	--[[ SYSTEM INTEGRATION ]]
 	use 'tpope/vim-eunuch' -- Unix utilities
-	use { 'nvim-telescope/telescope.nvim', -- Fuzzy file finder
-		tag = '0.1.0',
-	}
+	use { 'nvim-telescope/telescope.nvim', tag = '0.1.0', } -- Fuzzy file finder
 	use 'akinsho/bufferline.nvim'
 
 
@@ -77,41 +75,14 @@ return require('packer').startup(function(use)
 	use 'lewis6991/gitsigns.nvim' -- Track git changes in gutter
 
 	--[[ GENERAL CODING ]]
-	use "p00f/nvim-ts-rainbow" -- Rainbox parentheses
-	use { 'jose-elias-alvarez/null-ls.nvim', -- Inject 3rd party executables into LSP
-		requires = {
-			'neovim/nvim-lspconfig',
-			'nvim-lua/plenary.nvim'
-		},
-		config = function()
-			local null_ls = require("null-ls")
-			-- local fmt = null_ls.builtins.formatting
-			-- local dgn = null_ls.builtins.diagnostics
-			local codeaction = null_ls.builtins.code_actions
-			local completion = null_ls.builtins.completion
-			local diagnostics = null_ls.builtins.diagnostics
-			local formatting = null_ls.builtins.formatting
-			local hover = null_ls.builtins.hover
-
-			null_ls.setup({
-				sources = {
-					-- fmt.stylua,
-					formatting.prettier.with({ extra_filetypes = { "liquid" }, }),
-				},
-			})
-		end,
-	}
 	use { 'numToStr/Comment.nvim', -- Comment and uncomment lines
 		config = function()
 			require('Comment').setup()
 		end
 	}
 	use { 'kylechui/nvim-surround', -- Suround things
-		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
 		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
+			require("nvim-surround").setup()
 		end
 	}
 	use { 'lukas-reineke/indent-blankline.nvim', -- Track indents
@@ -149,81 +120,28 @@ return require('packer').startup(function(use)
 	}
 
 	--[[ TREESITTER STUFF ]]
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', } -- Language awareness
 	use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code
-	use { 'nvim-treesitter/nvim-treesitter', -- Language awareness
-		run = ':TSUpdate',
-		config = function()
-			require 'nvim-treesitter.configs'.setup {
-				auto_install = true,
-				highlight = { enable = true },
-				-- incremental_selection = { enable = true },
-				textobjects = { enable = true },
-				indent = { enable = true },
-			}
-			if not vim.wo.diff then
-				vim.opt.foldmethod = 'expr'
-				vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
-			end
-			---WORKAROUND
-			vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
-				group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
-				callback = function()
-					if vim.wo.diff then return end
-					vim.opt.foldmethod = 'expr'
-					vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
-				end
-			})
-			---ENDWORKAROUND
-		end
-	}
+	use "p00f/nvim-ts-rainbow" -- Rainbox parentheses
 
 	--[[ LSP STUFF ]]
-	use { 'VonHeikemen/lsp-zero.nvim', -- Simple LSP setup
-		requires = {
-			-- LSP Support
-			{ 'neovim/nvim-lspconfig' },
-			{ 'williamboman/mason.nvim' },
-			{ 'williamboman/mason-lspconfig.nvim' },
+	-- LSP Support
+	use 'neovim/nvim-lspconfig'
+	use 'williamboman/mason.nvim'
+	use 'williamboman/mason-lspconfig.nvim'
+	-- Autocompletion
+	use 'hrsh7th/nvim-cmp'
+	use 'hrsh7th/cmp-buffer'
+	use 'hrsh7th/cmp-path'
+	use 'saadparwaiz1/cmp_luasnip'
+	use 'hrsh7th/cmp-nvim-lsp'
+	use 'hrsh7th/cmp-nvim-lua'
+	-- Snippets
+	use 'L3MON4D3/LuaSnip'
+	use 'rafamadriz/friendly-snippets'
 
-			-- Autocompletion
-			{ 'hrsh7th/nvim-cmp' },
-			{ 'hrsh7th/cmp-buffer' },
-			{ 'hrsh7th/cmp-path' },
-			{ 'saadparwaiz1/cmp_luasnip' },
-			{ 'hrsh7th/cmp-nvim-lsp' },
-			{ 'hrsh7th/cmp-nvim-lua' },
-
-			-- Snippets
-			{ 'L3MON4D3/LuaSnip' },
-			{ 'rafamadriz/friendly-snippets' },
-		},
-		config = function()
-			local lsp = require('lsp-zero')
-			local cmp = require('cmp')
-			local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-			lsp.on_attach(function(client, bufnr)
-				local noremap = { buffer = bufnr, remap = false }
-				local bind = vim.keymap.set
-
-				bind('n', '##', '<cmd>lua vim.lsp.buf.rename()<cr>', noremap)
-				bind('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', noremap)
-				bind('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>', noremap)
-				bind('n', 'K', 'K', noremap)
-
-			end)
-
-			lsp.preset('recommended')
-			lsp.setup_nvim_cmp({
-				mapping = lsp.defaults.cmp_mappings({
-					['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-					['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-				})
-			})
-			lsp.nvim_workspace()
-			lsp.setup()
-		end
-	}
+	use 'VonHeikemen/lsp-zero.nvim' -- Simple LSP setup
+	use 'jose-elias-alvarez/null-ls.nvim' -- Inject 3rd party executables into LSP
 
 	if packer_bootstrap then -- // Automatically set up your configuration after cloning packer.nvim
 		require('packer').sync()
