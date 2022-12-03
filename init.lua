@@ -15,6 +15,8 @@ require 'user.lsp.null-ls'
 require 'user.toggleterm'
 require 'user.lualine'
 require 'user.auto-session'
+require 'user.indent-blankline'
+require 'user.which-key'
 
 -- Neovide config
 vim.o.guifont = "CascadiaCode_Nerd_Font,Cascadia_Code_PL,Hack:h10"

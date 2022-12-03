@@ -18,8 +18,6 @@ autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 "autocmd BufWritePost plugins.lua source <afile> | PackerSync
 augroup end
 ]])
-
-
 return require('packer').startup(function(use)
 
 	--[[ plugin dependancies]]
@@ -29,16 +27,18 @@ return require('packer').startup(function(use)
 
 	--[[ neovim settings ]]
 	use 'moll/vim-bbye' -- Close buffer without exit
-	use 'tpope/vim-obsession' -- Easy session management
+	-- use 'tpope/vim-obsession' -- Easy session management
 	use 'tpope/vim-repeat' -- Do it again
-	use 'tpope/vim-vinegar' -- Make Netrw suck less
+	-- use 'tpope/vim-vinegar' -- Make Netrw suck less
 	use 'wellle/targets.vim' -- improve text objects
-	use 'tpope/vim-sleuth' -- Automagically determine tabwidth etc
+	-- use 'tpope/vim-sleuth' -- Automagically determine tabwidth etc
 	use 'karb94/neoscroll.nvim' -- Smooth scrolling
 	use 'ellisonleao/gruvbox.nvim'
 	use 'akinsho/toggleterm.nvim' -- Easy terminal access
 	use 'nvim-lualine/lualine.nvim' -- Statusline
 	use 'rmagatti/auto-session'
+	use "folke/which-key.nvim"
+
 
 	--[[ SYSTEM INTEGRATION ]]
 	use 'tpope/vim-eunuch' -- Unix utilities
@@ -52,25 +52,13 @@ return require('packer').startup(function(use)
 	--[[ GENERAL CODING ]]
 	use 'numToStr/Comment.nvim' -- Comment and uncomment lines
 	use 'kylechui/nvim-surround' -- Suround things
-	use { 'lukas-reineke/indent-blankline.nvim', -- Track indents
-		config = function()
-			require('indent_blankline').setup({
-				char = '▏',
-				show_trailing_blankline_indent = false,
-				show_first_indent_level = false,
-				use_treesitter = true,
-				show_current_context = false
-			})
-		end
-	}
+	use 'lukas-reineke/indent-blankline.nvim' -- Track indents
 
 	--[[ WEB DEVELOPMENT SPECIFIC ]]
 	use 'tpope/vim-liquid' -- Support for liquid templates
 	use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS
-	use 'uga-rosa/ccc.nvim'
 	use 'windwp/nvim-ts-autotag' -- Auto close tags and rename in pairs
 	use 'windwp/nvim-autopairs' -- Match brackets
-	-- use 'norcalli/nvim-colorizer.lua' -- Highlight colors in a file
 
 	--[[ TREESITTER STUFF ]]
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', } -- Language awareness

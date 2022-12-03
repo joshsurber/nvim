@@ -14,7 +14,6 @@ end
 local plugins = {
 	'nvim-ts-autotag',
 	'nvim-autopairs',
-	'colorizer',
 	'nvim-surround',
 	'Comment',
 	'neoscroll',

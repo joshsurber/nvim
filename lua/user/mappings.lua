@@ -89,10 +89,10 @@ tmap("<Esc>", "<C-\\><C-n>")
 -- Save and quit easier
 nmap("<leader>w", "<cmd>w<cr>")
 nmap("<leader>W", "<cmd>wall<cr>")
-nmap("<leader>qq", "<cmd>q<cr>")
+nmap("<leader>qq", "<cmd>Bdelete<cr>")
 nmap("<leader>Q", "<cmd>qall<cr>")
 nmap("QQ", ":q<cr>")
-nmap("QQ", ":Bdelete<cr>")
+-- nmap("QQ", ":Bdelete<cr>")
 
 -- Move line up and down in NORMAL and VISUAL modes
 -- -- Reference: https://vim.fandom.com/wiki/Moving_lines_up_or_down

@@ -13,7 +13,7 @@ for key, value in pairs({ -- NeoVim settings
 	-- o.clipboard = 'unnamedplus',-- Makes neovim and host OS clipboard play nicely with each other
 	relativenumber = true, -- Current line actual line number, other relative to cursor
 	scrolloff = 3,
-	sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+	sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions",
 	shiftwidth = 0,
 	showbreak = "↪", -- Indicator at the start of wrapped lines
 	showmatch = true, -- Highlight matching brackets as you type
@@ -25,6 +25,7 @@ for key, value in pairs({ -- NeoVim settings
 	splitright = true,
 	swapfile = false, -- How often does vim crash anyway?
 	tabstop = 4,
+	termguicolors = true,
 	timeout = false, -- Time out on key codes but not mappings. Basically this makes terminal Vim work sanely.
 	wildignorecase = true, -- Case insensitive completion
 	wildmode = "list:longest,full", -- Expand as much as possible, then show the list
