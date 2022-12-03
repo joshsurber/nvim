@@ -1,0 +1,169 @@
+snippet ! Basic CSS reset and skeleton/
+  /* RESET and BASE STYLES */
+  :root {
+    /* VARIABLES */
+    --hsl-hs-brand: 180 50%;
+    --hsl-l-brand: 50%;
+    --hsl-hs-accent: 180 50%;
+    --hsl-l-accent: 50%;
+
+    --hsl-white: var(--hsl-hs-brand) 95%;
+    --hsl-black: var(--hsl-hs-brand) 5%;
+    /* --hsl-white: var(--hsl-hs-accent) 95%; */
+    /* --hsl-black: var(--hsl-hs-accent) 5%; */
+
+    --hsl-brand: var(--hsl-hs-brand) var(--hsl-l-brand);
+    --hsl-accent: var(--hsl-hs-accent) var(--hsl-l-accent);
+
+    --color-brand: hsl(var(--hsl-brand));
+    --color-accent: hsl(var(--hsl-accent));
+    --color-white: hsl(var(--hsl-white));
+    --color-black: hsl(var(--hsl-black));
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    line-height: calc(1em + 0.5rem);
+  }
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+  body {
+    line-height: 1.5;
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+  }
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+  [role="list"] {
+    list-style: none;
+  }
+  em,
+  i,
+  .italic {
+    font-style: italic;
+  }
+  strong,
+  b,
+  .bold {
+    font-weight: var(--fw-bold, bold);
+  }
+
+  /* LAYOUT */
+  .flow * + * {
+    margin-block-start: 1em;
+  }
+  .even-columns {
+    display: grid;
+    gap: var(--gap, 1rem);
+  }
+  @media (min-width: 50em) {
+    .even-columns {
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+    }
+  }
+
+  .container {
+    --_padding: var(--padding, 1rem);
+    --_width: var(--width, 60ch);
+
+    inline-size: min(100% - var(--_padding) * 2, var(--_width));
+    margin-inline: auto;
+  }
+  .container .fullbleed {
+    margin: 0 calc(50% - 50vw);
+  }
+  .full-grid {
+    grid-column: 1/-1;
+    text-align: center;
+  }
+  .stacked {
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+  }
+  .stacked > * {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+  }
+  .stacked > .media {
+    z-index: -1;
+  }
+
+  /* COMPONENTS */
+
+  /* UTILITY */
+  .mx-auto {
+    margin-inline: auto;
+  }
+
+  /* ACCESSABILITY */
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  .skiplink {
+    position: fixed;
+    inset: 0 0 auto;
+    padding: 1em;
+    background: var(--color-accent);
+    color: var(--color-white);
+    z-index: 9999;
+    text-align: center;
+    translate: 0 -100%;
+    transition: translate 250ms ease-in-out;
+  }
+  .skiplink:focus {
+    translate: 0;
+  }
+  .hidden,
+  [hidden] {
+    display: none !important;
+  }
+  .sr-only {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+  .sr-only.focusable:active,
+  .sr-only.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    white-space: inherit;
+    width: auto;
+  }
+  .invisible {
+    visibility: hidden;
+  }
+
+  /* EXCEPTIONS */
