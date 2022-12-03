@@ -29,7 +29,7 @@ return require('packer').startup(function(use)
 
 	--[[ neovim settings ]]
 	use 'moll/vim-bbye' -- Close buffer without exit
-	-- use 'tpope/vim-obsession' -- Easy session management
+	use 'tpope/vim-obsession' -- Easy session management
 	use 'tpope/vim-repeat' -- Do it again
 	use 'tpope/vim-vinegar' -- Make Netrw suck less
 	use 'wellle/targets.vim' -- improve text objects
@@ -68,28 +68,14 @@ return require('packer').startup(function(use)
 	use 'tpope/vim-liquid' -- Support for liquid templates
 	use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS
 	use 'uga-rosa/ccc.nvim'
-	use { 'windwp/nvim-ts-autotag', -- Auto close tags and rename in pairs
-		-- disable = true,
-		config = function()
-			require('nvim-ts-autotag').setup()
-		end
-	}
-	use { 'windwp/nvim-autopairs', -- Match brackets
-		config = function()
-			require("nvim-autopairs").setup()
-		end
-	}
-	use { 'norcalli/nvim-colorizer.lua', -- Highlight colors in a file
-		disable = true,
-		config = function()
-			require 'colorizer'.setup()
-		end
-	}
+	use 'windwp/nvim-ts-autotag' -- Auto close tags and rename in pairs
+	use 'windwp/nvim-autopairs' -- Match brackets
+	-- use 'norcalli/nvim-colorizer.lua' -- Highlight colors in a file
 
 	--[[ TREESITTER STUFF ]]
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', } -- Language awareness
 	use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code
-	use "p00f/nvim-ts-rainbow" -- Rainbox parentheses
+	use "p00f/nvim-ts-rainbow" -- Rainbow parentheses
 
 	--[[ LSP STUFF ]]
 	-- LSP Support

@@ -92,6 +92,7 @@ nmap("<leader>W", "<cmd>wall<cr>")
 nmap("<leader>qq", "<cmd>q<cr>")
 nmap("<leader>Q", "<cmd>qall<cr>")
 nmap("QQ", ":q<cr>")
+nmap("QQ", ":Bdelete<cr>")
 
 -- Move line up and down in NORMAL and VISUAL modes
 -- -- Reference: https://vim.fandom.com/wiki/Moving_lines_up_or_down
@@ -106,13 +107,13 @@ imap('<A-k>', '<Esc>:m .-2<CR>==gi')
 map('!', '<A-ESC>', '~') -- Tilde is a third layer on my esc key. Fuck that
 imap('<A-\'>', '`') -- Backtick is also a function layer on esc. To hell with that shit
 
--- nmap('Q', '@q') --run default macro (recorded with qq)
+nmap('<C-q>', '@q') --run default macro (recorded with qq)
 
-nmap("<tab>", "%")
+-- nmap("<tab>", "%")
 
-nmap('<S-h>',	':bprev<cr>')
-nmap( '[b',		':bprev<cr>')
-nmap('<S-l>',	':bnext<cr>')
-nmap(']b',		':bnext<cr>')
+nmap('<S-h>', ':bprev<cr>')
+nmap('[b', ':bprev<cr>')
+nmap('<S-l>', ':bnext<cr>')
+nmap(']b', ':bnext<cr>')
 
 nmap('<C-e>', ':Lexplore<CR>')

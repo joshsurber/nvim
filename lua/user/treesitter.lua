@@ -1,7 +1,6 @@
 local ok, ts = pcall(require, 'nvim-treesitter.configs')
 if not ok then return vim.notify('treesitter not loaded') end
 
--- require 'nvim-treesitter.configs'.setup {
 ts.setup {
 	auto_install = true,
 	highlight = { enable = true },

@@ -2,4 +2,3 @@
 -- vim.o.background = "dark" -- or "light" for light mode
 vim.cmd [[silent! colorscheme evening]]
 vim.cmd [[silent! colorscheme gruvbox]]
--- vim.cmd [[silent! colorscheme gruvbox-baby]]

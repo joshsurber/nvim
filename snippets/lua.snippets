@@ -1,0 +1,4 @@
+snippet preq Require a module in a protected way
+  local ok, ${1} = pcall(require, '${1}')
+  if not ok then return vim.notify('${1} not loaded') end
+  ${1}.setup(${0:${VISUAL}})
