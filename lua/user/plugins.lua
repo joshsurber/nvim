@@ -74,9 +74,7 @@ return require('packer').startup(function(use)
 
 	--[[ GIT INTEGRATION ]]
 	use 'tpope/vim-fugitive' -- Git integration
-	use { 'lewis6991/gitsigns.nvim', -- Track git changes in gutter
-		-- disable = true,
-	}
+	use 'lewis6991/gitsigns.nvim' -- Track git changes in gutter
 
 	--[[ GENERAL CODING ]]
 	use "p00f/nvim-ts-rainbow" -- Rainbox parentheses
