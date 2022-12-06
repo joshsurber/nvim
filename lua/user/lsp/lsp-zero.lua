@@ -31,3 +31,4 @@ lsp.setup()
 
 require("luasnip.loaders.from_snipmate").lazy_load()
 vim.cmd [[ command! LuaSnipEdit :lua require("luasnip.loaders").edit_snippet_files() ]]
+vim.cmd [[ command! Format :lua vim.lsp.buf.formatting_sync() ]]

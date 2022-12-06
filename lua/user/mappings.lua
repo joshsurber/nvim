@@ -123,6 +123,7 @@ map('n', '<leader>lo', '<cmd>lua vim.lsp.buf.type_definition()<cr>', { desc = 'G
 map('n', '<leader>lr', '<cmd>lua vim.lsp.buf.references()<cr>', { desc = 'List referencess in quickfix window' })
 map('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', { desc = 'Rename symbol under cursor' })
 map('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', { desc = 'Select a code action' })
+map('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', { desc = 'Format buffer' })
 map('n', '<leader>ll', '<cmd>lua vim.diagnostic.open_float()<cr>', { desc = 'Show diagnostics in floating window' })
 map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', { desc = 'Go to previous diagnostic' })
 map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', { desc = 'Go to next diagnostic' })
