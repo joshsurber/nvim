@@ -39,7 +39,6 @@ return require('packer').startup(function(use)
 	use 'rmagatti/auto-session'
 	use "folke/which-key.nvim"
 
-
 	--[[ SYSTEM INTEGRATION ]]
 	use 'tpope/vim-eunuch' -- Unix utilities
 	use 'nvim-telescope/telescope.nvim' -- Fuzzy file finder
