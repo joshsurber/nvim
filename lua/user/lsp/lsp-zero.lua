@@ -24,6 +24,8 @@ lsp.setup_nvim_cmp({
 	mapping = lsp.defaults.cmp_mappings({
 		['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
 		['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+		['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
+		['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
 	})
 })
 lsp.nvim_workspace()
@@ -32,3 +34,5 @@ lsp.setup()
 require("luasnip.loaders.from_snipmate").lazy_load()
 vim.cmd [[ command! LuaSnipEdit :lua require("luasnip.loaders").edit_snippet_files() ]]
 vim.cmd [[ command! Format :lua vim.lsp.buf.formatting_sync() ]]
+
+vim.diagnostic.config({ virtual_text = true })
