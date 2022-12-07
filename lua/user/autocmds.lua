@@ -2,10 +2,11 @@ local A = vim.api
 
 -- Autoformat on save
 local lspfmt = vim.api.nvim_create_augroup("LspFormatting", {})
-A.nvim_clear_autocmds({ group = lspfmt, buffer = bufnr })
+-- A.nvim_clear_autocmds({ group = lspfmt, buffer = bufnr })
+A.nvim_clear_autocmds({ group = lspfmt })
 A.nvim_create_autocmd("BufWritePre", {
 	group = lspfmt,
-	buffer = bufnr,
+	-- buffer = bufnr,
 	callback = function()
 		-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
 		vim.lsp.buf.formatting_sync()
