@@ -29,7 +29,7 @@ for key, value in pairs({ -- NeoVim settings
 	-- timeout = false, -- Time out on key codes but not mappings. Basically this makes terminal Vim work sanely.
 	timeoutlen = 500,
 	wildignorecase = true, -- Case insensitive completion
-	wildmode = "list:longest,full", -- Expand as much as possible, then show the list
+	-- wildmode = "list:longest,full", -- Expand as much as possible, then show the list
 	wrap = true, -- Wrap long lines, but not in the middle of a word, and maintain indent level
 }) do vim.opt[key] = value end
 
