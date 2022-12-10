@@ -48,6 +48,7 @@ gitsigns.setup {
 		lmap('n', 't', '<esc>', { desc = "Toggle" })
 		lmap('n', 'g', '<cmd>Git<cr>', { desc = "Open Git status with fugitive" })
 		lmap('n', 'c', '<cmd>Git commit<cr>', { desc = "Git commit" })
+		lmap('n', 'P', '<cmd>Git push<cr>', { desc = "Git push" })
 
 		-- Text object
 		map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
