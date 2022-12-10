@@ -16,6 +16,7 @@ vim.keymap.del('', 'Y')
 WKRegister('<leader>v', 'Neovim config')
 map("n", "<leader>ve", ":tabedit $MYVIMRC<cr>", { desc = 'Edit init.lua' })
 map("n", "<leader>vs", ":source $MYVIMRC<cr>:PackerSync<cr>", { desc = 'Reload init.lua' })
+map("n", "<leader>vd", ":cd ~/.config/nvim<cr>", { desc = 'Change to Neovim config directory' })
 map("n", "<leader>vp", ":PackerSync<cr>", { desc = "Sync plugins" })
 
 -- Window nav and resizing

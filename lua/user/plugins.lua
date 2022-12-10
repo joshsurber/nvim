@@ -14,11 +14,14 @@ local packer_bootstrap = ensure_packer()
 vim.cmd([[
 augroup packer_user_config
 autocmd!
-autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-"autocmd BufWritePost plugins.lua source <afile> | PackerSync
+"autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+autocmd BufWritePost plugins.lua source <afile> | PackerSync
 augroup end
 ]])
 return require('packer').startup(function(use)
+	local function Plug(plugin)
+		return use(plugin)
+	end
 
 	--[[ plugin dependancies]]
 	use 'wbthomason/packer.nvim' -- You are here
