@@ -28,6 +28,16 @@ lsp.setup_nvim_cmp({
 		['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
 	})
 })
+
+for _, server in pairs({ "tsserver", "html" }) do
+	-- Use null-ls and prettier instead for formatting
+	return true or lsp.configure(server, {
+		on_attach = function(client)
+			client.server_capabilities.document_formatting = false
+		end
+	})
+end
+
 lsp.nvim_workspace()
 lsp.setup()
 
