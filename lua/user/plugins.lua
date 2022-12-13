@@ -33,7 +33,7 @@ return require('packer').startup(function(use)
 	-- use 'tpope/vim-obsession' -- Easy session management
 	use 'tpope/vim-repeat' -- Do it again
 	-- use 'tpope/vim-vinegar' -- Make Netrw suck less
-	use 'wellle/targets.vim' -- improve text objects
+	-- use 'wellle/targets.vim' -- improve text objects
 	-- use 'tpope/vim-sleuth' -- Automagically determine tabwidth etc
 	use 'karb94/neoscroll.nvim' -- Smooth scrolling
 	use 'ellisonleao/gruvbox.nvim'
@@ -66,6 +66,8 @@ return require('packer').startup(function(use)
 	--[[ TREESITTER STUFF ]]
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', } -- Language awareness
 	use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code
+	use 'nvim-treesitter/nvim-treesitter-textobjects' -- Adds function and clss objs
+	-- use 'nvim-treesitter/playground'
 	use "p00f/nvim-ts-rainbow" -- Rainbow parentheses
 
 	--[[ LSP STUFF ]]
