@@ -1,22 +1,24 @@
 vim.g.mapleader = " "
 
-require("user.plugins")
-require("user.settings")
-require("user.setup")
-require("user.colorscheme")
-require("user.which-key")
-require("user.bufferline")
-require("user.telescope")
-require("user.gitsigns")
-require("user.treesitter")
-require("user.lsp.lsp-zero")
-require("user.lsp.null-ls")
-require("user.toggleterm")
-require("user.lualine")
+require("user.which-key") -- Must be first as it exposes WKRegister function other files use
+require("user.autocmds") -- Do stuff when stuff happens
+require("user.colorscheme") -- Make things pretty
+require("user.mappings") -- Key mappings
+require("user.plugins") -- Packer install stuff
+require("user.settings") -- Basic options
+require("user.setup") -- For plugins that require more than a `use` but not a full file
+
+--[[ Plugins that require configuration ]]
 require("user.auto-session")
+require("user.bufferline")
+require("user.gitsigns")
 require("user.indent-blankline")
-require("user.mappings")
-require("user.autocmds")
+require("user.lsp-zero")
+require("user.null-ls")
+require("user.lualine")
+require("user.telescope")
+require("user.toggleterm")
+require("user.treesitter")
 
 -- Neovide config
 vim.o.guifont = "CascadiaCode_Nerd_Font,Cascadia_Code_PL,Hack:h10"
