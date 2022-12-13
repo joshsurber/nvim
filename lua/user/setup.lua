@@ -17,6 +17,7 @@ local plugins = {
 	'nvim-surround',
 	'Comment',
 	'neoscroll',
+	-- 'hl_match_area',
 }
 
 for _, plugin in pairs(plugins) do
