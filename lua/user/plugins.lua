@@ -28,6 +28,13 @@ return require('packer').startup(function(use)
 	use 'nvim-tree/nvim-web-devicons'
 	use 'nvim-lua/plenary.nvim'
 
+	--[[ color schemes ]]
+	use 'ellisonleao/gruvbox.nvim'
+	use 'folke/tokyonight.nvim'
+	use 'ray-x/starry.nvim'
+	-- use 'tanvirtin/monokai.nvim'
+	-- use 'Mofiqul/dracula.nvim'
+
 	--[[ neovim settings ]]
 	use 'moll/vim-bbye' -- Close buffer without exit
 	-- use 'tpope/vim-obsession' -- Easy session management
@@ -36,7 +43,6 @@ return require('packer').startup(function(use)
 	-- use 'wellle/targets.vim' -- improve text objects
 	-- use 'tpope/vim-sleuth' -- Automagically determine tabwidth etc
 	use 'karb94/neoscroll.nvim' -- Smooth scrolling
-	use 'ellisonleao/gruvbox.nvim'
 	use 'akinsho/toggleterm.nvim' -- Easy terminal access
 	use 'nvim-lualine/lualine.nvim' -- Statusline
 	use 'rmagatti/auto-session'
