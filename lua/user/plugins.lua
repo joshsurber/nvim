@@ -45,13 +45,13 @@ return require('packer').startup(function(use)
 	use 'karb94/neoscroll.nvim' -- Smooth scrolling
 	use 'akinsho/toggleterm.nvim' -- Easy terminal access
 	use 'nvim-lualine/lualine.nvim' -- Statusline
-	use 'rmagatti/auto-session'
-	use "folke/which-key.nvim"
+	use 'rmagatti/auto-session' -- Save and restore sessions automatically
+	use "folke/which-key.nvim" -- Popup tree of available key mappings
 
 	--[[ SYSTEM INTEGRATION ]]
 	use 'tpope/vim-eunuch' -- Unix utilities
 	use 'nvim-telescope/telescope.nvim' -- Fuzzy file finder
-	use 'akinsho/bufferline.nvim'
+	use 'akinsho/bufferline.nvim' -- tabs for open buffers
 
 	--[[ GIT INTEGRATION ]]
 	use 'tpope/vim-fugitive' -- Git integration
