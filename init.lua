@@ -21,10 +21,17 @@ require("user.telescope")
 require("user.toggleterm")
 require("user.treesitter")
 
--- Neovide config
-vim.o.guifont = "CascadiaCode_Nerd_Font,Cascadia_Code_PL,Hack:h10"
-vim.cmd([[
-let g:neovide_floating_blur_amount_x = 50
-let g:neovide_floating_blur_amount_y = 50
-let g:neovide_cursor_vfx_mode = "railgun"
-]])
+-- For plugins that require more than a `use` but not a full file
+for _, plugin in pairs({
+    'nvim-autopairs',
+    'nvim-surround',
+    'Comment',
+    -- 'neoscroll',
+}) do
+    local ok, result = pcall(require, plugin)
+    if not ok then return vim.notify(plugin .. ' not loaded') end
+    result.setup()
+    -- vim.notify(plugin .. ' loaded')
+end
+
+-- vim: foldlevel=2
