@@ -11,6 +11,7 @@ require("user.setup") -- For plugins that require more than a `use` but not a fu
 --[[ Plugins that require configuration ]]
 require("user.auto-session")
 require("user.bufferline")
+require("user.emmet")
 require("user.gitsigns")
 require("user.indent-blankline")
 require("user.lsp-zero")

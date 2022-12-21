@@ -68,6 +68,7 @@ return require('packer').startup(function(use)
 	use 'windwp/nvim-ts-autotag' -- Auto close tags and rename in pairs
 	use 'windwp/nvim-autopairs' -- Match brackets
 	use 'davidgranstrom/nvim-markdown-preview'
+	Plug 'mattn/emmet-vim'
 
 	--[[ TREESITTER STUFF ]]
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', } -- Language awareness
