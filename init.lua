@@ -6,7 +6,6 @@ require("user.colorscheme") -- Make things pretty
 require("user.mappings") -- Key mappings
 require("user.plugins") -- Packer install stuff
 require("user.settings") -- Basic options
-require("user.setup") -- For plugins that require more than a `use` but not a full file
 
 --[[ Plugins that require configuration ]]
 require("user.auto-session")
