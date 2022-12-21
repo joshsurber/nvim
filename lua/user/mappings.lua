@@ -3,10 +3,10 @@ set fdm=expr fde=getline(v\:lnum)=~'^\\s*$'&&getline(v\:lnum+1)=~'\\S'?'<1'\:1
 ]]
 
 local function map(mode, shortcut, command, opts)
-	local opts = opts or {}
-	opts.noremap = true
-	opts.silent = true
-	vim.keymap.set(mode, shortcut, command, opts)
+    local opts = opts or {}
+    opts.noremap = true
+    -- opts.silent = false
+    vim.keymap.set(mode, shortcut, command, opts)
 end
 
 -- You can have my Y when you pry it from my cold, dead hands!
