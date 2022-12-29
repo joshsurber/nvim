@@ -8,8 +8,10 @@ local formatting = null_ls.builtins.formatting
 local hover = null_ls.builtins.hover
 
 null_ls.setup({
-	sources = {
-		-- fmt.stylua,
-		formatting.prettier.with({ extra_filetypes = { "liquid" }, }),
-	},
+    sources = {
+        -- fmt.stylua,
+        formatting.prettier.with({ extra_filetypes = { "liquid" }, }),
+        -- formatting.markdownlint,
+        -- formatting.mdformat,
+    },
 })
