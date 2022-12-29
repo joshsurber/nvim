@@ -25,11 +25,13 @@ for _, plugin in pairs({
     'nvim-autopairs',
     'nvim-surround',
     'Comment',
+    -- 'auto-pandoc',
     -- 'neoscroll',
 }) do
     local ok, result = pcall(require, plugin)
     if not ok then return vim.notify(plugin .. ' not loaded') end
-    result.setup()
+    pcall(result.setup)
+    -- result.setup()
     -- vim.notify(plugin .. ' loaded')
 end
 
