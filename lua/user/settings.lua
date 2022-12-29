@@ -47,5 +47,7 @@ for key, value in pairs({ -- globals (for older plugins)
     netrw_banner = 0,
     -- netrw_altv = 1,
 
+    nvim_markdown_preview_format = 'markdown',
+
 }) do vim.g[key] = value end
 -- vim: foldlevel=1
