@@ -91,6 +91,7 @@ map("n", "<leader>W", "<cmd>wall<cr>", { desc = 'Save all windows/tabs' })
 map("n", "<leader>q", "<cmd>Bdelete<cr>", { desc = 'Remove buffer (close tab)' })
 map("n", "<leader>Q", "<cmd>qall<cr>", { desc = 'Close all windows/tabs' })
 map("n", "QQ", ":q<cr>")
+-- map("n", "<leader>q", ":q<cr>", { desc = 'Quit current window/tab' })
 -- Move line up and down in NORMAL and VISUAL modes
 -- -- Reference: https://vim.fandom.com/wiki/Moving_lines_up_or_down
 map("n", '<A-j>', '<CMD>move .+1<CR>==', { desc = "Move line down" })
@@ -119,8 +120,7 @@ map("n", ']b', ':bnext<cr>', { desc = "Next buffer" })
 map("n", '<leader>e', ':Lexplore<CR>', { desc = 'Toggle file tree' })
 -- This is for a weird bug I get with a single-line window and empty buffer
 -- Hopefully will be fixed in future nvim release. FIXME delete if fixed
-map("n", '<leader>_', ':Bdelete<cr>:resize<cr>', { desc = 'Fix window sizes' })
-
+-- map("n", '<leader>_', ':Bdelete<cr>:resize<cr>', { desc = 'Fix window sizes' })
 
 -- LSP mappings
 WKRegister('<leader>l', 'LSP commands')

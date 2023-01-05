@@ -7,11 +7,11 @@ ts.setup {
     autotag = { enable = true, },
     highlight = { enable = true, --[[ additional_vim_regex_highlighting = true, ]] },
     incremental_selection = {
-        enable = true,
+        enable = false,
         keymaps = {
             init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
+            node_incrementalc= "grn",
+            scope_incrementan = "grc",
             node_decremental = "grm",
         },
     },
@@ -24,7 +24,7 @@ ts.setup {
         -- termcolors = {} -- table of colour name strings
     },
     textobjects = {
-        enable = true,
+        enable = false,
         select = {
             enable = true,
 
@@ -87,6 +87,15 @@ ts.setup {
                 ["<leader>lp"] = "@function.outer",
                 ["<leader>lP"] = "@class.outer",
             },
+        },
+    },
+    textsubjects = {
+        enable = true,
+        prev_selection = ',', -- (Optional) keymap to select the previous selection
+        keymaps = {
+            ['.'] = 'textsubjects-smart',
+            [';'] = 'textsubjects-container-outer',
+            ['i;'] = 'textsubjects-container-inner',
         },
     },
 }

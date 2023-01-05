@@ -10,8 +10,11 @@ local hover = null_ls.builtins.hover
 null_ls.setup({
     sources = {
         -- fmt.stylua,
+        -- formatting.tidy,
         formatting.prettier.with({ extra_filetypes = { "liquid" }, }),
+        diagnostics.tidy,
         -- formatting.markdownlint,
         -- formatting.mdformat,
+        formatting.beautysh,
     },
 })
