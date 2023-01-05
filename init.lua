@@ -17,6 +17,7 @@ require("user.lsp-zero")
 require("user.lualine")
 require("user.null-ls")
 require("user.telescope")
+require("user.textobjects")
 require("user.toggleterm")
 require("user.treesitter")
 

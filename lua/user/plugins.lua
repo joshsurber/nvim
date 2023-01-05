@@ -77,6 +77,12 @@ return require('packer').startup(function(use)
     -- use 'nvim-treesitter/playground'
     use "p00f/nvim-ts-rainbow" -- Rainbow parentheses
 
+    --[[ TEXT OBJECCTS ]]
+    -- use 'wellle/targets.vim' -- improve text objects -- https://github.com/wellle/targets.vim
+    -- use 'nvim-treesitter/nvim-treesitter-textobjects' -- Adds function and clss objs -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+    -- use 'RRethy/nvim-treesitter-textsubjects' -- https://github.com/RRethy/nvim-treesitter-textsubjects
+    use 'chrisgrieser/nvim-various-textobjs' -- https://github.com/chrisgrieser/nvim-various-textobjs
+
     --[[ LSP STUFF ]]
     -- LSP Support
     use 'neovim/nvim-lspconfig'
