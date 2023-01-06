@@ -49,6 +49,7 @@ return require('packer').startup(function(use)
     use 'tpope/vim-repeat' -- Do it again -- https://github.com/tpope/vim-repeat
     -- use 'tpope/vim-sleuth' -- Automagically determine tabwidth etc -- https://github.com/tpope/vim-sleuth
     -- use 'tpope/vim-vinegar' -- Make Netrw suck less -- https://github.com/tpope/vim-vinegar
+    use 'mbbill/undotree' -- https://github.com/mbbill/undotree
 
     --[[ GIT INTEGRATION ]]
     use 'tpope/vim-fugitive' -- Git integration -- https://github.com/tpope/vim-fugitive

@@ -121,6 +121,7 @@ map("n", '<leader>e', ':Lexplore<CR>', { desc = 'Toggle file tree' })
 -- This is for a weird bug I get with a single-line window and empty buffer
 -- Hopefully will be fixed in future nvim release. FIXME delete if fixed
 -- map("n", '<leader>_', ':Bdelete<cr>:resize<cr>', { desc = 'Fix window sizes' })
+map("n", '<leader>u', vim.cmd.UndotreeToggle, {desc='Toggle undo tree'})
 
 -- LSP mappings
 WKRegister('<leader>l', 'LSP commands')
