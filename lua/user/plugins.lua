@@ -27,7 +27,7 @@ return require('packer').startup(function(use)
 
     --[[ PLUGIN DEPENDANCIES]]
     use 'wbthomason/packer.nvim' -- You are here -- https://github.com/wbthomason/packer.nvim
-    -- use 'nvim-tree/nvim-web-devicons' -- https://github.com/nvim-tree/nvim-web-devicons
+    use 'nvim-tree/nvim-web-devicons' -- https://github.com/nvim-tree/nvim-web-devicons
     use 'nvim-lua/plenary.nvim' -- https://github.com/nvim-lua/plenary.nvim
 
     --[[ COLOR SCHEMES ]]
@@ -38,47 +38,44 @@ return require('packer').startup(function(use)
     -- use 'Mofiqul/dracula.nvim' -- https://github.com/Mofiqul/dracula.nvim
 
     --[[ NEOVIM SETTINGS ]]
+    use 'echasnovski/mini.nvim' -- Small utilities -- https://github.com/echasnovski/mini.nvim
+    -- mini use 'akinsho/bufferline.nvim' -- tabs for open buffers -- https://github.com/akinsho/bufferline.nvim
+    -- mini use 'moll/vim-bbye' -- Close buffer without exit -- https://github.com/moll/vim-bbye
+    -- mini use 'nvim-lualine/lualine.nvim' -- Statusline -- https://github.com/nvim-lualine/lualine.nvim
+    -- mini use 'rmagatti/auto-session' -- Save and restore sessions automatically -- https://github.com/rmagatti/auto-session
     use "folke/which-key.nvim" -- Popup tree of available key mappings
-    use 'akinsho/bufferline.nvim' -- tabs for open buffers -- https://github.com/akinsho/bufferline.nvim
     use 'akinsho/toggleterm.nvim' -- Easy terminal access -- https://github.com/akinsho/toggleterm.nvim
-    use 'moll/vim-bbye' -- Close buffer without exit -- https://github.com/moll/vim-bbye
-    use 'nvim-lualine/lualine.nvim' -- Statusline -- https://github.com/nvim-lualine/lualine.nvim
+    use 'mbbill/undotree' -- https://github.com/mbbill/undotree
     use 'nvim-telescope/telescope.nvim' -- Fuzzy file finder -- https://github.com/nvim-telescope/telescope.nvim
-    use 'rmagatti/auto-session' -- Save and restore sessions automatically -- https://github.com/rmagatti/auto-session
     use 'tpope/vim-eunuch' -- Unix utilities -- https://github.com/tpope/vim-eunuch
     use 'tpope/vim-repeat' -- Do it again -- https://github.com/tpope/vim-repeat
-    -- use 'tpope/vim-sleuth' -- Automagically determine tabwidth etc -- https://github.com/tpope/vim-sleuth
-    -- use 'tpope/vim-vinegar' -- Make Netrw suck less -- https://github.com/tpope/vim-vinegar
-    use 'mbbill/undotree' -- https://github.com/mbbill/undotree
 
     --[[ GIT INTEGRATION ]]
     use 'tpope/vim-fugitive' -- Git integration -- https://github.com/tpope/vim-fugitive
     use 'lewis6991/gitsigns.nvim' -- Track git changes in gutter -- https://github.com/lewis6991/gitsigns.nvim
 
-    --[[ GENERAL CODING ]]
-    use 'numToStr/Comment.nvim' -- Comment and uncomment lines -- https://github.com/numToStr/Comment.nvim
-    use 'kylechui/nvim-surround' -- Suround things -- https://github.com/kylechui/nvim-surround
-    -- use 'lukas-reineke/indent-blankline.nvim' -- Track indents -- https://github.com/lukas-reineke/indent-blankline.nvim
-
-    --[[ WEB DEVELOPMENT SPECIFIC ]]
-    use 'tpope/vim-liquid' -- Support for liquid templates -- https://github.com/tpope/vim-liquid
-    -- use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS -- https://github.com/hail2u/vim-css3-syntax
-    use 'windwp/nvim-ts-autotag' -- Auto close tags and rename in pairs -- https://github.com/windwp/nvim-ts-autotag
-    use 'windwp/nvim-autopairs' -- Match brackets -- https://github.com/windwp/nvim-autopairs
+    --[[ CODING ]]
+    -- mini -- use 'numToStr/Comment.nvim' -- Comment and uncomment lines -- https://github.com/numToStr/Comment.nvim
+    -- mini use 'kylechui/nvim-surround' -- Suround things -- https://github.com/kylechui/nvim-surround
+    -- mini use 'windwp/nvim-autopairs' -- Match brackets -- https://github.com/windwp/nvim-autopairs
     -- use 'davidgranstrom/nvim-markdown-preview' -- https://github.com/davidgranstrom/nvim-markdown-preview
+    -- use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS -- https://github.com/hail2u/vim-css3-syntax
+    -- use 'lukas-reineke/indent-blankline.nvim' -- Track indents -- https://github.com/lukas-reineke/indent-blankline.nvim
     -- use 'mattn/emmet-vim' -- https://github.com/mattn/emmet-vim
-
-    --[[ TREESITTER STUFF ]]
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', } -- Language awareness -- https://github.com/nvim-treesitter/nvim-treesitter
-    -- use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code -- https://github.com/nvim-treesitter/nvim-treesitter-context
-    -- use 'nvim-treesitter/playground' -- https://github.com/nvim-treesitter/playground
-    -- use "p00f/nvim-ts-rainbow" -- Rainbow parentheses
+    use 'tpope/vim-liquid' -- Support for liquid templates -- https://github.com/tpope/vim-liquid
+    use 'windwp/nvim-ts-autotag' -- Auto close tags and rename in pairs -- https://github.com/windwp/nvim-ts-autotag
 
     --[[ TEXT OBJECCTS ]]
-    -- use 'wellle/targets.vim' -- improve text objects -- https://github.com/wellle/targets.vim
-    -- use 'nvim-treesitter/nvim-treesitter-textobjects' -- Adds function and clss objs -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-    -- use 'RRethy/nvim-treesitter-textsubjects' -- https://github.com/RRethy/nvim-treesitter-textsubjects
-    use 'chrisgrieser/nvim-various-textobjs' -- https://github.com/chrisgrieser/nvim-various-textobjs
+    --mini -- use 'RRethy/nvim-treesitter-textsubjects' -- https://github.com/RRethy/nvim-treesitter-textsubjects
+    --mini -- use 'nvim-treesitter/nvim-treesitter-textobjects' -- Adds function and clss objs -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+    --mini -- use 'wellle/targets.vim' -- improve text objects -- https://github.com/wellle/targets.vim
+    --mini -- use 'chrisgrieser/nvim-various-textobjs' -- https://github.com/chrisgrieser/nvim-various-textobjs
+
+    --[[ TREESITTER STUFF ]]
+    -- use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code -- https://github.com/nvim-treesitter/nvim-treesitter-context
+    -- use 'nvim-treesitter/playground' -- https://github.com/nvim-treesitter/playground
+    use "p00f/nvim-ts-rainbow" -- Rainbow parentheses
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', } -- Language awareness -- https://github.com/nvim-treesitter/nvim-treesitter
 
     --[[ LSP STUFF ]]
     -- LSP Support
@@ -110,9 +107,9 @@ return require('packer').startup(function(use)
 
     -- For plugins that require more than a `use` but not a full file
     for _, plugin in pairs({
-        'nvim-autopairs',
-        'nvim-surround',
-        'Comment',
+        -- 'nvim-autopairs',
+        -- 'nvim-surround',
+        -- 'Comment',
     }) do
         local ok, result = pcall(require, plugin)
         if not ok then return vim.notify(plugin .. ' not loaded') end

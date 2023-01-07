@@ -5,5 +5,4 @@ require("user.mappings") -- Key mappings
 require("user.plugins") -- Packer install stuff
 require("user.settings") -- Basic options
 
-
 -- vim: foldlevel=2
