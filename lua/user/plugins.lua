@@ -31,11 +31,11 @@ return require('packer').startup(function(use)
     use 'nvim-lua/plenary.nvim' -- https://github.com/nvim-lua/plenary.nvim
 
     --[[ COLOR SCHEMES ]]
+    use 'Mofiqul/dracula.nvim' -- https://github.com/Mofiqul/dracula.nvim
+    use 'ellisonleao/gruvbox.nvim' -- https://github.com/ellisonleao/gruvbox.nvim
     use 'folke/tokyonight.nvim' -- https://github.com/folke/tokyonight.nvim
-    -- use 'ellisonleao/gruvbox.nvim' -- https://github.com/ellisonleao/gruvbox.nvim
-    -- use 'ray-x/starry.nvim' -- https://github.com/ray-x/starry.nvim
-    -- use 'tanvirtin/monokai.nvim' -- https://github.com/tanvirtin/monokai.nvim
-    -- use 'Mofiqul/dracula.nvim' -- https://github.com/Mofiqul/dracula.nvim
+    use 'ray-x/starry.nvim' -- https://github.com/ray-x/starry.nvim
+    use 'tanvirtin/monokai.nvim' -- https://github.com/tanvirtin/monokai.nvim
 
     --[[ NEOVIM SETTINGS ]]
     use 'echasnovski/mini.nvim' -- Small utilities -- https://github.com/echasnovski/mini.nvim

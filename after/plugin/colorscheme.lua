@@ -1,6 +1,7 @@
 --" If we haven't installed gruvbox yet, use a build-in colorscheme
--- vim.o.background = "dark" -- or "light" for light mode
-vim.cmd.colorscheme("evening")
+    -- vim.o.background = "dark" -- or "light" for light mode
+    vim.cmd.colorscheme("evening")
+    local colorscheme = 'gruvbox' -- tokyonight gruvbox dracula dracula_blood monokai
 
 for --[[STARRY SETUP]]key, value in pairs({
     italic_comments = true,
@@ -59,7 +60,4 @@ require("tokyonight").setup({
     on_highlights = function(highlights, colors) end,
 })
 
-vim.cmd.colorscheme("tokyonight")
--- vim.cmd.colorscheme("gruvbox")
--- vim.cmd.colorscheme("dracula")
--- vim.cmd.colorscheme("monokai")
+vim.cmd.colorscheme(colorscheme)
