@@ -107,5 +107,19 @@ return require('packer').startup(function(use)
     if packer_bootstrap then -- // Automatically set up your configuration after cloning packer.nvim
         require('packer').sync()
     end
+
+    -- For plugins that require more than a `use` but not a full file
+    for _, plugin in pairs({
+        'nvim-autopairs',
+        'nvim-surround',
+        'Comment',
+    }) do
+        local ok, result = pcall(require, plugin)
+        if not ok then return vim.notify(plugin .. ' not loaded') end
+        pcall(result.setup)
+        -- vim.notify(plugin .. ' loaded')
+    end
+
 end)
+
 -- vim: foldlevel=1
