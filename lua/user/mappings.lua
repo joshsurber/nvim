@@ -13,7 +13,6 @@ end
 vim.keymap.del('', 'Y')
 
 -- Easy access to edit init.lua
-WKRegister('<leader>v', 'Neovim config')
 map("n", "<leader>ve", ":tabedit $MYVIMRC<cr>", { desc = 'Edit init.lua' })
 map("n", "<leader>vs", ":source $MYVIMRC<cr>:PackerSync<cr>", { desc = 'Reload init.lua' })
 map("n", "<leader>vd", ":cd ~/.config/nvim<cr>", { desc = 'Change to Neovim config directory' })
@@ -124,7 +123,6 @@ map("n", '<leader>e', ':Lexplore<CR>', { desc = 'Toggle file tree' })
 map("n", '<leader>u', vim.cmd.UndotreeToggle, {desc='Toggle undo tree'})
 
 -- LSP mappings
-WKRegister('<leader>l', 'LSP commands')
 map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>', { desc = 'Floating information window' })
 map('n', 'gH', '<cmd>lua vim.lsp.buf.signature_help()<cr>', { desc = 'Signature information floating window' })
 map('n', '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = 'Go to definition' })

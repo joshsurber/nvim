@@ -33,7 +33,6 @@ gitsigns.setup {
 		end, { expr = true, desc = 'Goto previous changed hunk' })
 
 		-- Actions
-		WKRegister('<leader>g', "Git commands")
 		lmap({ 'n', 'v' }, 's', function () vim.cmd.Gitsigns('stage_hunk') end, { desc = "Stage hunk" })
 		lmap({ 'n', 'v' }, 'r', function () vim.cmd.Gitsigns('reset_hunk') end, { desc = "Reset hunk" })
 		lmap('n', 'S', gs.stage_buffer, { desc = "Stage buffer" })
@@ -45,10 +44,10 @@ gitsigns.setup {
 		lmap('n', 'd', gs.diffthis, { desc = "Diff hunk" })
 		lmap('n', 'D', function() gs.diffthis('~') end, { desc = "Diff buffer" })
 		lmap('n', 'td', gs.toggle_deleted, { desc = "Toggle deleted" })
-		lmap('n', 't', '<esc>', { desc = "Toggle" })
-		lmap('n', 'g', function () vim.cmd.Git() end, { desc = "Open Git status with fugitive" })
-		lmap('n', 'c', function () vim.cmd.Git('commit') end, { desc = "Git commit" })
-		lmap('n', 'P', function () vim.cmd.Git('push') end, { desc = "Git push" })
+		-- lmap('n', 't', '<esc>', { desc = "Toggle" })
+		lmap('n', 'g', function () vim.cmd.Git() end, { desc = "Open Git status with fugitive" }) -- fugitive
+		lmap('n', 'c', function () vim.cmd.Git('commit') end, { desc = "Git commit" }) -- fugitive
+		lmap('n', 'P', function () vim.cmd.Git('push') end, { desc = "Git push" }) -- fugitive
 
 		-- Text object
 		map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')

@@ -19,7 +19,6 @@ for _, mapping in pairs({
 	{ key = 'm', cmd = 'mergelines_key', desc = 'Merge lines' },
 	{ key = 'c', cmd = 'codepretty_key', desc = 'Code pretty' },
 }) do
-	WKRegister(leader .. mapping.key, mapping.desc)
 	vim.g['user_emmet_' .. mapping.cmd] = leader .. mapping.key
 end
 

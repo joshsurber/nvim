@@ -45,7 +45,7 @@ return require('packer').startup(function(use)
     use 'nvim-lualine/lualine.nvim' -- Statusline -- https://github.com/nvim-lualine/lualine.nvim
     use 'nvim-telescope/telescope.nvim' -- Fuzzy file finder -- https://github.com/nvim-telescope/telescope.nvim
     use 'rmagatti/auto-session' -- Save and restore sessions automatically -- https://github.com/rmagatti/auto-session
-    -- use 'tpope/vim-eunuch' -- Unix utilities -- https://github.com/tpope/vim-eunuch
+    use 'tpope/vim-eunuch' -- Unix utilities -- https://github.com/tpope/vim-eunuch
     use 'tpope/vim-repeat' -- Do it again -- https://github.com/tpope/vim-repeat
     -- use 'tpope/vim-sleuth' -- Automagically determine tabwidth etc -- https://github.com/tpope/vim-sleuth
     -- use 'tpope/vim-vinegar' -- Make Netrw suck less -- https://github.com/tpope/vim-vinegar

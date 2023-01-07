@@ -1,21 +1,6 @@
 local ok, wk = pcall(require, 'which-key')
 if not ok then
-    function WKRegister()
-        --[[
-        -- I only directly register mapping groups with WhichKey so they have a nice name.
-        -- I use normal NeoVim commands to register actual mappings.
-        -- If the WhichKey plugin isn't loaded this function keeps me from getting an error when I register a mapping group
-        -- but it doesn't need to actually do anything if WhichKey isn't loaded anyway.
-        --]]
-    end
-
     return vim.notify('which-key not loaded')
-end
-
-function WKRegister(key, desc)
-    wk.register({
-        [key] = { name = desc }
-    })
 end
 
 wk.setup({

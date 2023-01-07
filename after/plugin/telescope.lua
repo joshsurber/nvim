@@ -10,9 +10,6 @@ local function map(lhs, rhs, desc)
 	vim.keymap.set('n', leader .. lhs, builtin[rhs], { desc = desc })
 end
 
-WKRegister(leader, 'Find with Telescope')
-WKRegister(leader .. 'G', 'Git')
-
 map('"', 'registers', 'Registers')
 map('*', 'colorscheme', 'Available colorschemes')
 map('/', 'search_history', 'Previous searches')
