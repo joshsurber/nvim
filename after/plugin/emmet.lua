@@ -1,5 +1,7 @@
 local leader = '\\'
 
+-- Emmet has an old-school global variable based config approach. Let's lua-ize it, shall we?
+
 for _, mapping in pairs({
 	-- leader_key = leader,
 	{ key = '', cmd = 'leader_key', desc = 'Emmet' },

@@ -55,8 +55,8 @@ return require('packer').startup(function(use)
     use 'lewis6991/gitsigns.nvim' -- Track git changes in gutter -- https://github.com/lewis6991/gitsigns.nvim
 
     --[[ CODING ]]
-    -- mini -- use 'numToStr/Comment.nvim' -- Comment and uncomment lines -- https://github.com/numToStr/Comment.nvim
     -- mini use 'kylechui/nvim-surround' -- Suround things -- https://github.com/kylechui/nvim-surround
+    -- mini use 'numToStr/Comment.nvim' -- Comment and uncomment lines -- https://github.com/numToStr/Comment.nvim
     -- mini use 'windwp/nvim-autopairs' -- Match brackets -- https://github.com/windwp/nvim-autopairs
     -- use 'davidgranstrom/nvim-markdown-preview' -- https://github.com/davidgranstrom/nvim-markdown-preview
     -- use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS -- https://github.com/hail2u/vim-css3-syntax
