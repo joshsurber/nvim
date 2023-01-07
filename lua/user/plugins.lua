@@ -27,7 +27,7 @@ return require('packer').startup(function(use)
 
     --[[ PLUGIN DEPENDANCIES]]
     use 'wbthomason/packer.nvim' -- You are here -- https://github.com/wbthomason/packer.nvim
-    use 'nvim-tree/nvim-web-devicons' -- https://github.com/nvim-tree/nvim-web-devicons
+    -- use 'nvim-tree/nvim-web-devicons' -- https://github.com/nvim-tree/nvim-web-devicons
     use 'nvim-lua/plenary.nvim' -- https://github.com/nvim-lua/plenary.nvim
 
     --[[ COLOR SCHEMES ]]
@@ -45,7 +45,7 @@ return require('packer').startup(function(use)
     use 'nvim-lualine/lualine.nvim' -- Statusline -- https://github.com/nvim-lualine/lualine.nvim
     use 'nvim-telescope/telescope.nvim' -- Fuzzy file finder -- https://github.com/nvim-telescope/telescope.nvim
     use 'rmagatti/auto-session' -- Save and restore sessions automatically -- https://github.com/rmagatti/auto-session
-    use 'tpope/vim-eunuch' -- Unix utilities -- https://github.com/tpope/vim-eunuch
+    -- use 'tpope/vim-eunuch' -- Unix utilities -- https://github.com/tpope/vim-eunuch
     use 'tpope/vim-repeat' -- Do it again -- https://github.com/tpope/vim-repeat
     -- use 'tpope/vim-sleuth' -- Automagically determine tabwidth etc -- https://github.com/tpope/vim-sleuth
     -- use 'tpope/vim-vinegar' -- Make Netrw suck less -- https://github.com/tpope/vim-vinegar
@@ -58,21 +58,21 @@ return require('packer').startup(function(use)
     --[[ GENERAL CODING ]]
     use 'numToStr/Comment.nvim' -- Comment and uncomment lines -- https://github.com/numToStr/Comment.nvim
     use 'kylechui/nvim-surround' -- Suround things -- https://github.com/kylechui/nvim-surround
-    use 'lukas-reineke/indent-blankline.nvim' -- Track indents -- https://github.com/lukas-reineke/indent-blankline.nvim
+    -- use 'lukas-reineke/indent-blankline.nvim' -- Track indents -- https://github.com/lukas-reineke/indent-blankline.nvim
 
     --[[ WEB DEVELOPMENT SPECIFIC ]]
     use 'tpope/vim-liquid' -- Support for liquid templates -- https://github.com/tpope/vim-liquid
     -- use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS -- https://github.com/hail2u/vim-css3-syntax
     use 'windwp/nvim-ts-autotag' -- Auto close tags and rename in pairs -- https://github.com/windwp/nvim-ts-autotag
     use 'windwp/nvim-autopairs' -- Match brackets -- https://github.com/windwp/nvim-autopairs
-    use 'davidgranstrom/nvim-markdown-preview' -- https://github.com/davidgranstrom/nvim-markdown-preview
-    use 'mattn/emmet-vim' -- https://github.com/mattn/emmet-vim
+    -- use 'davidgranstrom/nvim-markdown-preview' -- https://github.com/davidgranstrom/nvim-markdown-preview
+    -- use 'mattn/emmet-vim' -- https://github.com/mattn/emmet-vim
 
     --[[ TREESITTER STUFF ]]
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', } -- Language awareness -- https://github.com/nvim-treesitter/nvim-treesitter
-    use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code -- https://github.com/nvim-treesitter/nvim-treesitter-context
+    -- use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code -- https://github.com/nvim-treesitter/nvim-treesitter-context
     -- use 'nvim-treesitter/playground' -- https://github.com/nvim-treesitter/playground
-    use "p00f/nvim-ts-rainbow" -- Rainbow parentheses
+    -- use "p00f/nvim-ts-rainbow" -- Rainbow parentheses
 
     --[[ TEXT OBJECCTS ]]
     -- use 'wellle/targets.vim' -- improve text objects -- https://github.com/wellle/targets.vim
@@ -98,6 +98,11 @@ return require('packer').startup(function(use)
     -- Configure LSP
     use 'VonHeikemen/lsp-zero.nvim' -- Simple LSP setup -- https://github.com/VonHeikemen/lsp-zero.nvim
     use 'jose-elias-alvarez/null-ls.nvim' -- Inject 3rd party executables into LSP -- https://github.com/jose-elias-alvarez/null-ls.nvim
+
+    --[[ EXPERIMENTAL]]
+    -- Plugins I want to try go here
+
+    --[[ /EXPERIMENTAL]]
 
     if packer_bootstrap then -- // Automatically set up your configuration after cloning packer.nvim
         require('packer').sync()
