@@ -14,8 +14,8 @@ local packer_bootstrap = ensure_packer()
 vim.cmd([[
 augroup packer_user_config
 autocmd!
-autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-" autocmd BufWritePost plugins.lua source <afile> | PackerSync
+autocmd BufWritePost packer.lua source <afile> | PackerCompile
+" autocmd BufWritePost packer.lua source <afile> | PackerSync
 augroup end
 ]])
 
@@ -31,11 +31,9 @@ return require('packer').startup(function(use)
     use 'nvim-lua/plenary.nvim' -- https://github.com/nvim-lua/plenary.nvim
 
     --[[ COLOR SCHEMES ]]
-    use 'Mofiqul/dracula.nvim' -- https://github.com/Mofiqul/dracula.nvim
     use 'ellisonleao/gruvbox.nvim' -- https://github.com/ellisonleao/gruvbox.nvim
     use 'folke/tokyonight.nvim' -- https://github.com/folke/tokyonight.nvim
     use 'ray-x/starry.nvim' -- https://github.com/ray-x/starry.nvim
-    use 'tanvirtin/monokai.nvim' -- https://github.com/tanvirtin/monokai.nvim
 
     --[[ NEOVIM SETTINGS ]]
     use 'echasnovski/mini.nvim' -- Small utilities -- https://github.com/echasnovski/mini.nvim
@@ -58,7 +56,7 @@ return require('packer').startup(function(use)
     -- mini use 'kylechui/nvim-surround' -- Suround things -- https://github.com/kylechui/nvim-surround
     -- mini use 'numToStr/Comment.nvim' -- Comment and uncomment lines -- https://github.com/numToStr/Comment.nvim
     -- mini use 'windwp/nvim-autopairs' -- Match brackets -- https://github.com/windwp/nvim-autopairs
-    -- use 'davidgranstrom/nvim-markdown-preview' -- https://github.com/davidgranstrom/nvim-markdown-preview
+    use 'davidgranstrom/nvim-markdown-preview' -- https://github.com/davidgranstrom/nvim-markdown-preview
     -- use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS -- https://github.com/hail2u/vim-css3-syntax
     -- use 'lukas-reineke/indent-blankline.nvim' -- Track indents -- https://github.com/lukas-reineke/indent-blankline.nvim
     -- use 'mattn/emmet-vim' -- https://github.com/mattn/emmet-vim
@@ -74,7 +72,7 @@ return require('packer').startup(function(use)
     --[[ TREESITTER STUFF ]]
     -- use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code -- https://github.com/nvim-treesitter/nvim-treesitter-context
     -- use 'nvim-treesitter/playground' -- https://github.com/nvim-treesitter/playground
-    use "p00f/nvim-ts-rainbow" -- Rainbow parentheses
+    use "mrjones2014/nvim-ts-rainbow" -- Rainbow parentheses
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', } -- Language awareness -- https://github.com/nvim-treesitter/nvim-treesitter
 
     --[[ LSP STUFF ]]
