@@ -37,10 +37,6 @@ return require('packer').startup(function(use)
 
     --[[ NEOVIM SETTINGS ]]
     use 'echasnovski/mini.nvim' -- Small utilities -- https://github.com/echasnovski/mini.nvim
-    -- mini use 'akinsho/bufferline.nvim' -- tabs for open buffers -- https://github.com/akinsho/bufferline.nvim
-    -- mini use 'moll/vim-bbye' -- Close buffer without exit -- https://github.com/moll/vim-bbye
-    -- mini use 'nvim-lualine/lualine.nvim' -- Statusline -- https://github.com/nvim-lualine/lualine.nvim
-    -- mini use 'rmagatti/auto-session' -- Save and restore sessions automatically -- https://github.com/rmagatti/auto-session
     use "folke/which-key.nvim" -- Popup tree of available key mappings
     use 'akinsho/toggleterm.nvim' -- Easy terminal access -- https://github.com/akinsho/toggleterm.nvim
     use 'mbbill/undotree' -- https://github.com/mbbill/undotree
@@ -53,21 +49,11 @@ return require('packer').startup(function(use)
     use 'lewis6991/gitsigns.nvim' -- Track git changes in gutter -- https://github.com/lewis6991/gitsigns.nvim
 
     --[[ CODING ]]
-    -- mini use 'kylechui/nvim-surround' -- Suround things -- https://github.com/kylechui/nvim-surround
-    -- mini use 'numToStr/Comment.nvim' -- Comment and uncomment lines -- https://github.com/numToStr/Comment.nvim
-    -- mini use 'windwp/nvim-autopairs' -- Match brackets -- https://github.com/windwp/nvim-autopairs
     use 'davidgranstrom/nvim-markdown-preview' -- https://github.com/davidgranstrom/nvim-markdown-preview
     -- use 'hail2u/vim-css3-syntax' -- The newest hawtness of CSS -- https://github.com/hail2u/vim-css3-syntax
-    -- use 'lukas-reineke/indent-blankline.nvim' -- Track indents -- https://github.com/lukas-reineke/indent-blankline.nvim
     -- use 'mattn/emmet-vim' -- https://github.com/mattn/emmet-vim
     use 'tpope/vim-liquid' -- Support for liquid templates -- https://github.com/tpope/vim-liquid
     use 'windwp/nvim-ts-autotag' -- Auto close tags and rename in pairs -- https://github.com/windwp/nvim-ts-autotag
-
-    --[[ TEXT OBJECCTS ]]
-    --mini -- use 'RRethy/nvim-treesitter-textsubjects' -- https://github.com/RRethy/nvim-treesitter-textsubjects
-    --mini -- use 'nvim-treesitter/nvim-treesitter-textobjects' -- Adds function and clss objs -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-    --mini -- use 'wellle/targets.vim' -- improve text objects -- https://github.com/wellle/targets.vim
-    --mini -- use 'chrisgrieser/nvim-various-textobjs' -- https://github.com/chrisgrieser/nvim-various-textobjs
 
     --[[ TREESITTER STUFF ]]
     -- use 'nvim-treesitter/nvim-treesitter-context' -- Where am I in my code -- https://github.com/nvim-treesitter/nvim-treesitter-context
@@ -105,6 +91,7 @@ return require('packer').startup(function(use)
 
     -- For plugins that require more than a `use` but not a full file
     for _, plugin in pairs({
+        'which-key',
         -- 'nvim-autopairs',
         -- 'nvim-surround',
         -- 'Comment',
