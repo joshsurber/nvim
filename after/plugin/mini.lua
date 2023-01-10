@@ -1,35 +1,74 @@
-for _, module in pairs({
+-- A list of modules included. Uncommented ones will be loaded.
+local modules = {
 
-    'ai', -- Extend and create `a`/`i` textobjects              https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-ai.md
-    -- 'align', -- Align text interactively                        https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-align.md
-    'animate', -- Animate common Neovim actions                 https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-animate.md
-    -- 'base16', -- Base16 colorscheme creation                    https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-base16.md
-    'bufremove', -- Remove buffers                              https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-bufremove.md
-    'comment', -- Comment                                       https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-comment.md
-    -- 'completion', -- Completion and signature help              https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-completion.md
-    'cursorword', -- Autohighlight word under cursor            https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-cursorword.md
-    -- 'doc', -- Generate Neovim help files                        https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-doc.md
-    -- 'fuzzy', -- Fuzzy matching                                  https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-fuzzy.md
-    'indentscope', -- Visualize and operate on indent scope     https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-indentscope.md
-    -- 'jump', -- Jump forward/backward to a single character      https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-jump.md
-    -- 'jump2d', -- Jump within visible lines                      https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-jump2d.md
-    -- 'map', -- Window with buffer text overview                  https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-map.md
-    -- 'misc', -- Miscellaneous functions                          https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-misc.md
-    'pairs', -- Autopairs                                       https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-pairs.md
-    'sessions', -- Session management                           https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-sessions.md
-    'starter', -- Start screen                                  https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-starter.md
-    'statusline', -- Statusline                                 https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-statusline.md
-    'surround', -- Surround actions                             https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md
-    'tabline', -- Tabline                                       https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-tabline.md
-    -- 'test', -- Test Neovim plugins                              https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-test.md
-    'trailspace', -- Trailspace (highlight and remove)          https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-trailspace.md
+    'ai', -- Extend and create `a`/`i` textobjects          -- miniai
+    -- 'align' , -- Align text interactively                   -- minialign
+    'animate', -- Animate common Neovim actions             -- minianimate
+    -- 'base16' , -- Base16 colorscheme creation               -- minibase16
+    'bufremove', -- Remove buffers                          -- minibufremove
+    'comment', -- Comment                                   -- minicomment
+    -- 'completion' , -- Completion and signature help         -- minicompletion
+    'cursorword', -- Autohighlight word under cursor        -- minicursorword
+    -- 'doc' , -- Generate Neovim help files                   -- minidoc
+    -- 'fuzzy' , -- Fuzzy matching                             -- minifuzzy
+    'indentscope', -- Visualize and operate on indent scope -- miniindentscope
+    'jump', -- Jump forward/backward to a single character  -- minijump
+    'jump2d', -- Jump within visible lines                  -- minijump2d
+    -- 'map' , -- Window with buffer text overview             -- minimap
+    -- 'misc' , -- Miscellaneous functions                     -- minimisc
+    'pairs', -- Autopairs                                   -- minipairs
+    'sessions', -- Session management                       -- minisessions
+    'starter', -- Start screen                              -- ministarter
+    'statusline', -- Statusline                             -- ministatusline
+    'surround', -- Surround actions                         -- minisurround
+    'tabline', -- Tabline                                   -- minitabline
+    -- 'test' , -- Test Neovim plugins                         -- minitest
+    'trailspace', -- Trailspace (highlight and remove)      -- minitrailspace
 
-}) do
-    require('mini.' .. module).setup()
+}
+
+local config = {
+
+    bufremove = {
+        after = function()
+            vim.keymap.set("n", "<leader>q", "<cmd>lua MiniBufremove.wipeout()<cr>",
+                { desc = 'Wipeout buffer (close tab)' })
+        end
+    },
+
+    sessions = {
+        after = function()
+            vim.api.nvim_create_user_command('Screate', function()
+                vim.ui.input({
+                    prompt = 'Session name? ',
+                }, function(input) MiniSessions.write(input) end)
+            end, {})
+
+            vim.api.nvim_create_user_command('Sdelete', function()
+                MiniSessions.select('delete')
+            end, {})
+
+            vim.api.nvim_create_user_command('Sload', function()
+                MiniSessions.write()
+                MiniSessions.select()
+            end, {})
+        end
+    },
+
+    trailspace = {
+        after = function()
+            -- Delete trailing space on write
+            vim.api.nvim_create_autocmd('BufWritePre', { callback = MiniTrailspace.trim})
+            vim.api.nvim_create_autocmd('BufWritePre', { callback = MiniTrailspace.trim_last_lines})
+        end
+    }
+
+}
+
+for _, module in pairs(modules) do
+    local opts = config[module] or {}
+    require('mini.' .. module).setup(opts)
+    if config[module] and config[module].after then pcall(config[module].after) end
 end
-
-require('mini.sessions').setup({
-    autoread = true,
-})
 
 -- vim.api.nvim_create_user_command('Bdelete', )
