@@ -1,16 +1,4 @@
---[[
-set fdm=expr fde=getline(v\:lnum)=~'^\\s*$'&&getline(v\:lnum+1)=~'\\S'?'<1'\:1
-]]
-
-local function map(mode, shortcut, command, opts)
-    local opts = opts or {}
-    opts.noremap = true
-    -- opts.silent = false
-    vim.keymap.set(mode, shortcut, command, opts)
-end
-
--- You can have my Y when you pry it from my cold, dead hands!
-vim.keymap.del('', 'Y')
+local map = vim.keymap.set
 
 -- Easy access to edit init.lua
 map("n", "<leader>ve", ":tabedit $MYVIMRC<cr>", { desc = 'Edit init.lua' })
@@ -28,7 +16,7 @@ map("n", "<C-Down>", ":resize -2<CR>", { desc = 'Make window shorter' })
 map("n", "<C-Left>", ":vertical resize +2<CR>", { desc = 'Make window wider' })
 map("n", "<C-Right>", ":vertical resize -2<CR>", { desc = 'Make window narrower' })
 
-map('n', '/', '/\\v')
+-- map('n', '/', '/\\v')
 
 -- Command line conveniences
 map("c", "%%", "<C-R>=expand('%:h').'/'<cr>") -- expand %% to current directory in command-line mode
@@ -39,9 +27,9 @@ map("n", '<leader>o', 'o<ESC>cc<ESC>', { desc = 'Insert blank line below' })
 map("n", '<leader>O', 'O<ESC>cc<ESC>', { desc = 'Insert blank line above' })
 
 -- Lines wrap. Deal with it...
-map("n", "<DOWN>", "gj", { desc = "Down visual line" })
-map("n", "<UP>", "gk", { desc = "Up visual lines" })
-map("", "<C-z>", ":set wrap!<CR>:set wrap?<CR>", { desc = "Toggle word wrap" })
+map("n", "<DOWN>", "gj")
+map("n", "<UP>", "gk")
+map("", "<C-z>", ":set wrap!<CR>:set wrap?<CR>")
 
 -- Folding
 map({ 'n', 'v' }, "<leader><leader>", "za", { desc = 'Toggle fold' })
@@ -81,19 +69,16 @@ map("x", "<leader>p", '"_dP', { desc = "Paste over selection without modifying r
 
 -- Change modes easier
 map("i", "jk", "<esc>")
--- map("v","jkjk", "<esc>")
 map("t", "<Esc>", "<C-\\><C-n>")
 
 -- Save and quit easier
 map("n", "<leader>w", "<cmd>w<cr>", { desc = 'Save' })
 map("n", "<leader>W", "<cmd>wall<cr>", { desc = 'Save all windows/tabs' })
--- map("n", "<leader>q", "<cmd>Bdelete<cr>", { desc = 'Remove buffer (close tab)' })
-map("n", "<leader>q", "<cmd>bdelete<cr>", { desc = 'Remove buffer (close tab)' })
+map("n", "<leader>q", "<cmd>bdelete<cr>", { desc = 'Delete buffer' })
 map("n", "<leader>Q", "<cmd>qall<cr>", { desc = 'Close all windows/tabs' })
 map("n", "QQ", ":q<cr>")
--- map("n", "<leader>q", ":q<cr>", { desc = 'Quit current window/tab' })
+
 -- Move line up and down in NORMAL and VISUAL modes
--- -- Reference: https://vim.fandom.com/wiki/Moving_lines_up_or_down
 map("n", '<A-j>', '<CMD>move .+1<CR>==', { desc = "Move line down" })
 map("n", '<A-k>', '<CMD>move .-2<CR>==', { desc = "Move line up" })
 map("v", '<A-j>', ":move '>+1<CR>gv=gv", { desc = "Move line(s) down" })
@@ -108,32 +93,9 @@ map('', '<A-ESC>', '~') -- Tilde is a third layer on my ESC key. Fuck that
 map('!', '<A-ESC>', '~') -- Remap it in every way possible
 map("i", '<A-\'>', '`') -- Backtick is also a function layer on esc. To hell with that shit
 
-map("n", '<C-q>', '@q', { desc = "run default macro (from qq)" })
+map("n", '<C-q>', '@q') -- Access `qq` macro
 
--- map("n","<tab>", "%")
-
-map("n", '<S-h>', ':bprev<cr>', { desc = "Previous buffer" })
-map("n", '[b', ':bprev<cr>', { desc = "Next buffer" })
-map("n", '<S-l>', ':bnext<cr>', { desc = "Previous buffer" })
-map("n", ']b', ':bnext<cr>', { desc = "Next buffer" })
+map("n", '<S-h>', ':bprev<cr>')
+map("n", '<S-l>', ':bnext<cr>')
 
 map("n", '<leader>e', ':Lexplore<CR>', { desc = 'Toggle file tree' })
--- This is for a weird bug I get with a single-line window and empty buffer
--- Hopefully will be fixed in future nvim release. FIXME delete if fixed
--- map("n", '<leader>_', ':Bdelete<cr>:resize<cr>', { desc = 'Fix window sizes' })
-map("n", '<leader>u', vim.cmd.UndotreeToggle, {desc='Toggle undo tree'})
-
--- LSP mappings
-map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>', { desc = 'Floating information window' })
-map('n', 'gH', '<cmd>lua vim.lsp.buf.signature_help()<cr>', { desc = 'Signature information floating window' })
-map('n', '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = 'Go to definition' })
-map('n', '<leader>lD', '<cmd>lua vim.lsp.buf.declaration()<cr>', { desc = 'Go to declaration' })
-map('n', '<leader>li', '<cmd>lua vim.lsp.buf.implementation()<cr>', { desc = 'List implementations in quickfix window' })
-map('n', '<leader>lo', '<cmd>lua vim.lsp.buf.type_definition()<cr>', { desc = 'Go to type definition' })
-map('n', '<leader>lr', '<cmd>lua vim.lsp.buf.references()<cr>', { desc = 'List referencess in quickfix window' })
-map('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', { desc = 'Rename symbol under cursor' })
-map('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', { desc = 'Select a code action' })
-map('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>', { desc = 'Format buffer' })
-map('n', '<leader>ll', '<cmd>lua vim.diagnostic.open_float()<cr>', { desc = 'Show diagnostics in floating window' })
-map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', { desc = 'Go to previous diagnostic' })
-map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', { desc = 'Go to next diagnostic' })
