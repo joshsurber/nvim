@@ -1,11 +1,13 @@
 for key, value in pairs({ -- NeoVim settings
 
+    backup = false, -- Don't need backups with infinite undo
     breakindent = true, -- Indent lines when wrapping text
     cindent = true, -- Indent using C-style rules
     confirm = true, -- Instead of failing a command because of unsaved changes, raise a dialogue asking if you wish to save changed files.
     cursorline = true, -- Highlight current line
     dictionary = "/usr/share/dict/words",
     expandtab = true, -- Use spaces instead of tabs
+    guifont='FiraCode Nerd Font Mono:h10', -- For Neovide etc
     ignorecase = true, -- Case insensitive searching...
     infercase = true, -- ...including during insert completion
     keywordprg = ':help', -- 'K' searches vim docs
@@ -26,11 +28,10 @@ for key, value in pairs({ -- NeoVim settings
     tabstop = 4, -- Spaces a tab is worth
     termguicolors = true, -- Enable colors in the terminal
     timeoutlen = 500, -- MS to wait for mapping to complete
-    wildignorecase = true, -- Case insensitive completion
-    wrap = true, -- Wrap long lines, but not in the middle of a word, and maintain indent level
-    backup = false, -- Don't need backups with infinite undo
     undodir = os.getenv("HOME") .. "/.vim/undodir", -- Save undo history
     undofile = true, -- Save undo history
+    wildignorecase = true, -- Case insensitive completion
+    wrap = true, -- Wrap long lines, but not in the middle of a word, and maintain indent level
 
 }) do vim.opt[key] = value end
 
