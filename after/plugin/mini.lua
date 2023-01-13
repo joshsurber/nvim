@@ -49,8 +49,11 @@ local config = {
             end, {})
 
             vim.api.nvim_create_user_command('Sload', function()
-                MiniSessions.write()
                 MiniSessions.select()
+            end, {})
+
+            vim.api.nvim_create_user_command('Ssave', function ()
+                MiniSessions.write()
             end, {})
         end
     },
@@ -58,8 +61,8 @@ local config = {
     trailspace = {
         after = function()
             -- Delete trailing space on write
-            vim.api.nvim_create_autocmd('BufWritePre', { callback = MiniTrailspace.trim})
-            vim.api.nvim_create_autocmd('BufWritePre', { callback = MiniTrailspace.trim_last_lines})
+            vim.api.nvim_create_autocmd('BufWritePre', { callback = MiniTrailspace.trim })
+            vim.api.nvim_create_autocmd('BufWritePre', { callback = MiniTrailspace.trim_last_lines })
         end
     }
 
