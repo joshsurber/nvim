@@ -7,7 +7,7 @@ for key, value in pairs({ -- NeoVim settings
     cursorline = true, -- Highlight current line
     dictionary = "/usr/share/dict/words",
     expandtab = true, -- Use spaces instead of tabs
-    guifont='FiraCode Nerd Font Mono:h10', -- For Neovide etc
+    guifont='Cascadia Code PL,Symbols Nerd Font:h10', -- For Neovide etc
     ignorecase = true, -- Case insensitive searching...
     infercase = true, -- ...including during insert completion
     keywordprg = ':help', -- 'K' searches vim docs
