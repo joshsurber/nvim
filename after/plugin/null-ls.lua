@@ -15,6 +15,6 @@ null_ls.setup({
         diagnostics.tidy,
         -- formatting.markdownlint,
         -- formatting.mdformat,
-        formatting.beautysh,
+        formatting.shfmt,
     },
 })
