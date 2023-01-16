@@ -1,27 +1,24 @@
 --" If we haven't installed gruvbox yet, use a build-in colorscheme
     -- vim.o.background = "dark" -- or "light" for light mode
     vim.cmd.colorscheme("evening")
-    local colorscheme = 'tokyonight' -- tokyonight gruvbox dracula dracula_blood monokai
+    local colorscheme = 'tokyonight' -- tokyonight gruvbox rose-pine
+    --" other themes: dracula, oceanic, dracula_blood, 'deep ocean', darker, palenight, monokai, mariana, emerald, middlenight_blue
 
 for --[[STARRY SETUP]]key, value in pairs({
-    italic_comments = true,
-    italic_string = false,
-    italic_keywords = false,
-    italic_functions = false,
-    italic_variables = false,
-    contrast = true,
     borders = false,
-    disable_background = false, --"set to true to disable background and allow transparent background
-    style_fix = true, --"disable random loading
-    style = "moonlight", --"load moonlight everytime or
+    contrast = true,
     darker_contrast = true, --"darker background
-    deep_black = true, --"OLED deep black
-    italic_keywords = false,
-    italic_functions = false,
-    set_hl = false, --" Note: enable for nvim 0.6+, it is faster (loading time down to 4~6s from 7~11s), but it does
-    --" not overwrite old values and may has some side effects
     daylight_switch = false, --"this allow using brighter color
-    --" other themes: dracula, oceanic, dracula_blood, 'deep ocean', darker, palenight, monokai, mariana, emerald, middlenight_blue
+    deep_black = true, --"OLED deep black
+    disable_background = true, --"set to true to disable background and allow transparent background
+    italic_comments = true,
+    italic_functions = false,
+    italic_keywords = false,
+    italic_string = false,
+    italic_variables = false,
+    style = "moonlight", --"load moonlight everytime or
+    style_fix = true, --"disable random loading
+    set_hl = true, --" Note: enable for nvim 0.6+, it is faster (loading time down to 4~6s from 7~11s), but it does not overwrite old values and may has some side effects
 }) do vim.g['starry_' .. key] = value end
 
 require("tokyonight").setup({
@@ -58,6 +55,47 @@ require("tokyonight").setup({
     ---@param highlights Highlights
     ---@param colors ColorScheme
     on_highlights = function(highlights, colors) end,
+})
+
+require('rose-pine').setup({
+	--- @usage 'main' | 'moon'
+	dark_variant = 'main',
+	bold_vert_split = false,
+	dim_nc_background = false,
+	disable_background = true,
+	disable_float_background = false,
+	disable_italics = false,
+
+	--- @usage string hex value or named color from rosepinetheme.com/palette
+	groups = {
+		background = 'base',
+		panel = 'surface',
+		border = 'highlight_med',
+		comment = 'muted',
+		link = 'iris',
+		punctuation = 'subtle',
+
+		error = 'love',
+		hint = 'iris',
+		info = 'foam',
+		warn = 'gold',
+
+		headings = {
+			h1 = 'iris',
+			h2 = 'foam',
+			h3 = 'rose',
+			h4 = 'gold',
+			h5 = 'pine',
+			h6 = 'foam',
+		}
+		-- or set all headings at once
+		-- headings = 'subtle'
+	},
+
+	-- Change specific vim highlight groups
+	highlight_groups = {
+		ColorColumn = { bg = 'rose' }
+	}
 })
 
 vim.cmd.colorscheme(colorscheme)

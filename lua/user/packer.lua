@@ -33,6 +33,8 @@ return require('packer').startup(function(use)
     --[[ COLOR SCHEMES ]]
     use 'ellisonleao/gruvbox.nvim' -- https://github.com/ellisonleao/gruvbox.nvim
     use 'folke/tokyonight.nvim' -- https://github.com/folke/tokyonight.nvim
+    use({ 'rose-pine/neovim', as = 'rose-pine',
+    })
     use 'ray-x/starry.nvim' -- https://github.com/ray-x/starry.nvim
 
     --[[ NEOVIM SETTINGS ]]
