@@ -16,6 +16,7 @@ local modules = {
     'jump2d', -- Jump within visible lines                  -- minijump2d
     -- 'map' , -- Window with buffer text overview             -- minimap
     -- 'misc' , -- Miscellaneous functions                     -- minimisc
+    'move', -- Move any selection in any direction          -- minimove
     'pairs', -- Autopairs                                   -- minipairs
     'sessions', -- Session management                       -- minisessions
     'starter', -- Start screen                              -- ministarter
