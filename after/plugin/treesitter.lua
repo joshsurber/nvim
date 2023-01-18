@@ -105,13 +105,13 @@ if not vim.wo.diff then
     vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
 end
 
----WORKAROUND for folding
-vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
-    group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
-    callback = function()
-        if vim.wo.diff then return end
-        vim.opt.foldmethod = 'expr'
-        vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
-    end
-})
----ENDWORKAROUND
+-- ---WORKAROUND for folding
+-- vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
+--     group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
+--     callback = function()
+--         if vim.wo.diff then return end
+--         vim.opt.foldmethod = 'expr'
+--         vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
+--     end
+-- })
+-- ---ENDWORKAROUND
