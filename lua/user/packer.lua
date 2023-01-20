@@ -84,7 +84,6 @@ return require('packer').startup(function(use)
 
     --[[ EXPERIMENTAL]]
     -- Plugins I want to try go here
-
     --[[ /EXPERIMENTAL]]
 
     if packer_bootstrap then -- // Automatically set up your configuration after cloning packer.nvim
@@ -94,9 +93,6 @@ return require('packer').startup(function(use)
     -- For plugins that require more than a `use` but not a full file
     for _, plugin in pairs({
         'which-key',
-        -- 'nvim-autopairs',
-        -- 'nvim-surround',
-        -- 'Comment',
     }) do
         local ok, result = pcall(require, plugin)
         if not ok then return vim.notify(plugin .. ' not loaded') end

@@ -1,6 +1,7 @@
 --" If we haven't installed gruvbox yet, use a build-in colorscheme
     -- vim.o.background = "dark" -- or "light" for light mode
     vim.cmd.colorscheme("evening")
+-- if true then return end
     local colorscheme = 'tokyonight' -- tokyonight gruvbox rose-pine
     --" other themes: dracula, oceanic, dracula_blood, 'deep ocean', darker, palenight, monokai, mariana, emerald, middlenight_blue
 

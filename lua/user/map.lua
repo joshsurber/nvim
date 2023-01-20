@@ -54,11 +54,6 @@ map("v", "p", "p`]", { desc = "Replace selection with register (paste)" })
 map("n", "p", "p`]", { desc = "Put buffer contents (paste)" })
 map("n", "gV", "`[v`]", { desc = "Reselect last selection" })
 
--- -- don't leave visual selection mode after changing indentation
--- map("v", '>', '>gv', { desc = "Indent more" })
--- map("v", '<', '<gv', { desc = "Indent less" })
--- map("v", '=', '=gv', { desc = "Fix indentation" })
-
 -- Easier access to system clipboard
 map("n", '<leader>p', '"+p==', { desc = 'Paste from system clipboard' })
 map("n", '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
@@ -78,16 +73,6 @@ map("n", "<leader>W", "<cmd>wall<cr>", { desc = 'Save all windows/tabs' })
 map("n", "<leader>q", "<cmd>bdelete<cr>", { desc = 'Delete buffer' })
 map("n", "<leader>Q", "<cmd>qall<cr>", { desc = 'Close all windows/tabs' })
 map("n", "QQ", ":q<cr>")
-
--- -- Move line up and down in NORMAL and VISUAL modes
--- map("n", '<A-j>', '<CMD>move .+1<CR>==', { desc = "Move line down" })
--- map("n", '<A-k>', '<CMD>move .-2<CR>==', { desc = "Move line up" })
--- map("v", '<A-j>', ":move '>+1<CR>gv=gv", { desc = "Move line(s) down" })
--- map("v", '<A-k>', ":move '<-2<CR>gv=gv", { desc = "Move line(s) up" })
--- map("i", '<A-j>', '<Esc>:m .+1<CR>==gi', { desc = "Move line down" })
--- map("i", '<A-k>', '<Esc>:m .-2<CR>==gi', { desc = "Move line up" })
--- map("n", '<A-J>', 'yyp', { desc = "Duplicate line below" })
--- map("n", '<A-K>', 'yyP', { desc = "Duplicate line above" })
 
 -- Simplify accessing keys chorded to my escape key
 map('', '<A-ESC>', '~') -- Tilde is a third layer on my ESC key. Fuck that
