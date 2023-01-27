@@ -59,6 +59,16 @@ local config = {
         end
     },
 
+    starter= {
+        after = function()
+
+            vim.api.nvim_create_user_command('Start', function()
+                MiniStarter.open()
+            end, {})
+
+        end
+    },
+
     trailspace = {
         after = function()
             -- Delete trailing space on write
