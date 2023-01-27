@@ -3,7 +3,7 @@
     vim.cmd.colorscheme("evening")
 -- if true then return end
     local colorscheme = 'tokyonight' -- tokyonight gruvbox rose-pine
-    --" other themes: dracula, oceanic, dracula_blood, 'deep ocean', darker, palenight, monokai, mariana, emerald, middlenight_blue
+    --" other themes: dracula, oceanic, dracula_blood, 'deep ocean', darker, palenight, monokai, mariana, emerald, middlenight_blue, solarized
 
 for --[[STARRY SETUP]]key, value in pairs({
     borders = false,
