@@ -84,5 +84,3 @@ for _, module in pairs(modules) do
     require('mini.' .. module).setup(opts)
     if config[module] and config[module].after then pcall(config[module].after) end
 end
-
--- vim.api.nvim_create_user_command('Bdelete', )
