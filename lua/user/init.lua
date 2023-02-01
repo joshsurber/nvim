@@ -4,6 +4,13 @@ require('user.packer')
 
 local A = vim.api
 
+-- Change CWD to current file's directory
+A.nvim_create_user_command('CD', function()
+    vim.cmd.cd(
+        vim.fn.expand('%:h')
+    )
+end, {})
+
 -- Remove useless stuff from the terminal window and enter INSERT mode
 A.nvim_create_autocmd('TermOpen', {
     callback = function(data)
