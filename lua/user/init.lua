@@ -11,17 +11,17 @@ A.nvim_create_user_command('CD', function()
     )
 end, {})
 
--- Remove useless stuff from the terminal window and enter INSERT mode
-A.nvim_create_autocmd('TermOpen', {
-    callback = function(data)
-        if not string.find(vim.bo[data.buf].filetype, '^[fF][tT]erm') then
-            A.nvim_set_option_value('number', false, { scope = 'local' })
-            A.nvim_set_option_value('relativenumber', false, { scope = 'local' })
-            A.nvim_set_option_value('signcolumn', 'no', { scope = 'local' })
-            -- A.nvim_command('startinsert')
-        end
-    end,
-})
+-- -- Remove useless stuff from the terminal window and enter INSERT mode
+-- A.nvim_create_autocmd('TermOpen', {
+--     callback = function(data)
+--         if not string.find(vim.bo[data.buf].filetype, '^[fF][tT]erm') then
+--             A.nvim_set_option_value('number', false, { scope = 'local' })
+--             A.nvim_set_option_value('relativenumber', false, { scope = 'local' })
+--             A.nvim_set_option_value('signcolumn', 'no', { scope = 'local' })
+--             -- A.nvim_command('startinsert')
+--         end
+--     end,
+-- })
 
 -- Help window on right, navigate helptags with enter and backspace
 A.nvim_create_autocmd('FileType', {
@@ -48,17 +48,17 @@ A.nvim_create_autocmd('FileType', {
 --     end
 -- })
 
--- Do not use smart case in command line mode
-local dynamic_smartcase = A.nvim_create_augroup('dynamic_smartcase', { clear = true })
-A.nvim_create_autocmd('CmdLineEnter', {
-    group = dynamic_smartcase,
-    callback = function()
-        A.nvim_set_option('smartcase', false)
-    end
-})
-A.nvim_create_autocmd('CmdLineLeave', {
-    group = dynamic_smartcase,
-    callback = function()
-        A.nvim_set_option('smartcase', true)
-    end
-})
+-- -- Do not use smart case in command line mode
+-- local dynamic_smartcase = A.nvim_create_augroup('dynamic_smartcase', { clear = true })
+-- A.nvim_create_autocmd('CmdLineEnter', {
+--     group = dynamic_smartcase,
+--     callback = function()
+--         A.nvim_set_option('smartcase', false)
+--     end
+-- })
+-- A.nvim_create_autocmd('CmdLineLeave', {
+--     group = dynamic_smartcase,
+--     callback = function()
+--         A.nvim_set_option('smartcase', true)
+--     end
+-- })

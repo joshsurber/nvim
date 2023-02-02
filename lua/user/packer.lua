@@ -93,7 +93,7 @@ return require('packer').startup(function(use)
 
     -- For plugins that require more than a `use` but not a full file
     for _, plugin in pairs({
-        'which-key',
+        -- 'which-key',
     }) do
         local ok, result = pcall(require, plugin)
         if not ok then return vim.notify(plugin .. ' not loaded') end
