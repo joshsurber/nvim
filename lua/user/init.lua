@@ -18,7 +18,7 @@ A.nvim_create_autocmd('TermOpen', {
             A.nvim_set_option_value('number', false, { scope = 'local' })
             A.nvim_set_option_value('relativenumber', false, { scope = 'local' })
             A.nvim_set_option_value('signcolumn', 'no', { scope = 'local' })
-            A.nvim_command('startinsert')
+            -- A.nvim_command('startinsert')
         end
     end,
 })
@@ -33,20 +33,20 @@ A.nvim_create_autocmd('FileType', {
     end
 })
 
--- Use relativenumber in current window only
-local numbertoggle = A.nvim_create_augroup('numbertoggle', { clear = true })
-A.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
-    group = numbertoggle,
-    callback = function()
-        A.nvim_set_option_value('relativenumber', true, { scope = 'local' })
-    end
-})
-A.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
-    group = numbertoggle,
-    callback = function()
-        A.nvim_set_option_value('relativenumber', false, { scope = 'local' })
-    end
-})
+-- -- Use relativenumber in current window only
+-- local numbertoggle = A.nvim_create_augroup('numbertoggle', { clear = true })
+-- A.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
+--     group = numbertoggle,
+--     callback = function()
+--         A.nvim_set_option_value('relativenumber', true, { scope = 'local' })
+--     end
+-- })
+-- A.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
+--     group = numbertoggle,
+--     callback = function()
+--         A.nvim_set_option_value('relativenumber', false, { scope = 'local' })
+--     end
+-- })
 
 -- Do not use smart case in command line mode
 local dynamic_smartcase = A.nvim_create_augroup('dynamic_smartcase', { clear = true })

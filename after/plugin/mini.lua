@@ -5,6 +5,7 @@ local modules = {
     -- 'align' , -- Align text interactively                   -- minialign
     'animate', -- Animate common Neovim actions             -- minianimate
     -- 'base16' , -- Base16 colorscheme creation               -- minibase16
+    'basics', -- Common config presets                    -- minibasics
     'bufremove', -- Remove buffers                          -- minibufremove
     'comment', -- Comment                                   -- minicomment
     -- 'completion' , -- Completion and signature help         -- minicompletion
@@ -30,6 +31,20 @@ local modules = {
 
 local config = {
 
+    basics = {
+        options = {
+            extra_ui = true,
+            -- win_borders = 'default',
+        },
+        mappings = {
+            windows = true, -- Window navigation with <C-hjkl>, resize with <C-arrow>
+            move_with_alt = true, -- Move cursor in Insert, Command, and Terminal mode with <M-hjkl>
+        },
+        autocommands = {
+            relnum_in_visual_mode = true,
+        },
+    },
+
     bufremove = {
         after = function()
             vim.keymap.set("n", "<leader>q", "<cmd>lua MiniBufremove.wipeout()<cr>",
@@ -53,13 +68,13 @@ local config = {
                 MiniSessions.select()
             end, {})
 
-            vim.api.nvim_create_user_command('Ssave', function ()
+            vim.api.nvim_create_user_command('Ssave', function()
                 MiniSessions.write()
             end, {})
         end
     },
 
-    starter= {
+    starter = {
         after = function()
 
             vim.api.nvim_create_user_command('Start', function()
