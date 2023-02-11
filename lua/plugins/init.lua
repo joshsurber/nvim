@@ -3,16 +3,6 @@ return {
     'nvim-tree/nvim-web-devicons', -- https://github.com/nvim-tree/nvim-web-devicons
     'nvim-lua/plenary.nvim', -- https://github.com/nvim-lua/plenary.nvim
 
-    --[[ COLOR SCHEMES ]]
-    { 'ellisonleao/gruvbox.nvim', lazy = true }, -- https://github.com/ellisonleao/gruvbox.nvim
-    { 'folke/tokyonight.nvim',
-        lazy = false,
-        priority = 1000
-    }, -- https://github.com/folke/tokyonight.nvim
-    { 'ishan9299/nvim-solarized-lua', lazy = true },
-    { 'rose-pine/neovim', name = 'rose-pine', lazy = true },
-    { 'ray-x/starry.nvim', lazy = true }, -- https://github.com/ray-x/starry.nvim
-
     --[[ NEOVIM SETTINGS ]]
     'echasnovski/mini.nvim', -- Small utilities -- https://github.com/echasnovski/mini.nvim
     'folke/which-key.nvim', -- Popup tree of available key mappings
@@ -22,8 +12,6 @@ return {
     'tpope/vim-eunuch', -- Unix utilities -- https://github.com/tpope/vim-eunuch
     'tpope/vim-repeat', -- Do it again -- https://github.com/tpope/vim-repeat
     'vifm/vifm.vim',
-
-    --[[ GIT INTEGRATION ]]
 
     --[[ CODING ]]
     'davidgranstrom/nvim-markdown-preview', -- https://github.com/davidgranstrom/nvim-markdown-preview
