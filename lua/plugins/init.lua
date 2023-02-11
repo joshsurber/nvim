@@ -24,8 +24,6 @@ return {
     'vifm/vifm.vim',
 
     --[[ GIT INTEGRATION ]]
-    'tpope/vim-fugitive', -- Git integration -- https://github.com/tpope/vim-fugitive
-    'lewis6991/gitsigns.nvim', -- Track git changes in gutter -- https://github.com/lewis6991/gitsigns.nvim
 
     --[[ CODING ]]
     'davidgranstrom/nvim-markdown-preview', -- https://github.com/davidgranstrom/nvim-markdown-preview
