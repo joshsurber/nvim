@@ -1,19 +1,5 @@
 for key, value in pairs({ -- NeoVim settings
 
-    -- backup = false, -- Don't need backups with infinite undo
-    -- breakindent = true, -- Indent lines when wrapping text
-    -- cursorline = true, -- Highlight current line
-    -- ignorecase = true, -- Case insensitive searching...
-    -- infercase = true, -- ...including during insert completion
-    -- linebreak = true, -- Break lines at `breakat` chars instead of last col
-    -- number = true, -- Show line numbers (with relnumber, make current line no absolute)
-    -- relativenumber = true, -- Current line actual line number, other relative to cursor
-    -- smartcase = true, -- ...unless search includes uppercase letters...
-    -- spell = true, -- Spellcheck by default
-    -- splitbelow = true, splitright = true, -- New windows below and to right
-    -- termguicolors = true, -- Enable colors in the terminal
-    -- undofile = true, -- Save undo history
-    -- wrap = true, -- Wrap long lines, but not in the middle of a word, and maintain indent level
     cindent = true, -- Indent using C-style rules
     confirm = true, -- Instead of failing a command because of unsaved changes, raise a dialogue asking if you wish to save changed files.
     dictionary = "/usr/share/dict/words",
