@@ -1,6 +1,6 @@
 require('user.set')
 require('user.map')
-require('user.packer')
+require('user.lazy')
 
 local A = vim.api
 
