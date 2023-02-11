@@ -18,14 +18,6 @@ return {
     -- 'hail2u/vim-css3-syntax', -- The newest hawtness of CSS -- https://github.com/hail2u/vim-css3-syntax
     -- 'mattn/emmet-vim', -- https://github.com/mattn/emmet-vim
     'tpope/vim-liquid', -- Support for liquid templates -- https://github.com/tpope/vim-liquid
-    'windwp/nvim-ts-autotag', -- Auto close tags and rename in pairs -- https://github.com/windwp/nvim-ts-autotag
-
-    --[[ TREESITTER STUFF ]]
-    -- 'nvim-treesitter/nvim-treesitter-context', -- Where am I in my code -- https://github.com/nvim-treesitter/nvim-treesitter-context
-    -- 'nvim-treesitter/playground', -- https://github.com/nvim-treesitter/playground
-    'mrjones2014/nvim-ts-rainbow', -- Rainbow parentheses
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', }, -- Language awareness -- https://github.com/nvim-treesitter/nvim-treesitter
-
 
     --[[ EXPERIMENTAL]]
     -- Plugins I want to try go here
