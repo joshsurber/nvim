@@ -20,10 +20,8 @@ return {
             'rafamadriz/friendly-snippets', -- Optional
         },
         config = function()
-            local ok, lsp = pcall(require, 'lsp-zero')
-            if not ok then return vim.notify('lspzero not loaded') end
-            local ok, cmp = pcall(require, 'cmp')
-            if not ok then return vim.notify('cmp not loaded') end
+            local lsp=require('lsp-zero')
+            local cmp=require('cmp')
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
             lsp.preset('recommended')
@@ -88,5 +86,4 @@ return {
             vim.diagnostic.config({ virtual_text = true })
         end,
     },
-    'jose-elias-alvarez/null-ls.nvim', -- Inject 3rd party executables into LSP -- https://github.com/jose-elias-alvarez/null-ls.nvim
 }
