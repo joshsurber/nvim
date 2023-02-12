@@ -5,7 +5,6 @@ return {
 
     --[[ NEOVIM SETTINGS ]]
     'echasnovski/mini.nvim', -- Small utilities -- https://github.com/echasnovski/mini.nvim
-    'folke/which-key.nvim', -- Popup tree of available key mappings
     'akinsho/toggleterm.nvim', -- Easy terminal access -- https://github.com/akinsho/toggleterm.nvim
     'mbbill/undotree', -- https://github.com/mbbill/undotree
     'nvim-telescope/telescope.nvim', -- Fuzzy file finder -- https://github.com/nvim-telescope/telescope.nvim
