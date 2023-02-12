@@ -7,7 +7,6 @@ return {
     'echasnovski/mini.nvim', -- Small utilities -- https://github.com/echasnovski/mini.nvim
     'akinsho/toggleterm.nvim', -- Easy terminal access -- https://github.com/akinsho/toggleterm.nvim
     'mbbill/undotree', -- https://github.com/mbbill/undotree
-    'nvim-telescope/telescope.nvim', -- Fuzzy file finder -- https://github.com/nvim-telescope/telescope.nvim
     'tpope/vim-eunuch', -- Unix utilities -- https://github.com/tpope/vim-eunuch
     'tpope/vim-repeat', -- Do it again -- https://github.com/tpope/vim-repeat
     'vifm/vifm.vim',
