@@ -37,4 +37,4 @@ for key, value in pairs({ -- globals (for older plugins)
     nvim_markdown_preview_format = 'markdown',
 
 }) do vim.g[key] = value end
--- vim: foldlevel=1
+-- vim: fdl=1

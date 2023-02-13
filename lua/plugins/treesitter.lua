@@ -4,13 +4,11 @@ if not vim.wo.diff then
 end
 
 return {
+    'mrjones2014/nvim-ts-rainbow', -- Rainbow parentheses
+    'nvim-treesitter/nvim-treesitter-context', -- Where am I in my code -- https://github.com/nvim-treesitter/nvim-treesitter-context
+    -- 'nvim-treesitter/playground', -- https://github.com/nvim-treesitter/playground
+    'windwp/nvim-ts-autotag', -- Auto close tags and rename in pairs -- https://github.com/windwp/nvim-ts-autotag
     { 'nvim-treesitter/nvim-treesitter',
-        dependencies = {
-            'mrjones2014/nvim-ts-rainbow', -- Rainbow parentheses
-            -- 'nvim-treesitter/nvim-treesitter-context', -- Where am I in my code -- https://github.com/nvim-treesitter/nvim-treesitter-context
-            -- 'nvim-treesitter/playground', -- https://github.com/nvim-treesitter/playground
-            'windwp/nvim-ts-autotag', -- Auto close tags and rename in pairs -- https://github.com/windwp/nvim-ts-autotag
-        },
         build = ':TSUpdate',
         opts = {
             auto_install = true,

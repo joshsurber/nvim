@@ -4,12 +4,13 @@ local map = vim.keymap.set
 map("n", "<leader>ve", ":tabedit $MYVIMRC<cr>", { desc = 'Edit init.lua' })
 map("n", "<leader>vs", ":source $MYVIMRC<cr>:PackerSync<cr>", { desc = 'Reload init.lua' })
 map("n", "<leader>vd", ":cd ~/.config/nvim<cr>", { desc = 'Change to Neovim config directory' })
-map("n", "<leader>vp", ":PackerSync<cr>", { desc = "Sync plugins" })
+map("n", "<leader>vp", ":Lazy sync<cr>", { desc = "Sync plugins" })
 
 
 -- Command line conveniences
 map("c", "%%", "<C-R>=expand('%:h').'/'<cr>") -- expand %% to current directory in command-line mode
--- THIS DOESN'T WORK ANYMORE ANYWAY -- map("c", "w!!", "w !sudo tee % >/dev/null") -- No write permission? Fuck you, do it anyway!")
+-- THIS DOESN'T WORK ANYMORE ANYWAY --
+map("c", "w!!", "w !sudo tee % >/dev/null") -- No write permission? Fuck you, do it anyway!")
 
 -- Folding
 map({ 'n', 'v' }, "<leader><leader>", "za", { desc = 'Toggle fold' })
