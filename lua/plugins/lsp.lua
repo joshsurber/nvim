@@ -72,8 +72,8 @@ return {
                 vim.keymap.set('n', '<leader>lf', buf.format, { desc = 'Format buffer' })
                 vim.keymap.set('n', '<leader>ll', vim.diagnostic.open_float,
                     { desc = 'Show diagnostics in floating window' })
-                vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
-                vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
+                -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
+                -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
             end)
 
             lsp.nvim_workspace()

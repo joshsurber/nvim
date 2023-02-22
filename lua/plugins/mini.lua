@@ -7,6 +7,7 @@ return {
             'animate', -- Animate common Neovim actions             -- minianimate
             -- 'base16' , -- Base16 colorscheme creation               -- minibase16
             'basics', -- Common config presets                    -- minibasics
+            'bracketed',-- Go forward/backward with square brackets -- minibracketed
             'bufremove', -- Remove buffers                          -- minibufremove
             'comment', -- Comment                                   -- minicomment
             -- 'completion' , -- Completion and signature help         -- minicompletion
