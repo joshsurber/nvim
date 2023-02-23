@@ -48,7 +48,7 @@ map("i", '<A-\'>', '`') -- Backtick is also a function layer on esc. To hell wit
 
 map("n", '<C-q>', '@q') -- Access `qq` macro
 
-map("n", '<S-h>', ':bprev<cr>')
-map("n", '<S-l>', ':bnext<cr>')
+-- map("n", '<S-h>', ':bprev<cr>')
+-- map("n", '<S-l>', ':bnext<cr>')
 
 map("n", '<leader>e', ':Lexplore<CR>', { desc = 'Toggle file tree' })
