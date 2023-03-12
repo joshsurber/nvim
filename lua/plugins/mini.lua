@@ -22,6 +22,7 @@ return {
             'move', -- Move any selection in any direction          -- minimove
             'pairs', -- Autopairs                                   -- minipairs
             'sessions', -- Session management                       -- minisessions
+            'splitjoin', -- Split and join arguments                -- minisplitjoin
             'starter', -- Start screen                              -- ministarter
             'statusline', -- Statusline                             -- ministatusline
             'surround', -- Surround actions                         -- minisurround
