@@ -13,7 +13,6 @@ return {
 
     -- Popup tree of available key mappings }
     { 'folke/which-key.nvim', config = true },
-
     { 'akinsho/toggleterm.nvim', -- Easy terminal access -- https://github.com/akinsho/toggleterm.nvim
         opts = {
             open_mapping = '<C-g>',
