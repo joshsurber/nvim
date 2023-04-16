@@ -9,6 +9,7 @@ return {
             'basics', -- Common config presets                    -- minibasics
             'bracketed',-- Go forward/backward with square brackets -- minibracketed
             'bufremove', -- Remove buffers                          -- minibufremove
+            'colors', -- Tweak and save any color scheme            -- minicolors
             'comment', -- Comment                                   -- minicomment
             -- 'completion' , -- Completion and signature help         -- minicompletion
             'cursorword', -- Autohighlight word under cursor        -- minicursorword
