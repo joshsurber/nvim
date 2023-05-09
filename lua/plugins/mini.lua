@@ -89,6 +89,19 @@ return {
             }
         }
 
+        if Colemak then
+            config.move={ -- only for Colemak
+                mappings={
+                    down='<M-n>',
+                    up='<M-e>',
+                    right='<M-i>',
+                    line_down='<M-n>',
+                    line_up='<M-e>',
+                    line_right='<M-i>',
+                }
+            }
+        end
+
         for _, module in pairs(modules) do
             local opts = config[module] or {}
             require('mini.' .. module).setup(opts)

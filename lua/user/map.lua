@@ -31,7 +31,7 @@ map("n", "Vab", "vabV", { desc = "Select a block" })
 map("n", "VaB", "vaBV", { desc = "Select a block" })
 
 -- Change modes easier
-map("i", "jk", "<esc>")
+-- map("i", "jk", "<esc>")
 -- map("t", "<Esc>", "<C-\\><C-n>")
 
 -- Save and quit easier
