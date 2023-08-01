@@ -7,14 +7,17 @@ return {
             'animate', -- Animate common Neovim actions             -- minianimate
             -- 'base16' , -- Base16 colorscheme creation               -- minibase16
             'basics', -- Common config presets                    -- minibasics
-            'bracketed',-- Go forward/backward with square brackets -- minibracketed
+            'bracketed', -- Go forward/backward with square brackets -- minibracketed
             'bufremove', -- Remove buffers                          -- minibufremove
+            -- 'clue', -- Show next key clues                          -- miniclue
             'colors', -- Tweak and save any color scheme            -- minicolors
             'comment', -- Comment                                   -- minicomment
             -- 'completion' , -- Completion and signature help         -- minicompletion
             'cursorword', -- Autohighlight word under cursor        -- minicursorword
             -- 'doc' , -- Generate Neovim help files                   -- minidoc
+            -- 'files', -- Navigate and manipulate file system         -- minifiles
             -- 'fuzzy' , -- Fuzzy matching                             -- minifuzzy
+            'hipatterns', -- Highlight patterns in text             -- minihipatterns
             'indentscope', -- Visualize and operate on indent scope -- miniindentscope
             'jump', -- Jump forward/backward to a single character  -- minijump
             'jump2d', -- Jump within visible lines                  -- minijump2d
@@ -51,6 +54,60 @@ return {
                     vim.keymap.set("n", "<leader>q", "<cmd>lua MiniBufremove.wipeout()<cr>",
                         { desc = 'Wipeout buffer (close tab)' })
                 end
+            },
+            clue = {
+                window = {
+                    delay = 250,
+                },
+                triggers = {
+                    -- Leader triggers
+                    { mode = 'n', keys = '<Leader>' },
+                    { mode = 'x', keys = '<Leader>' },
+
+                    -- Built-in completion
+                    { mode = 'i', keys = '<C-x>' },
+
+                    -- `g` key
+                    { mode = 'n', keys = 'g' },
+                    { mode = 'x', keys = 'g' },
+
+                    -- Marks
+                    { mode = 'n', keys = "'" },
+                    { mode = 'n', keys = '`' },
+                    { mode = 'x', keys = "'" },
+                    { mode = 'x', keys = '`' },
+
+                    -- Registers
+                    { mode = 'n', keys = '"' },
+                    { mode = 'x', keys = '"' },
+                    { mode = 'i', keys = '<C-r>' },
+                    { mode = 'c', keys = '<C-r>' },
+
+                    -- Window commands
+                    { mode = 'n', keys = '<C-w>' },
+
+                    -- `z` key
+                    { mode = 'n', keys = 'z' },
+                    { mode = 'x', keys = 'z' },
+                },
+
+                clues = {
+                    -- Enhance this by adding descriptions for <Leader> mapping groups
+                    -- miniclue.gen_clues.builtin_completion(),
+                    -- miniclue.gen_clues.g(),
+                    -- miniclue.gen_clues.marks(),
+                    -- miniclue.gen_clues.registers(),
+                    -- miniclue.gen_clues.windows(),
+                    -- miniclue.gen_clues.z(),
+                },
+            },
+            hipatterns = {
+                highlighters = {
+                    fixme = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
+                    hack  = { pattern = 'HACK', group = 'MiniHipatternsHack' },
+                    todo  = { pattern = 'TODO', group = 'MiniHipatternsTodo' },
+                    note  = { pattern = 'NOTE', group = 'MiniHipatternsNote' },
+                },
             },
             sessions = {
                 after = function()
@@ -90,14 +147,15 @@ return {
         }
 
         if Colemak then
-            config.move={ -- only for Colemak
-                mappings={
-                    down='<M-n>',
-                    up='<M-e>',
-                    right='<M-i>',
-                    line_down='<M-n>',
-                    line_up='<M-e>',
-                    line_right='<M-i>',
+            config.move = {
+                -- only for Colemak
+                mappings = {
+                    down = '<M-n>',
+                    up = '<M-e>',
+                    right = '<M-i>',
+                    line_down = '<M-n>',
+                    line_up = '<M-e>',
+                    line_right = '<M-i>',
                 }
             }
         end

@@ -16,6 +16,8 @@ map("n", "gj") -- Jump to next match
 map("e", "gk") -- Go to end of word
 map("i", "l") -- Enter insert mode
 
+map("M", "K")
+
 -- From mini.nvim
 vim.keymap.set('n', '<C-H>', '<C-w>h', { desc = 'Focus on left window' })
 vim.keymap.set('n', '<C-N>', '<C-w>j', { desc = 'Focus on below window' })
