@@ -1,5 +1,6 @@
 return {
     'vimwiki/vimwiki',
+    enabled = false,
     keys = {
         '<leader>ww', '<leader>ws'
     },
