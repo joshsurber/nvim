@@ -53,10 +53,10 @@ return {
                 local opts = { buffer = bufnr, remap = false }
                 local buf = vim.lsp.buf
 
-                if client.name == "eslint" then
-                    vim.cmd.LspStop('eslint')
-                    return
-                end
+                -- if client.name == "eslint" then
+                --     vim.cmd.LspStop('eslint')
+                --     return
+                -- end
 
                 -- LSP mappings
                 vim.keymap.set('n', 'gh', buf.hover, { desc = 'Floating information window' })

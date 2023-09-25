@@ -30,6 +30,11 @@ map("n", "Vat", "vatV", { desc = "Select around a tag" })
 map("n", "Vab", "vabV", { desc = "Select a block" })
 map("n", "VaB", "vaBV", { desc = "Select a block" })
 
+-- Go to end of visual selection
+map('v', 'y', 'y`]')
+map('v', 'p', 'p`]')
+map('n', 'p', 'p`]')
+
 -- Change modes easier
 -- map("i", "jk", "<esc>")
 -- map("t", "<Esc>", "<C-\\><C-n>")
@@ -40,11 +45,6 @@ map("n", "<leader>W", "<cmd>wall<cr>", { desc = 'Save all windows/tabs' })
 map("n", "<leader>q", "<cmd>bdelete<cr>", { desc = 'Delete buffer' })
 map("n", "<leader>Q", "<cmd>qall<cr>", { desc = 'Close all windows/tabs' })
 map("n", "QQ", ":q<cr>")
-
--- Simplify accessing keys chorded to my escape key
-map('', '<A-ESC>', '~') -- Tilde is a third layer on my ESC key. Fuck that
-map('!', '<A-ESC>', '~') -- Remap it in every way possible
-map("i", '<A-\'>', '`') -- Backtick is also a function layer on esc. To hell with that shit
 
 map("n", '<C-q>', '@q') -- Access `qq` macro
 
