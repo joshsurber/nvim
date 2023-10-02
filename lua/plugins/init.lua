@@ -4,8 +4,8 @@ return {
 
     'mbbill/undotree', -- https://github.com/mbbill/undotree
     'tpope/vim-eunuch', -- Unix utilities -- https://github.com/tpope/vim-eunuch
-    'tpope/vim-repeat', -- Do it again -- https://github.com/tpope/vim-repeat
-    'vifm/vifm.vim',
+    -- 'tpope/vim-repeat', -- Do it again -- https://github.com/tpope/vim-repeat
+    -- 'vifm/vifm.vim',
 
     'davidgranstrom/nvim-markdown-preview', -- https://github.com/davidgranstrom/nvim-markdown-preview
     -- 'hail2u/vim-css3-syntax', -- The newest hawtness of CSS -- https://github.com/hail2u/vim-css3-syntax
