@@ -9,7 +9,7 @@ return {
             'basics', -- Common config presets                    -- minibasics
             'bracketed', -- Go forward/backward with square brackets -- minibracketed
             'bufremove', -- Remove buffers                          -- minibufremove
-            -- 'clue', -- Show next key clues                          -- miniclue
+            'clue', -- Show next key clues                          -- miniclue
             'colors', -- Tweak and save any color scheme            -- minicolors
             'comment', -- Comment                                   -- minicomment
             -- 'completion' , -- Completion and signature help         -- minicompletion
@@ -93,12 +93,23 @@ return {
 
                 clues = {
                     -- Enhance this by adding descriptions for <Leader> mapping groups
-                    -- miniclue.gen_clues.builtin_completion(),
-                    -- miniclue.gen_clues.g(),
-                    -- miniclue.gen_clues.marks(),
-                    -- miniclue.gen_clues.registers(),
-                    -- miniclue.gen_clues.windows(),
-                    -- miniclue.gen_clues.z(),
+                    require('mini.clue').gen_clues.builtin_completion(),
+                    require('mini.clue').gen_clues.g(),
+                    require('mini.clue').gen_clues.marks(),
+                    require('mini.clue').gen_clues.registers(),
+                    require('mini.clue').gen_clues.windows(),
+                    require('mini.clue').gen_clues.z(),
+
+                    { mode = 'i', keys = '<C-x><C-f>', desc = 'File names' },
+                    { mode = 'i', keys = '<C-x><C-l>', desc = 'Whole lines' },
+                    { mode = 'i', keys = '<C-x><C-o>', desc = 'Omni completion' },
+                    { mode = 'i', keys = '<C-x><C-s>', desc = 'Spelling suggestions' },
+                    { mode = 'i', keys = '<C-x><C-u>', desc = "With 'completefunc'" },
+
+                    { mode = 'n', keys = '<leader>f',  desc = 'Find with Telescope' },
+                    { mode = 'n', keys = '<leader>l',  desc = 'LSP' },
+                    { mode = 'n', keys = '<leader>g',  desc = 'Git' },
+                    { mode = 'n', keys = '<leader>v',  desc = 'Vim config' },
                 },
             },
             hipatterns = {
