@@ -15,7 +15,7 @@ return {
             -- 'completion' , -- Completion and signature help         -- minicompletion
             'cursorword', -- Autohighlight word under cursor        -- minicursorword
             -- 'doc' , -- Generate Neovim help files                   -- minidoc
-            -- 'files', -- Navigate and manipulate file system         -- minifiles
+            'files', -- Navigate and manipulate file system         -- minifiles
             -- 'fuzzy' , -- Fuzzy matching                             -- minifuzzy
             'hipatterns', -- Highlight patterns in text             -- minihipatterns
             'indentscope', -- Visualize and operate on indent scope -- miniindentscope
@@ -109,6 +109,13 @@ return {
                     note  = { pattern = 'NOTE', group = 'MiniHipatternsNote' },
                 },
             },
+            files = {
+                after = function()
+                    vim.notify('foobar')
+                    vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>",
+                        { desc = 'Open file explorer' })
+                end,
+            },
             sessions = {
                 after = function()
                     vim.api.nvim_create_user_command('Screate', function()
@@ -156,6 +163,12 @@ return {
                     line_down = '<M-n>',
                     line_up = '<M-e>',
                     line_right = '<M-i>',
+                }
+            }
+            config.files = {
+                mappings = {
+                    go_in      = 'i',
+                    go_in_plus = 'I',
                 }
             }
         end

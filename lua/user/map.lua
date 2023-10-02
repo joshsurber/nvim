@@ -51,4 +51,5 @@ map("n", '<C-q>', '@q') -- Access `qq` macro
 map("n", '<S-h>', ':bprev<cr>')
 map("n", '<S-i>', ':bnext<cr>')
 
-map("n", '<leader>e', ':Lexplore<CR>', { desc = 'Toggle file tree' })
+-- map("n", '<leader>e', ':Lexplore<CR>', { desc = 'Toggle file tree' })
+map("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>", { desc = 'Open file explorer' })
