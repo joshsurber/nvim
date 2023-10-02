@@ -48,7 +48,7 @@ map("n", "QQ", ":q<cr>")
 
 map("n", '<C-q>', '@q') -- Access `qq` macro
 
--- map("n", '<S-h>', ':bprev<cr>')
--- map("n", '<S-l>', ':bnext<cr>')
+map("n", '<S-h>', ':bprev<cr>')
+map("n", '<S-i>', ':bnext<cr>')
 
 map("n", '<leader>e', ':Lexplore<CR>', { desc = 'Toggle file tree' })
