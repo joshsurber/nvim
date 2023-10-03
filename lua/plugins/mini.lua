@@ -24,6 +24,7 @@ return {
             -- 'map' , -- Window with buffer text overview             -- minimap
             -- 'misc' , -- Miscellaneous functions                     -- minimisc
             'move', -- Move any selection in any direction          -- minimove
+            -- 'operators', -- Text edit operators                     -- minioperators
             'pairs', -- Autopairs                                   -- minipairs
             'sessions', -- Session management                       -- minisessions
             'splitjoin', -- Split and join arguments                -- minisplitjoin
@@ -165,22 +166,20 @@ return {
         }
 
         if Colemak then
-            config.move = {
+            if not config.move then config.move = {} end
+            if not config.files then config.files = {} end
+            config.move.mappings = {
                 -- only for Colemak
-                mappings = {
-                    down = '<M-n>',
-                    up = '<M-e>',
-                    right = '<M-i>',
-                    line_down = '<M-n>',
-                    line_up = '<M-e>',
-                    line_right = '<M-i>',
-                }
+                down = '<M-n>',
+                up = '<M-e>',
+                right = '<M-i>',
+                line_down = '<M-n>',
+                line_up = '<M-e>',
+                line_right = '<M-i>',
             }
-            config.files = {
-                mappings = {
-                    go_in      = 'i',
-                    go_in_plus = 'I',
-                }
+            config.files.mappings = {
+                go_in      = 'i',
+                go_in_plus = 'I',
             }
         end
 
