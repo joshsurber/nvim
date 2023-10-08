@@ -63,15 +63,13 @@ return {
                 vim.keymap.set('n', 'gH', buf.signature_help, { desc = 'Signature information floating window' })
                 vim.keymap.set('n', '<leader>ld', buf.definition, { desc = 'Go to definition' })
                 vim.keymap.set('n', '<leader>lD', buf.declaration, { desc = 'Go to declaration' })
-                vim.keymap.set('n', '<leader>li', buf.implementation,
-                    { desc = 'List implementations in quickfix window' })
+                vim.keymap.set('n', '<leader>li', buf.implementation, { desc = 'List implementations in quickfix window' })
                 vim.keymap.set('n', '<leader>lo', buf.type_definition, { desc = 'Go to type definition' })
                 vim.keymap.set('n', '<leader>lR', buf.references, { desc = 'List referencess in quickfix window' })
                 vim.keymap.set('n', '<leader>lr', buf.rename, { desc = 'Rename symbol under cursor' })
                 vim.keymap.set('n', '<leader>la', buf.code_action, { desc = 'Select a code action' })
                 vim.keymap.set('n', '<leader>lf', buf.format, { desc = 'Format buffer' })
-                vim.keymap.set('n', '<leader>ll', vim.diagnostic.open_float,
-                    { desc = 'Show diagnostics in floating window' })
+                vim.keymap.set('n', '<leader>ll', vim.diagnostic.open_float, { desc = 'Show diagnostics in floating window' })
                 -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
                 -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
             end)

@@ -2,7 +2,7 @@ return {
     'nvim-tree/nvim-web-devicons', -- https://github.com/nvim-tree/nvim-web-devicons
     'nvim-lua/plenary.nvim', -- https://github.com/nvim-lua/plenary.nvim
 
-    'mbbill/undotree', -- https://github.com/mbbill/undotree
+    -- 'mbbill/undotree', -- https://github.com/mbbill/undotree
     'tpope/vim-eunuch', -- Unix utilities -- https://github.com/tpope/vim-eunuch
     -- 'tpope/vim-repeat', -- Do it again -- https://github.com/tpope/vim-repeat
     -- 'vifm/vifm.vim',
