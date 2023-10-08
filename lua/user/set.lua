@@ -27,13 +27,6 @@ for key, value in pairs({ -- globals (for older plugins)
     maplocalleader = ' ',
     t_co = 256,
 
-    -- Netrw plugin options
-    netrw_liststyle = 3,
-    netrw_browse_split = 4,
-    netrw_winsize = 25,
-    netrw_banner = 0,
-    -- netrw_altv = 1,
-
     nvim_markdown_preview_format = 'markdown',
 
 }) do vim.g[key] = value end
