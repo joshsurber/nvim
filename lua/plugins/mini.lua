@@ -90,6 +90,14 @@ return {
                     -- `z` key
                     { mode = 'n', keys = 'z' },
                     { mode = 'x', keys = 'z' },
+
+                    -- mini.surround
+                    { mode='n', keys='s'},
+                    { mode='v', keys='s'},
+
+                    -- mini.bracketed
+                    {mode='n',keys='['},
+                    {mode='n',keys=']'},
                 },
 
                 clues = {
@@ -167,7 +175,6 @@ return {
 
         if Colemak then
             if not config.move then config.move = {} end
-            if not config.files then config.files = {} end
             config.move.mappings = {
                 -- only for Colemak
                 down = '<M-n>',
@@ -177,6 +184,7 @@ return {
                 line_up = '<M-e>',
                 line_right = '<M-i>',
             }
+            if not config.files then config.files = {} end
             config.files.mappings = {
                 go_in      = 'i',
                 go_in_plus = 'I',
