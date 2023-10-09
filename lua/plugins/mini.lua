@@ -12,7 +12,7 @@ return {
             'clue', -- Show next key clues                          -- miniclue
             'colors', -- Tweak and save any color scheme            -- minicolors
             'comment', -- Comment                                   -- minicomment
-            -- 'completion' , -- Completion and signature help         -- minicompletion
+            'completion', -- Completion and signature help         -- minicompletion
             'cursorword', -- Autohighlight word under cursor        -- minicursorword
             -- 'doc' , -- Generate Neovim help files                   -- minidoc
             'files', -- Navigate and manipulate file system         -- minifiles
@@ -92,12 +92,15 @@ return {
                     { mode = 'x', keys = 'z' },
 
                     -- mini.surround
-                    { mode='n', keys='s'},
-                    { mode='v', keys='s'},
+                    { mode = 'n', keys = 's' },
+                    { mode = 'v', keys = 's' },
 
                     -- mini.bracketed
-                    {mode='n',keys='['},
-                    {mode='n',keys=']'},
+                    { mode = 'n', keys = '[' },
+                    { mode = 'n', keys = ']' },
+
+                    -- mini.basics
+                    {mode='n',keys='\\'}
                 },
 
                 clues = {
@@ -120,6 +123,32 @@ return {
                     { mode = 'n', keys = '<leader>g',  desc = 'Git' },
                     { mode = 'n', keys = '<leader>v',  desc = 'Vim config' },
                 },
+            },
+            completion = {
+                after = function()
+                    vim.keymap.set('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
+                    vim.keymap.set('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
+                    local keys = {
+                        ['cr']        = vim.api.nvim_replace_termcodes('<CR>', true, true, true),
+                        ['ctrl-y']    = vim.api.nvim_replace_termcodes('<C-y>', true, true, true),
+                        ['ctrl-y_cr'] = vim.api.nvim_replace_termcodes('<C-y><CR>', true, true, true),
+                    }
+
+                    _G.cr_action = function()
+                        if vim.fn.pumvisible() ~= 0 then
+                            -- If popup is visible, confirm selected item or add new line otherwise
+                            local item_selected = vim.fn.complete_info()['selected'] ~= -1
+                            return item_selected and keys['ctrl-y'] or keys['ctrl-y_cr']
+                        else
+                            -- If popup is not visible, use plain `<CR>`. You might want to customize
+                            -- according to other plugins. For example, to use 'mini.pairs', replace
+                            -- next line with `return require('mini.pairs').cr()`
+                            return keys['cr']
+                        end
+                    end
+
+                    vim.keymap.set('i', '<CR>', 'v:lua._G.cr_action()', { expr = true })
+                end,
             },
             hipatterns = {
                 highlighters = {
