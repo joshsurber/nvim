@@ -2,36 +2,36 @@ return {
     'echasnovski/mini.nvim', -- Small utilities -- https://github.com/echasnovski/mini.nvim
     config = function()
         local modules = {
-            'ai', -- Extend and create `a`/`i` textobjects          -- miniai
+            'ai',          -- Extend and create `a`/`i` textobjects          -- miniai
             -- 'align' , -- Align text interactively                   -- minialign
-            'animate', -- Animate common Neovim actions             -- minianimate
+            'animate',     -- Animate common Neovim actions             -- minianimate
             -- 'base16' , -- Base16 colorscheme creation               -- minibase16
-            'basics', -- Common config presets                    -- minibasics
-            'bracketed', -- Go forward/backward with square brackets -- minibracketed
-            'bufremove', -- Remove buffers                          -- minibufremove
-            'clue', -- Show next key clues                          -- miniclue
-            'colors', -- Tweak and save any color scheme            -- minicolors
-            'comment', -- Comment                                   -- minicomment
-            'completion', -- Completion and signature help         -- minicompletion
-            'cursorword', -- Autohighlight word under cursor        -- minicursorword
+            'basics',      -- Common config presets                    -- minibasics
+            'bracketed',   -- Go forward/backward with square brackets -- minibracketed
+            'bufremove',   -- Remove buffers                          -- minibufremove
+            'clue',        -- Show next key clues                          -- miniclue
+            'colors',      -- Tweak and save any color scheme            -- minicolors
+            'comment',     -- Comment                                   -- minicomment
+            'completion',  -- Completion and signature help         -- minicompletion
+            'cursorword',  -- Autohighlight word under cursor        -- minicursorword
             -- 'doc' , -- Generate Neovim help files                   -- minidoc
-            'files', -- Navigate and manipulate file system         -- minifiles
+            'files',       -- Navigate and manipulate file system         -- minifiles
             -- 'fuzzy' , -- Fuzzy matching                             -- minifuzzy
-            'hipatterns', -- Highlight patterns in text             -- minihipatterns
+            'hipatterns',  -- Highlight patterns in text             -- minihipatterns
             'indentscope', -- Visualize and operate on indent scope -- miniindentscope
-            'jump', -- Jump forward/backward to a single character  -- minijump
-            'jump2d', -- Jump within visible lines                  -- minijump2d
+            'jump',        -- Jump forward/backward to a single character  -- minijump
+            'jump2d',      -- Jump within visible lines                  -- minijump2d
             -- 'map' , -- Window with buffer text overview             -- minimap
             -- 'misc' , -- Miscellaneous functions                     -- minimisc
-            'move', -- Move any selection in any direction          -- minimove
-            -- 'operators', -- Text edit operators                     -- minioperators
-            'pairs', -- Autopairs                                   -- minipairs
-            'sessions', -- Session management                       -- minisessions
-            'splitjoin', -- Split and join arguments                -- minisplitjoin
-            'starter', -- Start screen                              -- ministarter
+            'move',       -- Move any selection in any direction          -- minimove
+            'operators',  -- Text edit operators                     -- minioperators
+            'pairs',      -- Autopairs                                   -- minipairs
+            'sessions',   -- Session management                       -- minisessions
+            'splitjoin',  -- Split and join arguments                -- minisplitjoin
+            'starter',    -- Start screen                              -- ministarter
             'statusline', -- Statusline                             -- ministatusline
-            'surround', -- Surround actions                         -- minisurround
-            'tabline', -- Tabline                                   -- minitabline
+            'surround',   -- Surround actions                         -- minisurround
+            'tabline',    -- Tabline                                   -- minitabline
             -- 'test' , -- Test Neovim plugins                         -- minitest
             'trailspace', -- Trailspace (highlight and remove)      -- minitrailspace
         }
@@ -43,7 +43,7 @@ return {
                     -- win_borders = 'default',
                 },
                 mappings = {
-                    windows = true, -- Window navigation with <C-hjkl>, resize with <C-arrow>
+                    windows = true,       -- Window navigation with <C-hjkl>, resize with <C-arrow>
                     move_with_alt = true, -- Move cursor in Insert, Command, and Terminal mode with <M-hjkl>
                 },
                 autocommands = {
@@ -100,7 +100,7 @@ return {
                     { mode = 'n', keys = ']' },
 
                     -- mini.basics
-                    {mode='n',keys='\\'}
+                    { mode = 'n', keys = '\\' }
                 },
 
                 clues = {
@@ -117,7 +117,6 @@ return {
                     { mode = 'i', keys = '<C-x><C-o>', desc = 'Omni completion' },
                     { mode = 'i', keys = '<C-x><C-s>', desc = 'Spelling suggestions' },
                     { mode = 'i', keys = '<C-x><C-u>', desc = "With 'completefunc'" },
-
                     { mode = 'n', keys = '<leader>f',  desc = 'Find with Telescope' },
                     { mode = 'n', keys = '<leader>l',  desc = 'LSP' },
                     { mode = 'n', keys = '<leader>g',  desc = 'Git' },
@@ -164,6 +163,15 @@ return {
                     vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>",
                         { desc = 'Open file explorer' })
                 end,
+            },
+            operators = {
+                --[[
+                evaluate = { prefix = '<leader>=' },
+                exchange = { prefix = '<leader>x' },
+                multiply = { prefix = '<leader>m' },
+                replace = { prefix = '<leader>r' },
+                sort = { prefix = '<leader>s' },
+                --]]
             },
             sessions = {
                 after = function()
