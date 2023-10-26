@@ -1,8 +1,8 @@
 return {
-    'neovim/nvim-lspconfig', -- Required
+    'neovim/nvim-lspconfig',                 -- Required
     dependencies = {
-        'williamboman/mason.nvim', -- Optional
-        'williamboman/mason-lspconfig.nvim', -- Optional
+        'williamboman/mason.nvim',           -- Optional
+        'williamboman/mason-lspconfig.nvim', -- Optional{
     },
     config = function()
         local lspconfig = require('lspconfig')
@@ -37,6 +37,7 @@ return {
                 map('n', '<leader>lr', buf.rename, { desc = 'Rename symbol under cursor' })
                 map('n', '<leader>la', buf.code_action, { desc = 'Select a code action' })
                 map('n', '<leader>lf', buf.format, { desc = 'Format buffer' })
+                -- map('n', '<leader>lF', '<cmd>%!prettier --stdin-filepath %<cr>', { desc = 'Format with prettier' })
                 map('n', '<leader>ll', vim.diagnostic.open_float, { desc = 'Show diagnostics in floating window' })
                 -- map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
                 -- map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
