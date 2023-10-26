@@ -47,6 +47,3 @@ map("n", "<leader>Q", "<cmd>qall<cr>", { desc = 'Close all windows/tabs' })
 -- map("n", "QQ", ":q<cr>")
 
 map("n", '<C-q>', ':q<cr>') -- Access `qq` macro
-
-map("n", '<S-h>', ':bprev<cr>')
-map("n", '<S-i>', ':bnext<cr>')

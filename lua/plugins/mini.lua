@@ -165,7 +165,7 @@ return {
                 end,
             },
             operators = {
-                --[[
+                -- [[
                 evaluate = { prefix = '<leader>=' },
                 exchange = { prefix = '<leader>x' },
                 multiply = { prefix = '<leader>m' },
