@@ -1,5 +1,6 @@
 return {
     'nvim-telescope/telescope.nvim', -- Fuzzy file finder -- https://github.com/nvim-telescope/telescope.nvim
+    enabled=false,
     config = function()
         local leader = '<leader>f' -- For all telescope commands
         local actions = require "telescope.actions"
