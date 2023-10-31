@@ -187,6 +187,7 @@ return {
                     map('g', 'grep_live', 'Pick grep_live')
                     map('G', 'grep', 'Pick grep')
                     map('h', 'help', 'Pick help')
+                    map('r', 'resume', 'Resume last pick')
                 end,
             },
             sessions = {
