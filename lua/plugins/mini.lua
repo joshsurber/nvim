@@ -12,6 +12,7 @@ return {
             'comment',     -- Comment                                    -- minicomment
             'completion',  -- Completion and signature help           -- minicompletion
             'cursorword',  -- Autohighlight word under cursor         -- minicursorword
+            'extra',       -- Extra mini.nvim functionality                -- miniextra
             'files',       -- Navigate and manipulate file system          -- minifiles
             'hipatterns',  -- Highlight patterns in text              -- minihipatterns
             'indentscope', -- Visualize and operate on indent scope  -- miniindentscope
