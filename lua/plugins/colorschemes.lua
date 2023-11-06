@@ -1,6 +1,5 @@
 return {
-    {
-        'folke/tokyonight.nvim',
+    { 'folke/tokyonight.nvim',
         opts = {
             -- your configuration comes here
             -- or leave it empty to use the default settings
@@ -26,10 +25,9 @@ return {
             lualine_bold = true,                  -- When `true`, section headers in the lualine theme will be bold
         }
     },                                            -- https://github.com/folke/tokyonight.nvim
-    { 'ellisonleao/gruvbox.nvim',     enabled = false }, -- https://github.com/ellisonleao/gruvbox.nvim
+    { 'ellisonleao/gruvbox.nvim',     enabled = true }, -- https://github.com/ellisonleao/gruvbox.nvim
     { 'ishan9299/nvim-solarized-lua', enabled = false },
-    {
-        'rose-pine/neovim',
+    { 'rose-pine/neovim',
         name = 'rose-pine',
         enabled = false,
         opts = {
@@ -73,9 +71,8 @@ return {
             }
         }
     },
-    {
-        'ray-x/starry.nvim',
-        enabled = false,
+    { 'ray-x/starry.nvim',
+        enabled = true,
         config = function()
             for key, value in pairs({
                 borders = false,
