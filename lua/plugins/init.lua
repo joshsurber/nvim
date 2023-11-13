@@ -12,7 +12,7 @@ return {
     'tpope/vim-liquid', -- Support for liquid templates -- https://github.com/tpope/vim-liquid
 
     -- Popup tree of available key mappings }
-    -- { 'folke/which-key.nvim', config = true },
+    { 'folke/which-key.nvim', config = true },
     { 'akinsho/toggleterm.nvim', -- Easy terminal access -- https://github.com/akinsho/toggleterm.nvim
         opts = {
             open_mapping = '<C-g>',

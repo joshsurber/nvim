@@ -1,24 +1,57 @@
 return {
-    'neovim/nvim-lspconfig',                 -- Required
-    dependencies = {
-        'williamboman/mason.nvim',           -- Optional
-        'williamboman/mason-lspconfig.nvim', -- Optional{
-    },
-    config = function()
-        local lspconfig = require('lspconfig')
-        local lsp_defaults = lspconfig.util.default_config
+    {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v1.x',
+        dependencies = {
+            -- LSP Support
+            'neovim/nvim-lspconfig',             -- Required
+            'williamboman/mason.nvim',           -- Optional
+            'williamboman/mason-lspconfig.nvim', -- Optional
 
-        -- lsp_defaults.capabilities = vim.tbl_deep_extend(
-        --         'force',
-        --         lsp_defaults.capabilities,
-        --         require('cmp_nvim_lsp').default_capabilities()
-        --     )
+            -- Autocompletion
+            'hrsh7th/nvim-cmp',         -- Required
+            'hrsh7th/cmp-nvim-lsp',     -- Required
+            'hrsh7th/cmp-buffer',       -- Optional
+            'hrsh7th/cmp-path',         -- Optional
+            'saadparwaiz1/cmp_luasnip', -- Optional
+            'hrsh7th/cmp-nvim-lua',     -- Optional
 
-        vim.api.nvim_create_autocmd('LspAttach', {
-            desc = 'LSP actions',
-            callback = function(event)
-                local map = vim.keymap.set
-                local opts = { buffer = event.buf }
+            -- Snippets
+            'L3MON4D3/LuaSnip',             -- Required
+            'rafamadriz/friendly-snippets', -- Optional
+        },
+        config = function()
+            local lsp = require('lsp-zero')
+            local cmp = require('cmp')
+            local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+            lsp.preset('recommended')
+            lsp.set_preferences({
+                suggest_lsp_servers = true,
+                setup_servers_on_start = true,
+                set_lsp_keymaps = false,
+                configure_diagnostics = true,
+                cmp_capabilities = true,
+                manage_nvim_cmp = true,
+                call_servers = 'local',
+                sign_icons = {
+                    error = '✘',
+                    warn = '▲',
+                    hint = '⚑',
+                    info = ''
+                }
+            })
+            lsp.setup_nvim_cmp({
+                mapping = lsp.defaults.cmp_mappings({
+                    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+                    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+                    ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
+                    ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
+                })
+            })
+
+            lsp.on_attach(function(client, bufnr)
+                local opts = { buffer = bufnr, remap = false }
                 local buf = vim.lsp.buf
 
                 -- if client.name == "eslint" then
@@ -27,57 +60,30 @@ return {
                 -- end
 
                 -- LSP mappings
-                map('n', 'gh', buf.hover, { desc = 'Floating information window' })
-                map('n', 'gH', buf.signature_help, { desc = 'Signature information floating window' })
-                map('n', '<leader>ld', buf.definition, { desc = 'Go to definition' })
-                map('n', '<leader>lD', buf.declaration, { desc = 'Go to declaration' })
-                map('n', '<leader>li', buf.implementation, { desc = 'List implementations in quickfix window' })
-                map('n', '<leader>lo', buf.type_definition, { desc = 'Go to type definition' })
-                map('n', '<leader>lR', buf.references, { desc = 'List referencess in quickfix window' })
-                map('n', '<leader>lr', buf.rename, { desc = 'Rename symbol under cursor' })
-                map('n', '<leader>la', buf.code_action, { desc = 'Select a code action' })
-                map('n', '<leader>lf', buf.format, { desc = 'Format buffer' })
-                -- map('n', '<leader>lF', '<cmd>%!prettier --stdin-filepath %<cr>', { desc = 'Format with prettier' })
-                map('n', '<leader>ll', vim.diagnostic.open_float, { desc = 'Show diagnostics in floating window' })
-                -- map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
-                -- map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
+                vim.keymap.set('n', 'gh', buf.hover, { desc = 'Floating information window' })
+                vim.keymap.set('n', 'gH', buf.signature_help, { desc = 'Signature information floating window' })
+                vim.keymap.set('n', '<leader>ld', buf.definition, { desc = 'Go to definition' })
+                vim.keymap.set('n', '<leader>lD', buf.declaration, { desc = 'Go to declaration' })
+                vim.keymap.set('n', '<leader>li', buf.implementation, { desc = 'List implementations in quickfix window' })
+                vim.keymap.set('n', '<leader>lo', buf.type_definition, { desc = 'Go to type definition' })
+                vim.keymap.set('n', '<leader>lR', buf.references, { desc = 'List referencess in quickfix window' })
+                vim.keymap.set('n', '<leader>lr', buf.rename, { desc = 'Rename symbol under cursor' })
+                vim.keymap.set('n', '<leader>la', buf.code_action, { desc = 'Select a code action' })
+                vim.keymap.set('n', '<leader>lf', buf.format, { desc = 'Format buffer' })
+                vim.keymap.set('n', '<leader>ll', vim.diagnostic.open_float,
+                    { desc = 'Show diagnostics in floating window' })
+                -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
+                -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
+            end)
 
-                vim.diagnostic.config({ virtual_text = true })
-                vim.cmd [[ command! Format :lua vim.lsp.buf.format() ]]
-                --]]
-            end
-        })
+            lsp.nvim_workspace()
+            lsp.setup()
 
-        local default_setup = function(server)
-            lspconfig[server].setup({})
-        end
+            require("luasnip.loaders.from_snipmate").lazy_load()
+            vim.cmd [[ command! LuaSnipEdit :lua require("luasnip.loaders").edit_snippet_files() ]]
+            vim.cmd [[ command! Format :lua buf.format() ]]
 
-        require('mason').setup({})
-        require('mason-lspconfig').setup({
-            ensure_installed = {},
-            handlers = {
-                default_setup,
-                lua_ls = function()
-                    require('lspconfig').lua_ls.setup({
-                        settings = {
-                            Lua = {
-                                runtime = {
-                                    version = 'LuaJIT'
-                                },
-                                diagnostics = {
-                                    globals = { 'vim' },
-                                },
-                                workspace = {
-                                    library = {
-                                        vim.env.VIMRUNTIME,
-                                    }
-                                }
-                            }
-                        }
-                    })
-                end,
-
-            },
-        })
-    end,
+            vim.diagnostic.config({ virtual_text = true })
+        end,
+    },
 }
