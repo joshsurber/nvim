@@ -7,7 +7,6 @@ return {
             'basics',      -- Common config presets                       -- minibasics
             'bracketed',   -- Go forward/backward with square brackets -- minibracketed
             'bufremove',   -- Remove buffers                          -- minibufremove
-            -- 'clue',        -- Show next key clues                           -- miniclue
             'colors',      -- Tweak and save any color scheme             -- minicolors
             'comment',     -- Comment                                    -- minicomment
             'cursorword',  -- Autohighlight word under cursor         -- minicursorword
@@ -30,6 +29,7 @@ return {
             'trailspace',  -- Trailspace (highlight and remove)       -- minitrailspace
             -- 'align',       -- Align text interactively                  -- minialign
             -- 'base16' , -- Base16 colorscheme creation                  -- minibase16
+            -- 'clue',        -- Show next key clues                           -- miniclue
             -- 'completion',  -- Completion and signature help           -- minicompletion
             -- 'doc' , -- Generate Neovim help files                         -- minidoc
             -- 'fuzzy' , -- Fuzzy matching                                 -- minifuzzy
