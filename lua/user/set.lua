@@ -4,7 +4,7 @@ for key, value in pairs({ -- NeoVim settings
     confirm = true, -- Instead of failing a command because of unsaved changes, raise a dialogue asking if you wish to save changed files.
     dictionary = "/usr/share/dict/words",
     expandtab = true, -- Use spaces instead of tabs
-    guifont='Cascadia Code PL,Symbols Nerd Font:h10', -- For Neovide etc
+    guifont='CaskaydiaCove Nerd Font:h12', -- For Neovide etc
     keywordprg = ':help', -- 'K' searches vim docs
     lazyredraw = true, -- Don't redraw screen while executing macros
     scrolloff = 3, -- Lines to keep on screen
