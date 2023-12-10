@@ -1,12 +1,18 @@
 return {
     'echasnovski/mini.nvim', -- Small utilities -- https://github.com/echasnovski/mini.nvim
     config = function()
+        if not vim.g.neovide then
+            -- Get this first since it depends on whether in Terminal or Neovide
+            require('mini.animate').setup()
+        end
+
         local modules = {
             'ai',          -- Extend and create `a`/`i` textobjects           -- miniai
+            'align',       -- Align text interactively                     -- minialign
             'animate',     -- Animate common Neovim actions              -- minianimate
             'basics',      -- Common config presets                       -- minibasics
             'bracketed',   -- Go forward/backward with square brackets -- minibracketed
-            'bufremove',   -- Remove buffers                          -- minibufremove
+            'bufremove',   -- Remove buffers                           -- minibufremove
             'colors',      -- Tweak and save any color scheme             -- minicolors
             'comment',     -- Comment                                    -- minicomment
             'cursorword',  -- Autohighlight word under cursor         -- minicursorword
@@ -27,15 +33,15 @@ return {
             'surround',    -- Surround actions                          -- minisurround
             'tabline',     -- Tabline                                    -- minitabline
             'trailspace',  -- Trailspace (highlight and remove)       -- minitrailspace
-            -- 'align',       -- Align text interactively                  -- minialign
-            -- 'base16' , -- Base16 colorscheme creation                  -- minibase16
+            'visits'       -- Track and reuse file system visits          -- minivisits
+            -- 'base16' , -- Base16 colorscheme creation                     -- minibase16
             -- 'clue',        -- Show next key clues                           -- miniclue
             -- 'completion',  -- Completion and signature help           -- minicompletion
-            -- 'doc' , -- Generate Neovim help files                         -- minidoc
-            -- 'fuzzy' , -- Fuzzy matching                                 -- minifuzzy
-            -- 'map' , -- Window with buffer text overview                   -- minimap
-            -- 'misc' , -- Miscellaneous functions                          -- minimisc
-            -- 'test' , -- Test Neovim plugins                              -- minitest
+            -- 'doc' , -- Generate Neovim help files                            -- minidoc
+            -- 'fuzzy' , -- Fuzzy matching                                    -- minifuzzy
+            -- 'map' , -- Window with buffer text overview                      -- minimap
+            -- 'misc' , -- Miscellaneous functions                             -- minimisc
+            -- 'test' , -- Test Neovim plugins                                 -- minitest
         }
 
         local config = {
@@ -51,6 +57,12 @@ return {
                 autocommands = {
                     relnum_in_visual_mode = true,
                 },
+            },
+            bufremove = {
+                after = function()
+                    vim.keymap.set("n", "<leader>q", "<cmd>lua MiniBufremove.wipeout()<cr>",
+                        { desc = 'Wipeout buffer (close tab)' })
+                end
             },
             bufremove = {
                 after = function()
@@ -94,8 +106,8 @@ return {
                     { mode = 'x', keys = 'z' },
 
                     -- mini.surround
-                    { mode='n', keys='s'},
-                    { mode='v', keys='s'},
+                    { mode = 'n', keys = 's' },
+                    { mode = 'v', keys = 's' },
 
                     -- mini.bracketed
                     { mode = 'n', keys = '[' },
@@ -126,6 +138,10 @@ return {
                     { mode = 'n', keys = '<leader>g',  desc = 'Git' },
                     { mode = 'n', keys = '<leader>v',  desc = 'Vim config' },
                 },
+            },
+            completion = {
+                after = function()
+                end
             },
             hipatterns = {
                 highlighters = {
