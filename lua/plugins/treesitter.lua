@@ -1,3 +1,4 @@
+-- Use treesitter to manage folds
 if not vim.wo.diff then
     vim.opt.foldmethod = 'expr'
     vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
