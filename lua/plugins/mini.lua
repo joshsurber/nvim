@@ -7,41 +7,44 @@ return {
         end
 
         local modules = {
-            'ai',          -- Extend and create `a`/`i` textobjects           -- miniai
-            'align',       -- Align text interactively                     -- minialign
-            'animate',     -- Animate common Neovim actions              -- minianimate
-            'basics',      -- Common config presets                       -- minibasics
-            'bracketed',   -- Go forward/backward with square brackets -- minibracketed
-            'bufremove',   -- Remove buffers                           -- minibufremove
-            'colors',      -- Tweak and save any color scheme             -- minicolors
-            'comment',     -- Comment                                    -- minicomment
-            'cursorword',  -- Autohighlight word under cursor         -- minicursorword
-            'extra',       -- Extra mini.nvim functionality                -- miniextra
-            'files',       -- Navigate and manipulate file system          -- minifiles
-            'hipatterns',  -- Highlight patterns in text              -- minihipatterns
-            'indentscope', -- Visualize and operate on indent scope  -- miniindentscope
-            'jump',        -- Jump forward/backward to a single character   -- minijump
-            'jump2d',      -- Jump within visible lines                   -- minijump2d
-            'move',        -- Move any selection in any direction           -- minimove
-            'operators',   -- Text edit operators                      -- minioperators
-            'pairs',       -- Autopairs                                    -- minipairs
-            'pick',        -- Pick anything                                 -- minipick
-            'sessions',    -- Session management                        -- minisessions
-            'splitjoin',   -- Split and join arguments                 -- minisplitjoin
-            'starter',     -- Start screen                               -- ministarter
-            'statusline',  -- Statusline                              -- ministatusline
-            'surround',    -- Surround actions                          -- minisurround
-            'tabline',     -- Tabline                                    -- minitabline
-            'trailspace',  -- Trailspace (highlight and remove)       -- minitrailspace
-            'visits'       -- Track and reuse file system visits          -- minivisits
-            -- 'base16' , -- Base16 colorscheme creation                     -- minibase16
-            -- 'clue',        -- Show next key clues                           -- miniclue
-            -- 'completion',  -- Completion and signature help           -- minicompletion
-            -- 'doc' , -- Generate Neovim help files                            -- minidoc
-            -- 'fuzzy' , -- Fuzzy matching                                    -- minifuzzy
-            -- 'map' , -- Window with buffer text overview                      -- minimap
-            -- 'misc' , -- Miscellaneous functions                             -- minimisc
-            -- 'test' , -- Test Neovim plugins                                 -- minitest
+            'ai',          -- Extend and create `a`/`i` textobjects                 -- miniai
+            'align',       -- Align text interactively                              -- minialign
+            'animate',     -- Animate common Neovim actions                         -- minianimate
+            'basics',      -- Common config presets                                 -- minibasics
+            'bracketed',   -- Go forward/backward with square brackets              -- minibracketed
+            'bufremove',   -- Remove buffers                                        -- minibufremove
+            'clue',        -- Show next key clues                                   -- miniclue
+            'colors',      -- Tweak and save any color scheme                       -- minicolors
+            'comment',     -- Comment                                               -- minicomment
+            'cursorword',  -- Autohighlight word under cursor                       -- minicursorword
+            'extra',       -- Extra mini.nvim functionality                         -- miniextra
+            'files',       -- Navigate and manipulate file system                   -- minifiles
+            'hipatterns',  -- Highlight patterns in text                            -- minihipatterns
+            'icons',       -- Icon provider                                         -- miniicons
+            'indentscope', -- Visualize and operate on indent scope                 -- miniindentscope
+            'jump',        -- Jump forward/backward to a single character           -- minijump
+            'jump2d',      -- Jump within visible lines                             -- minijump2d
+            'move',        -- Move any selection in any direction                   -- minimove
+            'operators',   -- Text edit operators                                   -- minioperators
+            'pairs',       -- Autopairs                                             -- minipairs
+            'pick',        -- Pick anything                                         -- minipick
+            'sessions',    -- Session management                                    -- minisessions
+            'splitjoin',   -- Split and join arguments                              -- minisplitjoin
+            'starter',     -- Start screen                                          -- ministarter
+            'statusline',  -- Statusline                                            -- ministatusline
+            'surround',    -- Surround actions                                      -- minisurround
+            'tabline',     -- Tabline                                               -- minitabline
+            'trailspace',  -- Trailspace (highlight and remove)                     -- minitrailspace
+            'visits',      -- Track and reuse file system visits                    -- minivisits
+            -- 'base16' ,           -- Base16 colorscheme creation                           -- minibase16
+            -- 'completion',        -- Completion and signature help                         -- minicompletion
+            -- 'diff',              -- Work with diff hunks                                  -- minidiff
+            -- 'doc' ,              -- Generate Neovim help files                            -- minidoc
+            -- 'fuzzy' ,            -- Fuzzy matching                                        -- minifuzzy
+            -- 'git',               -- Git integration                                       -- minigit
+            -- 'map' ,              -- Window with buffer text overview                      -- minimap
+            -- 'misc' ,             -- Miscellaneous functions                               -- minimisc
+            -- 'test' ,             -- Test Neovim plugins                                   -- minitest
         }
 
         local config = {

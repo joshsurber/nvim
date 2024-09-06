@@ -1,5 +1,5 @@
 return {
-    'nvim-tree/nvim-web-devicons', -- https://github.com/nvim-tree/nvim-web-devicons
+    -- 'nvim-tree/nvim-web-devicons', -- https://github.com/nvim-tree/nvim-web-devicons
     'nvim-lua/plenary.nvim', -- https://github.com/nvim-lua/plenary.nvim
 
     -- 'mbbill/undotree', -- https://github.com/mbbill/undotree
@@ -12,7 +12,7 @@ return {
     'tpope/vim-liquid', -- Support for liquid templates -- https://github.com/tpope/vim-liquid
 
     -- Popup tree of available key mappings }
-    { 'folke/which-key.nvim', config = true },
+    -- { 'folke/which-key.nvim', config = true },
     { 'akinsho/toggleterm.nvim', -- Easy terminal access -- https://github.com/akinsho/toggleterm.nvim
         opts = {
             open_mapping = '<C-g>',
