@@ -38,6 +38,7 @@ return {
             'visits',            -- Track and reuse file system visits                    -- minivisits
             -- 'base16' ,           -- Base16 colorscheme creation                           -- minibase16
             -- 'completion',        -- Completion and signature help                         -- minicompletion
+            -- 'deps',              -- Plugin manager                                        -- minideps
             -- 'diff',              -- Work with diff hunks                                  -- minidiff
             -- 'doc' ,              -- Generate Neovim help files                            -- minidoc
             -- 'fuzzy' ,            -- Fuzzy matching                                        -- minifuzzy
