@@ -192,7 +192,7 @@ return {
                 exchange = { prefix = '<leader>x' },
                 multiply = { prefix = '<leader>m' },
                 replace = { prefix = '<leader>r' },
-                sort = { prefix = '<leader>s' },
+                sort = { prefix = '<leader>S' },
                 --]]
             },
             pick = {

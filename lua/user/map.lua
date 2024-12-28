@@ -19,7 +19,7 @@ map({ 'n', 'v' }, "<leader><leader>", "za", { desc = 'Toggle fold' })
 map("n", '*', '*N', { desc = 'Search word under cursor' }) -- Fix * (Keep the cursor position, don't move to next match)
 map("n", 'n', 'nzzzv', { desc = 'Go to next match' }) -- Fix n and N to...
 map("n", 'N', 'Nzzzv', { desc = 'Go to previous match' }) -- ...keep the cursor in center
--- map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word under cursor" })
+map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word under cursor" })
 map("n", "<esc>", "<cmd>noh<cr><cmd>echo<cr>") --  remove search highlighting
 
 -- Fix oddities with visual selections
