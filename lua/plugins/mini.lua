@@ -45,6 +45,7 @@ return {
             -- 'git',               -- Git integration                                       -- minigit
             -- 'map' ,              -- Window with buffer text overview                      -- minimap
             -- 'misc' ,             -- Miscellaneous functions                               -- minimisc
+            -- 'snippets'           -- Manage and expand snippets                            -- minisnippets
             -- 'test' ,             -- Test Neovim plugins                                   -- minitest
         }
 
