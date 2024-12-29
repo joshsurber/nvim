@@ -7,9 +7,10 @@ return {
         end
 
         local modules = {
+            -- 'animate',     -- Leave commented; applied first but not in Neovide
+
             'ai',          -- Extend and create `a`/`i` textobjects                 -- miniai
             'align',       -- Align text interactively                              -- minialign
-            'animate',     -- Animate common Neovim actions                         -- minianimate
             'basics',      -- Common config presets                                 -- minibasics
             'bracketed',   -- Go forward/backward with square brackets              -- minibracketed
             'bufremove',   -- Remove buffers                                        -- minibufremove
@@ -30,6 +31,7 @@ return {
             'pairs',       -- Autopairs                                             -- minipairs
             'pick',        -- Pick anything                                         -- minipick
             'sessions',    -- Session management                                    -- minisessions
+            'snippets'           -- Manage and expand snippets                            -- minisnippets
             'splitjoin',   -- Split and join arguments                              -- minisplitjoin
             'starter',     -- Start screen                                          -- ministarter
             'statusline',  -- Statusline                                            -- ministatusline
@@ -45,8 +47,8 @@ return {
             -- 'git',               -- Git integration                                       -- minigit
             -- 'map' ,              -- Window with buffer text overview                      -- minimap
             -- 'misc' ,             -- Miscellaneous functions                               -- minimisc
-            -- 'snippets'           -- Manage and expand snippets                            -- minisnippets
             -- 'test' ,             -- Test Neovim plugins                                   -- minitest
+
         }
 
         local config = {
