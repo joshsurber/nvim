@@ -27,6 +27,7 @@ return {
             'jump',        -- Jump forward/backward to a single character           -- minijump
             'jump2d',      -- Jump within visible lines                             -- minijump2d
             'move',        -- Move any selection in any direction                   -- minimove
+            'notify',      -- Show notifications                                    -- mininotify
             'operators',   -- Text edit operators                                   -- minioperators
             'pairs',       -- Autopairs                                             -- minipairs
             'pick',        -- Pick anything                                         -- minipick
