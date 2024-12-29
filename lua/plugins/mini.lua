@@ -32,7 +32,7 @@ return {
             'pairs',       -- Autopairs                                             -- minipairs
             'pick',        -- Pick anything                                         -- minipick
             'sessions',    -- Session management                                    -- minisessions
-            'snippets'           -- Manage and expand snippets                            -- minisnippets
+            'snippets',    -- Manage and expand snippets                            -- minisnippets
             'splitjoin',   -- Split and join arguments                              -- minisplitjoin
             'starter',     -- Start screen                                          -- ministarter
             'statusline',  -- Statusline                                            -- ministatusline
@@ -232,6 +232,27 @@ return {
                         MiniSessions.write()
                     end, {})
                 end
+            },
+            snippets={
+                snippets = {
+                    -- Load custom file with global snippets first (adjust for Windows)
+                    require('mini.snippets').gen_loader
+                        .from_file('~/.config/nvim/snippets/global.json'),
+
+                    -- Load snippets based on current language by reading files from
+                    -- "snippets/" subdirectories from 'runtimepath' directories.
+                    require('mini.snippets').gen_loader.from_lang(),
+                },
+                mappings = {
+                    -- Expand snippet at cursor position. Created globally in Insert mode.
+                    expand = '<C-n>',
+
+                    -- Interact with default `expand.insert` session.
+                    -- Created for the duration of active session(s)
+                    jump_next = '<C-i>',
+                    jump_prev = '<C-h>',
+                    stop = '<C-c>',
+                },
             },
             starter = {
                 after = function()
