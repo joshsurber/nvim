@@ -59,18 +59,12 @@ return {
                     -- win_borders = 'default',
                 },
                 mappings = {
-                    windows = true,       -- Window navigation with <C-hjkl>, resize with <C-arrow>
+                    -- windows = true,       -- Window navigation with <C-hjkl>, resize with <C-arrow>
                     move_with_alt = true, -- Move cursor in Insert, Command, and Terminal mode with <M-hjkl>
                 },
                 autocommands = {
                     relnum_in_visual_mode = true,
                 },
-            },
-            bufremove = {
-                after = function()
-                    vim.keymap.set("n", "<leader>q", "<cmd>lua MiniBufremove.wipeout()<cr>",
-                        { desc = 'Wipeout buffer (close tab)' })
-                end
             },
             bufremove = {
                 after = function()
@@ -152,11 +146,6 @@ return {
                     local imap_expr = function(lhs, rhs)
                         vim.keymap.set('i', lhs, rhs, { expr = true })
                     end
-                    local keys = {
-                        ['cr']        = keycode('<CR>'),
-                        ['ctrl-y']    = keycode('<C-y>'),
-                        ['ctrl-y_cr'] = keycode('<C-y><CR>'),
-                    }
 
                     -- local keycode = vim.keycode or function(x)
                     --     return vim.api.nvim_replace_termcodes(x, true, true, true)
@@ -196,7 +185,6 @@ return {
             },
             files = {
                 after = function()
-                    vim.notify('foobar')
                     vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>",
                         { desc = 'Open file explorer' })
                 end,
