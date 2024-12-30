@@ -42,10 +42,10 @@ return {
             'visits',      -- Track and reuse file system visits                    -- minivisits
             -- 'base16' ,           -- Base16 colorscheme creation                           -- minibase16
             -- 'deps',              -- Plugin manager                                        -- minideps
-            -- 'diff',              -- Work with diff hunks                                  -- minidiff
+            'diff', -- Work with diff hunks                                  -- minidiff
             -- 'doc' ,              -- Generate Neovim help files                            -- minidoc
             -- 'fuzzy' ,            -- Fuzzy matching                                        -- minifuzzy
-            -- 'git',               -- Git integration                                       -- minigit
+            'git', -- Git integration                                       -- minigit
             -- 'map' ,              -- Window with buffer text overview                      -- minimap
             -- 'misc' ,             -- Miscellaneous functions                               -- minimisc
             -- 'test' ,             -- Test Neovim plugins                                   -- minitest
@@ -175,6 +175,17 @@ return {
                     -- vim.keymap.set('i', '<CR>', 'v:lua._G.cr_action()', { expr = true })
                 end
             },
+            diff = {
+                view = {
+                    -- style = 'sign',
+                    signs = { add = '+', change = '~', delete = '-', }
+                },
+                -- Module mappings. Use `''` (empty string) to disable one.
+                mappings = {
+                    apply = '<leader>gh',
+                    reset = '<leader>gH',
+                },
+            },
             hipatterns = {
                 highlighters = {
                     fixme = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
@@ -188,6 +199,27 @@ return {
                     vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>",
                         { desc = 'Open file explorer' })
                 end,
+            },
+            git = {
+                -- Options for `:Git` command
+                command = {
+                    -- Default split direction
+                    split = 'horizontal',
+                },
+                after = function()
+                    local function lmap(mode, l, r, opts)
+                        local leader = '<leader>g'
+                        l = leader .. l
+                        opts = opts or {}
+                        opts.buffer = bufnr
+                        vim.keymap.set(mode, l, r, opts)
+                    end
+                    -- Actions
+                    lmap('n', 'g', function() vim.cmd.Git('status') end, { desc = "Git status" })
+                    lmap('n', 'c', function() vim.cmd.Git('commit') end, { desc = "Git commit" })
+                    lmap('n', 'P', function() vim.cmd.Git('push') end, { desc = "Git push" })
+                    lmap({ 'n', 'x' }, 's', '<Cmd>lua MiniGit.show_at_cursor()<CR>' , { desc = 'Show at cursor' })
+                end
             },
             operators = {
                 -- [[
@@ -233,7 +265,7 @@ return {
                     end, {})
                 end
             },
-            snippets={
+            snippets = {
                 snippets = {
                     -- Load custom file with global snippets first (adjust for Windows)
                     require('mini.snippets').gen_loader
