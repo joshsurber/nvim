@@ -12,15 +12,16 @@ map("c", "%%", "<C-R>=expand('%:h').'/'<cr>") -- expand %% to current directory 
 -- THIS DOESN'T WORK ANYMORE ANYWAY --
 map("c", "w!!", "w !sudo tee % >/dev/null")   -- No write permission? Fuck you, do it anyway!")
 map('t', '<C-w>', '<C-\\><C-n><C-w>')
+map('t', '<tab>', '<tab>') -- for some reason w/o this tab completion doesn't work
 -- Folding
 map({ 'n', 'v' }, "<leader><leader>", "za", { desc = 'Toggle fold' })
 
 -- Searching nicities
 map("n", '*', '*N', { desc = 'Search word under cursor' }) -- Fix * (Keep the cursor position, don't move to next match)
-map("n", 'n', 'nzzzv', { desc = 'Go to next match' }) -- Fix n and N to...
-map("n", 'N', 'Nzzzv', { desc = 'Go to previous match' }) -- ...keep the cursor in center
+-- map("n", 'n', 'nzzzv', { desc = 'Go to next match' })      -- Fix n and N to...
+-- map("n", 'N', 'Nzzzv', { desc = 'Go to previous match' })  -- ...keep the cursor in center
 map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word under cursor" })
-map("n", "<esc>", "<cmd>noh<cr><cmd>echo<cr>") --  remove search highlighting
+map("n", "<esc>", "<cmd>noh<cr><cmd>echo<cr>")             --  remove search highlighting
 
 -- Fix oddities with visual selections
 -- Fix linewise visual selection of various text objects
