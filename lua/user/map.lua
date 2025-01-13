@@ -10,8 +10,8 @@ map("n", "<leader>vp", ":Lazy sync<cr>", { desc = "Sync plugins" })
 -- Command line conveniences
 map("c", "%%", "<C-R>=expand('%:h').'/'<cr>") -- expand %% to current directory in command-line mode
 -- THIS DOESN'T WORK ANYMORE ANYWAY --
-map("c", "w!!", "w !sudo tee % >/dev/null") -- No write permission? Fuck you, do it anyway!")
-
+map("c", "w!!", "w !sudo tee % >/dev/null")   -- No write permission? Fuck you, do it anyway!")
+map('t', '<C-w>', '<C-\\><C-n><C-w>')
 -- Folding
 map({ 'n', 'v' }, "<leader><leader>", "za", { desc = 'Toggle fold' })
 

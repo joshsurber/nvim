@@ -19,8 +19,10 @@ return {
             'comment',     -- Comment                                               -- minicomment
             'completion',  -- Completion and signature help                         -- minicompletion
             'cursorword',  -- Autohighlight word under cursor                       -- minicursorword
+            'diff',        -- Work with diff hunks                                  -- minidiff
             'extra',       -- Extra mini.nvim functionality                         -- miniextra
             'files',       -- Navigate and manipulate file system                   -- minifiles
+            'git',         -- Git integration                                       -- minigit
             'hipatterns',  -- Highlight patterns in text                            -- minihipatterns
             'icons',       -- Icon provider                                         -- miniicons
             'indentscope', -- Visualize and operate on indent scope                 -- miniindentscope
@@ -42,10 +44,8 @@ return {
             'visits',      -- Track and reuse file system visits                    -- minivisits
             -- 'base16' ,           -- Base16 colorscheme creation                           -- minibase16
             -- 'deps',              -- Plugin manager                                        -- minideps
-            'diff', -- Work with diff hunks                                  -- minidiff
             -- 'doc' ,              -- Generate Neovim help files                            -- minidoc
             -- 'fuzzy' ,            -- Fuzzy matching                                        -- minifuzzy
-            'git', -- Git integration                                       -- minigit
             -- 'map' ,              -- Window with buffer text overview                      -- minimap
             -- 'misc' ,             -- Miscellaneous functions                               -- minimisc
             -- 'test' ,             -- Test Neovim plugins                                   -- minitest

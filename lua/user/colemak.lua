@@ -37,10 +37,15 @@ vim.keymap.del("n", "<C-w>E")
 vim.keymap.del("n", "<C-w>I")
 
 -- From mini.nvim
-map('n', '<C-H>', '<C-w>h', { desc = 'Focus on left window' })
-map('n', '<C-N>', '<C-w>j', { desc = 'Focus on below window' })
-map('n', '<C-E>', '<C-w>k', { desc = 'Focus on above window' })
-map('n', '<C-I>', '<C-w>l', { desc = 'Focus on right window' })
+map('n', '<C-h>', '<C-w>h', { desc = 'Focus on left window' })
+map('n', '<C-n>', '<C-w>j', { desc = 'Focus on below window' })
+map('n', '<C-e>', '<C-w>k', { desc = 'Focus on above window' })
+map('n', '<C-i>', '<C-w>l', { desc = 'Focus on right window' })
+
+map('t', '<C-h>', '<C-\\><C-n><C-w>h', { desc = 'Focus on left window' })
+map('t', '<C-n>', '<C-\\><C-n><C-w>j', { desc = 'Focus on below window' })
+map('t', '<C-e>', '<C-\\><C-n><C-w>k', { desc = 'Focus on above window' })
+map('t', '<C-i>', '<C-\\><C-n><C-w>l', { desc = 'Focus on right window' })
 
 map('c', '<M-h>', '<Left>', { silent = false, desc = 'Left' })
 map('c', '<M-i>', '<Right>', { silent = false, desc = 'Right' })
