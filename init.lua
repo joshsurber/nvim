@@ -1,2 +1,2 @@
 require('user')
-vim.cmd.colorscheme('gruvbox')
+vim.cmd.colorscheme('tokyonight')
