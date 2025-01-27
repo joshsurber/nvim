@@ -10,7 +10,7 @@ return {
     'davidgranstrom/nvim-markdown-preview', -- https://github.com/davidgranstrom/nvim-markdown-preview
     -- 'hail2u/vim-css3-syntax', -- The newest hawtness of CSS -- https://github.com/hail2u/vim-css3-syntax
     'tpope/vim-liquid', -- Support for liquid templates -- https://github.com/tpope/vim-liquid
-
+    'github/copilot.vim',
     -- Popup tree of available key mappings }
     -- { 'folke/which-key.nvim', config = true },
     { 'akinsho/toggleterm.nvim', -- Easy terminal access -- https://github.com/akinsho/toggleterm.nvim
