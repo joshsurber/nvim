@@ -16,10 +16,10 @@ return {
     -- setting the keybinding for LazyGit with 'keys' is recommended in
     -- order to load the plugin when the command is run for the first time
     keys = {
-        { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+        -- { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
         { "<leader>gl", "<cmd>LazyGit<cr>", desc = "LazyGit" },
     },
-    after = function()
+    init = function()
         vim.keymap.set("n", "<leader>lg", function()
             --  get file name with extension
             local file = vim.fn.expand("%:t")
@@ -32,6 +32,6 @@ return {
                 vim.api.nvim_input("<CR>")
                 vim.api.nvim_input("<ESC>")
             end, 150) -- (milliseconds)
-        end, { desc = "[g]it" })
+        end, { desc = "LazyGit" })
     end
 }
