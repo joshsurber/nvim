@@ -16,6 +16,7 @@ return {
             'bufremove',         -- Remove buffers                                        -- minibufremove
             'clue',              -- Show next key clues                                   -- miniclue
             'comment',           -- Comment                                               -- minicomment
+            'completion',        -- Completion and signature help                         -- minicompletion
             'cursorword',        -- Autohighlight word under cursor                       -- minicursorword
             'diff',              -- Work with diff hunks                                  -- minidiff
             'extra',             -- Extra mini.nvim functionality                         -- miniextra
@@ -32,6 +33,7 @@ return {
             'pairs',             -- Autopairs                                             -- minipairs
             'pick',              -- Pick anything                                         -- minipick
             'sessions',          -- Session management                                    -- minisessions
+            'snippets',          -- Manage and expand snippets                            -- minisnippets
             'splitjoin',         -- Split and join arguments                              -- minisplitjoin
             'starter',           -- Start screen                                          -- ministarter
             'statusline',        -- Statusline                                            -- ministatusline
@@ -41,13 +43,11 @@ return {
             'visits',            -- Track and reuse file system visits                    -- minivisits
             -- 'base16' ,           -- Base16 colorscheme creation                           -- minibase16
             -- 'colors',            -- Tweak and save any color scheme                       -- minicolors
-            -- 'completion',        -- Completion and signature help                         -- minicompletion
             -- 'deps',              -- Plugin manager                                        -- minideps
             -- 'doc' ,              -- Generate Neovim help files                            -- minidoc
             -- 'fuzzy' ,            -- Fuzzy matching                                        -- minifuzzy
             -- 'map' ,              -- Window with buffer text overview                      -- minimap
             -- 'misc' ,             -- Miscellaneous functions                               -- minimisc
-            -- 'snippets',          -- Manage and expand snippets                            -- minisnippets
             -- 'test' ,             -- Test Neovim plugins                                   -- minitest
 
         }
