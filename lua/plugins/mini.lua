@@ -9,38 +9,38 @@ return {
         local modules = {
             -- 'animate',     -- Leave commented; applied first but not in Neovide
 
-            'ai',                -- Extend and create `a`/`i` textobjects                 -- miniai
-            'align',             -- Align text interactively                              -- minialign
-            'basics',            -- Common config presets                                 -- minibasics
-            'bracketed',         -- Go forward/backward with square brackets              -- minibracketed
-            'bufremove',         -- Remove buffers                                        -- minibufremove
-            'clue',              -- Show next key clues                                   -- miniclue
-            'comment',           -- Comment                                               -- minicomment
-            'completion',        -- Completion and signature help                         -- minicompletion
-            'cursorword',        -- Autohighlight word under cursor                       -- minicursorword
-            'diff',              -- Work with diff hunks                                  -- minidiff
-            'extra',             -- Extra mini.nvim functionality                         -- miniextra
-            'files',             -- Navigate and manipulate file system                   -- minifiles
-            'git',               -- Git integration                                       -- minigit
-            'hipatterns',        -- Highlight patterns in text                            -- minihipatterns
-            'icons',             -- Icon provider                                         -- miniicons
-            'indentscope',       -- Visualize and operate on indent scope                 -- miniindentscope
-            'jump',              -- Jump forward/backward to a single character           -- minijump
-            'jump2d',            -- Jump within visible lines                             -- minijump2d
-            'move',              -- Move any selection in any direction                   -- minimove
-            'notify',            -- Show notifications                                    -- mininotify
-            'operators',         -- Text edit operators                                   -- minioperators
-            'pairs',             -- Autopairs                                             -- minipairs
-            'pick',              -- Pick anything                                         -- minipick
-            'sessions',          -- Session management                                    -- minisessions
-            'snippets',          -- Manage and expand snippets                            -- minisnippets
-            'splitjoin',         -- Split and join arguments                              -- minisplitjoin
-            'starter',           -- Start screen                                          -- ministarter
-            'statusline',        -- Statusline                                            -- ministatusline
-            'surround',          -- Surround actions                                      -- minisurround
-            'tabline',           -- Tabline                                               -- minitabline
-            'trailspace',        -- Trailspace (highlight and remove)                     -- minitrailspace
-            'visits',            -- Track and reuse file system visits                    -- minivisits
+            'ai',          -- Extend and create `a`/`i` textobjects                 -- miniai
+            'align',       -- Align text interactively                              -- minialign
+            'basics',      -- Common config presets                                 -- minibasics
+            'bracketed',   -- Go forward/backward with square brackets              -- minibracketed
+            'bufremove',   -- Remove buffers                                        -- minibufremove
+            'clue',        -- Show next key clues                                   -- miniclue
+            'comment',     -- Comment                                               -- minicomment
+            'completion',  -- Completion and signature help                         -- minicompletion
+            'cursorword',  -- Autohighlight word under cursor                       -- minicursorword
+            'diff',        -- Work with diff hunks                                  -- minidiff
+            'extra',       -- Extra mini.nvim functionality                         -- miniextra
+            'files',       -- Navigate and manipulate file system                   -- minifiles
+            'git',         -- Git integration                                       -- minigit
+            'hipatterns',  -- Highlight patterns in text                            -- minihipatterns
+            'icons',       -- Icon provider                                         -- miniicons
+            'indentscope', -- Visualize and operate on indent scope                 -- miniindentscope
+            'jump',        -- Jump forward/backward to a single character           -- minijump
+            'jump2d',      -- Jump within visible lines                             -- minijump2d
+            'move',        -- Move any selection in any direction                   -- minimove
+            'notify',      -- Show notifications                                    -- mininotify
+            'operators',   -- Text edit operators                                   -- minioperators
+            'pairs',       -- Autopairs                                             -- minipairs
+            'pick',        -- Pick anything                                         -- minipick
+            'sessions',    -- Session management                                    -- minisessions
+            'snippets',    -- Manage and expand snippets                            -- minisnippets
+            'splitjoin',   -- Split and join arguments                              -- minisplitjoin
+            'starter',     -- Start screen                                          -- ministarter
+            'statusline',  -- Statusline                                            -- ministatusline
+            'surround',    -- Surround actions                                      -- minisurround
+            'tabline',     -- Tabline                                               -- minitabline
+            'trailspace',  -- Trailspace (highlight and remove)                     -- minitrailspace
+            'visits',      -- Track and reuse file system visits                    -- minivisits
             -- 'base16' ,           -- Base16 colorscheme creation                           -- minibase16
             -- 'colors',            -- Tweak and save any color scheme                       -- minicolors
             -- 'deps',              -- Plugin manager                                        -- minideps
@@ -142,6 +142,9 @@ return {
                 },
             },
             completion = {
+                lsp_completion = {
+                    source_func = 'omnifunc',
+                },
                 after = function()
                     local imap_expr = function(lhs, rhs)
                         vim.keymap.set('i', lhs, rhs, { expr = true })
@@ -218,7 +221,7 @@ return {
                     lmap('n', 'g', function() vim.cmd.Git('status') end, { desc = "Git status" })
                     lmap('n', 'c', function() vim.cmd.Git('commit') end, { desc = "Git commit" })
                     lmap('n', 'P', function() vim.cmd.Git('push') end, { desc = "Git push" })
-                    lmap({ 'n', 'x' }, 's', '<Cmd>lua MiniGit.show_at_cursor()<CR>' , { desc = 'Show at cursor' })
+                    lmap({ 'n', 'x' }, 's', '<Cmd>lua MiniGit.show_at_cursor()<CR>', { desc = 'Show at cursor' })
                 end
             },
             operators = {
@@ -299,7 +302,7 @@ return {
                     vim.api.nvim_create_autocmd('BufWritePre', { callback = MiniTrailspace.trim })
                     vim.api.nvim_create_autocmd('BufWritePre', { callback = MiniTrailspace.trim_last_lines })
                 end
-            }
+            },
         }
 
         if Colemak then
