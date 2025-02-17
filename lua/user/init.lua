@@ -1,7 +1,7 @@
 require('user.set')
 require('user.map')
 require('user.colemak')
-require('user.lazy')
+-- require('user.lazy')
 
 local A = vim.api
 
