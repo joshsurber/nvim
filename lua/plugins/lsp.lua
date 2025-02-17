@@ -1,4 +1,5 @@
-local add = MiniDeps.add
+-- local add = MiniDeps.add
+local add=require('mini.deps').add
 
 add({ source = "neovim/nvim-lspconfig" })
 add({

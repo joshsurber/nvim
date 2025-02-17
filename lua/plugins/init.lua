@@ -1,9 +1,11 @@
 local PluginFiles = {
+    "treesitter",
+    "lsp",
+    'null-ls',
 	"mini",
 	"colorschemes",
 	"lazygit",
-	"treesitter",
-    'lsp',
+    'tmux',
 }
 local Plugins = {
 	"nvim-lua/plenary.nvim", -- https://github.com/nvim-lua/plenary.nvim
