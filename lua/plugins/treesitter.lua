@@ -7,7 +7,7 @@ end
 
 add({
     source = "nvim-treesitter/nvim-treesitter",
-    post_checkout = ":TSUpdate",
+    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 })
 require("nvim-treesitter.configs").setup({
     build = ":TSUpdate",

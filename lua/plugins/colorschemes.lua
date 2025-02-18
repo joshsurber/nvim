@@ -24,4 +24,6 @@ require('tokyonight').setup({
     lualine_bold = true,                  -- When `true`, section headers in the lualine theme will be bold
 })
 MiniDeps.add('ellisonleao/gruvbox.nvim')
+
+vim.cmd.colorscheme('tokyonight')
 -- vim: fdl=1

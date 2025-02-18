@@ -1,10 +1,16 @@
+local add = require('mini.deps').add
+add({
+    source = 'neovim/nvim-lspconfig',
+    depends = { 'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
+        'rafamadriz/friendly-snippets',
+    },
+})
+
 return {
-    'neovim/nvim-lspconfig', -- Required
     enabled = true,
     dependencies = {
-        'williamboman/mason.nvim',           -- Optional
-        'williamboman/mason-lspconfig.nvim', -- Optional{
-        'rafamadriz/friendly-snippets',      -- Optional
+        'williamboman/mason.nvim', -- Optional
     },
     config = function()
         local lspconfig = require('lspconfig')

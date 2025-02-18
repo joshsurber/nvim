@@ -1,11 +1,14 @@
 -- local add = MiniDeps.add
-local add=require('mini.deps').add
+local add = require('mini.deps').add
 
 add({ source = "neovim/nvim-lspconfig" })
+
 add({
     source = "hrsh7th/nvim-cmp",
-    depends = { "hrsh7th/cmp-nvim-lsp", "rafamadriz/friendly-snippets" },
+    depends = { "hrsh7th/cmp-nvim-lsp" },
 })
+
+add("rafamadriz/friendly-snippets")
 
 add({
     source = "williamboman/mason.nvim",
@@ -16,27 +19,31 @@ require("mason-lspconfig").setup({
 
     -- Replace the language servers listed here
     -- with the ones you want to install
-    ensure_installed = { "lua_ls" },
+    ensure_installed = {},
     automatic_installation = true,
     handlers = {
         function(server_name)
             require("lspconfig")[server_name].setup({})
         end,
-    },
-    settings = {
-        Lua = {
-            runtime = {
-                version = "LuaJIT",
-            },
-            diagnostics = {
-                globals = { "vim" },
-            },
-            workspace = {
-                library = {
-                    vim.env.VIMRUNTIME,
-                },
-            },
-        },
+        lua_ls = function()
+            require('lspconfig').lua_ls.setup({
+                settings = {
+                    Lua = {
+                        runtime = {
+                            version = 'LuaJIT'
+                        },
+                        diagnostics = {
+                            globals = { 'vim' },
+                        },
+                        workspace = {
+                            library = {
+                                vim.env.VIMRUNTIME,
+                            }
+                        }
+                    }
+                }
+            })
+        end,
     },
 })
 

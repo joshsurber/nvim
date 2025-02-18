@@ -17,4 +17,3 @@ require('mini.deps').setup({ path = { package = path_package } })
 
 require('user')
 require('plugins')
-vim.cmd.colorscheme('tokyonight')
