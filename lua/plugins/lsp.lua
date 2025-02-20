@@ -1,18 +1,23 @@
 -- local add = MiniDeps.add
-local add = require('mini.deps').add
+local add = require("mini.deps").add
 
 add({ source = "neovim/nvim-lspconfig" })
 
+-- add("abeldekat/cmp-mini-snippets")
 add({
     source = "hrsh7th/nvim-cmp",
-    depends = { "hrsh7th/cmp-nvim-lsp" },
+    depends = {
+        "hrsh7th/cmp-nvim-lsp",
+        "abeldekat/cmp-mini-snippets" },
 })
 
 add("rafamadriz/friendly-snippets")
 
 add({
     source = "williamboman/mason.nvim",
-    depends = { "williamboman/mason-lspconfig.nvim" },
+    depends = {
+        "williamboman/mason-lspconfig.nvim",
+    },
 })
 require("mason").setup({})
 require("mason-lspconfig").setup({
@@ -26,22 +31,22 @@ require("mason-lspconfig").setup({
             require("lspconfig")[server_name].setup({})
         end,
         lua_ls = function()
-            require('lspconfig').lua_ls.setup({
+            require("lspconfig").lua_ls.setup({
                 settings = {
                     Lua = {
                         runtime = {
-                            version = 'LuaJIT'
+                            version = "LuaJIT",
                         },
                         diagnostics = {
-                            globals = { 'vim' },
+                            globals = { "vim" },
                         },
                         workspace = {
                             library = {
                                 vim.env.VIMRUNTIME,
-                            }
-                        }
-                    }
-                }
+                            },
+                        },
+                    },
+                },
             })
         end,
     },
@@ -102,7 +107,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
--- local cmp = require("cmp")
+local cmp = require("cmp")
 cmp.setup({
     sources = {
         { name = "nvim_lsp" },
@@ -113,5 +118,35 @@ cmp.setup({
             vim.snippet.expand(args.body)
         end,
     },
-    mapping = cmp.mapping.preset.insert({}),
+    mapping = cmp.mapping.preset.insert({
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ["<CR>"] = function(fallback)
+            if cmp.visible() then
+                cmp.confirm()
+            else
+                fallback()
+            end
+        end,
+        ["<Tab>"] = function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback()
+            end
+        end,
+        ["<S-Tab>"] = function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            else
+                fallback()
+            end
+        end,
+    }),
 })
+-- }),
+-- })

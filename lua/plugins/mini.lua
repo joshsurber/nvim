@@ -13,7 +13,7 @@ local modules = {
     "bufremove",   -- Remove buffers                                        -- minibufremove
     "clue",        -- Show next key clues                                   -- miniclue
     "comment",     -- Comment                                               -- minicomment
-    "completion",  -- Completion and signature help                         -- minicompletion
+    -- "completion",  -- Completion and signature help                         -- minicompletion
     "cursorword",  -- Autohighlight word under cursor                       -- minicursorword
     "diff",        -- Work with diff hunks                                  -- minidiff
     "extra",       -- Extra mini.nvim functionality                         -- miniextra
@@ -30,7 +30,7 @@ local modules = {
     "pairs",       -- Autopairs                                             -- minipairs
     "pick",        -- Pick anything                                         -- minipick
     "sessions",    -- Session management                                    -- minisessions
-    "snippets",    -- Manage and expand snippets                            -- minisnippets
+    -- "snippets",    -- Manage and expand snippets                            -- minisnippets
     "splitjoin",   -- Split and join arguments                              -- minisplitjoin
     "starter",     -- Start screen                                          -- ministarter
     "statusline",  -- Statusline                                            -- ministatusline
@@ -255,6 +255,7 @@ local config = {
     },
     snippets = {
         snippets = {
+            -- require("luasnip.loaders.from_snipmate").lazy_load()
             -- Load custom file with global snippets first (adjust for Windows)
             require("mini.snippets").gen_loader.from_file("~/.config/nvim/snippets/global.json"),
 
