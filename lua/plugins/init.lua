@@ -1,6 +1,6 @@
 local PluginFiles = {
-    "treesitter",
     "lsp",
+    "treesitter",
     'null-ls',
 	"mini",
 	"colorschemes",
