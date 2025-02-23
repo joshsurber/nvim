@@ -7,6 +7,7 @@ for key, value in pairs({ -- NeoVim settings
     guifont = 'CaskaydiaCove NF:h9', -- For Neovide etc
     keywordprg = ':help', -- 'K' searches vim docs
     lazyredraw = true, -- Don't redraw screen while executing macros
+    relativenumber = true,
     scrolloff = 3, -- Lines to keep on screen
     shiftwidth = 0, -- Spaces to use for autoindent. 0 uses tabstop value
     showbreak = "↪", -- Indicator at the start of wrapped lines

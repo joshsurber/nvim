@@ -13,8 +13,9 @@ local modules = {
     "bufremove",   -- Remove buffers                                        -- minibufremove
     "clue",        -- Show next key clues                                   -- miniclue
     "comment",     -- Comment                                               -- minicomment
-    -- "completion",  -- Completion and signature help                         -- minicompletion
+    "completion",  -- Completion and signature help                         -- minicompletion
     "cursorword",  -- Autohighlight word under cursor                       -- minicursorword
+    "deps",        -- Plugin manager                                        -- minideps
     "diff",        -- Work with diff hunks                                  -- minidiff
     "extra",       -- Extra mini.nvim functionality                         -- miniextra
     "files",       -- Navigate and manipulate file system                   -- minifiles
@@ -24,13 +25,14 @@ local modules = {
     "indentscope", -- Visualize and operate on indent scope                 -- miniindentscope
     "jump",        -- Jump forward/backward to a single character           -- minijump
     "jump2d",      -- Jump within visible lines                             -- minijump2d
+    "map",  -- Window with buffer text overview                      -- minimap
     "move",        -- Move any selection in any direction                   -- minimove
     "notify",      -- Show notifications                                    -- mininotify
     "operators",   -- Text edit operators                                   -- minioperators
     "pairs",       -- Autopairs                                             -- minipairs
     "pick",        -- Pick anything                                         -- minipick
     "sessions",    -- Session management                                    -- minisessions
-    -- "snippets",    -- Manage and expand snippets                            -- minisnippets
+    "snippets",    -- Manage and expand snippets                            -- minisnippets
     "splitjoin",   -- Split and join arguments                              -- minisplitjoin
     "starter",     -- Start screen                                          -- ministarter
     "statusline",  -- Statusline                                            -- ministatusline
@@ -38,14 +40,12 @@ local modules = {
     "tabline",     -- Tabline                                               -- minitabline
     "trailspace",  -- Trailspace (highlight and remove)                     -- minitrailspace
     "visits",      -- Track and reuse file system visits                    -- minivisits
-    'deps',        -- Plugin manager                                        -- minideps
-    -- 'base16' ,           -- Base16 colorscheme creation                           -- minibase16
-    -- 'colors',            -- Tweak and save any color scheme                       -- minicolors
-    -- 'doc' ,              -- Generate Neovim help files                            -- minidoc
-    -- 'fuzzy' ,            -- Fuzzy matching                                        -- minifuzzy
-    -- 'map' ,              -- Window with buffer text overview                      -- minimap
-    -- 'misc' ,             -- Miscellaneous functions                               -- minimisc
-    -- 'test' ,             -- Test Neovim plugins                                   -- minitest
+    -- "base16" ,           -- Base16 colorscheme creation                           -- minibase16
+    -- "colors",            -- Tweak and save any color scheme                       -- minicolors
+    -- "doc" ,              -- Generate Neovim help files                            -- minidoc
+    -- "fuzzy" ,            -- Fuzzy matching                                        -- minifuzzy
+    -- "misc" ,             -- Miscellaneous functions                               -- minimisc
+    -- "test" ,             -- Test Neovim plugins                                   -- minitest
 
 }
 
@@ -60,7 +60,7 @@ local config = {
             move_with_alt = true, -- Move cursor in Insert, Command, and Terminal mode with <M-hjkl>
         },
         autocommands = {
-            relnum_in_visual_mode = true,
+            -- relnum_in_visual_mode = false,
         },
     },
     bufremove = {
@@ -74,9 +74,6 @@ local config = {
         end,
     },
     clue = {
-        -- window = {
-        --     delay = 250,
-        -- },
         triggers = {
             -- Leader triggers
             { mode = "n", keys = "<Leader>" },
@@ -134,17 +131,19 @@ local config = {
             { mode = "i", keys = "<C-x><C-o>", desc = "Omni completion" },
             { mode = "i", keys = "<C-x><C-s>", desc = "Spelling suggestions" },
             { mode = "i", keys = "<C-x><C-u>", desc = "With 'completefunc'" },
-            -- { mode = 'n', keys = '<leader>f',  desc = 'Find with Telescope' },
             { mode = "n", keys = "<leader>f",  desc = "Find with MiniPick" },
-            { mode = "n", keys = "<leader>p",  desc = "Pick stuff" },
-            { mode = "n", keys = "<leader>l",  desc = "LSP" },
             { mode = "n", keys = "<leader>g",  desc = "Git" },
+            { mode = "n", keys = "<leader>l",  desc = "LSP" },
+            { mode = "n", keys = "<leader>m",  desc = "MiniMap" },
+            { mode = "n", keys = "<leader>p",  desc = "Pick stuff" },
             { mode = "n", keys = "<leader>v",  desc = "Vim config" },
+
         },
     },
     completion = {
         lsp_completion = {
             source_func = "omnifunc",
+            -- source_func = "completefunc",
         },
         after = function()
             local imap_expr = function(lhs, rhs)
@@ -155,6 +154,12 @@ local config = {
             imap_expr("<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
             imap_expr("<CR>", [[pumvisible() ? "\<C-y>" : "\<CR>"]])
         end,
+    },
+    deps = {
+        after = function()
+            -- vim.keymap.set("n", "<leader>vp", "<cmd>lua MiniDeps.update()<cr>", { desc = "Sync plugins" })
+            vim.keymap.set("n", "<leader>vp", require('mini.deps').update, { desc = "Sync plugins" })
+        end
     },
     diff = {
         view = {
@@ -176,8 +181,39 @@ local config = {
         },
     },
     files = {
+        windows = {
+            preview = true,
+            width_preview = 50,
+        },
         after = function()
-            vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<cr>", { desc = "Open file explorer" })
+            local minifiles_toggle = function(...)
+                if not MiniFiles.close() then MiniFiles.open(...) end
+            end
+            vim.keymap.set("n", "<leader>e", minifiles_toggle, { desc = "Open file explorer" })
+            -- vim.keymap.set("n", "<leader>e", require('mini.files').open, { desc = "Open file explorer" })
+
+            local show_dotfiles = true
+
+            local filter_show = function(fs_entry) return true end
+
+            local filter_hide = function(fs_entry)
+                return not vim.startswith(fs_entry.name, '.')
+            end
+
+            local toggle_dotfiles = function()
+                show_dotfiles = not show_dotfiles
+                local new_filter = show_dotfiles and filter_show or filter_hide
+                MiniFiles.refresh({ content = { filter = new_filter } })
+            end
+
+            vim.api.nvim_create_autocmd('User', {
+                pattern = 'MiniFilesBufferCreate',
+                callback = function(args)
+                    local buf_id = args.data.buf_id
+                    -- Tweak left-hand side of mapping to your liking
+                    vim.keymap.set('n', 'g.', toggle_dotfiles, { buffer = buf_id })
+                end,
+            })
         end,
     },
     git = {
@@ -208,13 +244,22 @@ local config = {
         end,
     },
     operators = {
-        -- [[
         evaluate = { prefix = "<leader>=" },
         exchange = { prefix = "<leader>x" },
-        multiply = { prefix = "<leader>m" },
+        multiply = { prefix = "<leader>d" },
         replace = { prefix = "<leader>r" },
         sort = { prefix = "<leader>S" },
-        --]]
+    },
+    map = {
+        after = function()
+            local map=vim.keymap.set
+map('n', '<Leader>mc', MiniMap.close,{desc='Close map'})
+map('n', '<Leader>mf', MiniMap.toggle_focus,{desc='Focus map'})
+map('n', '<Leader>mo', MiniMap.open,{desc='Open map'})
+map('n', '<Leader>mr', MiniMap.refresh,{desc='Refresh map'})
+map('n', '<Leader>ms', MiniMap.toggle_side,{desc='Switch map side'})
+map('n', '<Leader>mt', MiniMap.toggle,{desc='Toggle map'})
+        end
     },
     pick = {
         after = function()
@@ -255,7 +300,6 @@ local config = {
     },
     snippets = {
         snippets = {
-            -- require("luasnip.loaders.from_snipmate").lazy_load()
             -- Load custom file with global snippets first (adjust for Windows)
             require("mini.snippets").gen_loader.from_file("~/.config/nvim/snippets/global.json"),
 
@@ -266,13 +310,32 @@ local config = {
         mappings = {
             -- Expand snippet at cursor position. Created globally in Insert mode.
             expand = "<C-n>",
-
-            -- Interact with default `expand.insert` session.
-            -- Created for the duration of active session(s)
-            jump_next = "<C-i>",
+            jump_next = "<C-e>",
             jump_prev = "<C-h>",
-            stop = "<C-c>",
         },
+
+        after = function()
+            local snippets = require('mini.snippets')
+            local match_strict = function(snips)
+                -- Do not match with whitespace to cursor's left
+                return snippets.default_match(snips, { pattern_fuzzy = '%S+' })
+            end
+            local expand_or_jump = function()
+                local can_expand = #MiniSnippets.expand({ insert = false }) > 0
+                if can_expand then
+                    vim.schedule(MiniSnippets.expand); return ''
+                end
+                local is_active = MiniSnippets.session.get() ~= nil
+                if is_active then
+                    MiniSnippets.session.jump('next'); return ''
+                end
+                return '\t'
+            end
+            local jump_prev = function() MiniSnippets.session.jump('prev') end
+            vim.keymap.set('i', '<Tab>', expand_or_jump, { expr = true })
+            vim.keymap.set('i', '<S-Tab>', jump_prev)
+        end,
+
     },
     starter = {
         after = function()

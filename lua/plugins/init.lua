@@ -1,5 +1,6 @@
 local PluginFiles = {
     "lsp",
+    -- "cmp",
     "treesitter",
     'null-ls',
 	"mini",
@@ -10,7 +11,7 @@ local PluginFiles = {
 local Plugins = {
 	"nvim-lua/plenary.nvim", -- https://github.com/nvim-lua/plenary.nvim
 	-- 'mbbill/undotree', -- https://github.com/mbbill/undotree
-	"tpope/vim-eunuch", -- Unix utilities -- https://github.com/tpope/vim-eunuch
+	-- "tpope/vim-eunuch", -- Unix utilities -- https://github.com/tpope/vim-eunuch
 	-- 'vifm/vifm.vim',
 	"davidgranstrom/nvim-markdown-preview", -- https://github.com/davidgranstrom/nvim-markdown-preview
 	"github/copilot.vim",
