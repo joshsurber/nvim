@@ -186,26 +186,25 @@ local config = {
             width_preview = 50,
         },
         after = function()
+
+            -- Show/hide filexplorer
             local minifiles_toggle = function(...)
                 if not MiniFiles.close() then MiniFiles.open(...) end
             end
             vim.keymap.set("n", "<leader>e", minifiles_toggle, { desc = "Open file explorer" })
             -- vim.keymap.set("n", "<leader>e", require('mini.files').open, { desc = "Open file explorer" })
 
+            -- Dotfiles
             local show_dotfiles = true
-
             local filter_show = function(fs_entry) return true end
-
             local filter_hide = function(fs_entry)
                 return not vim.startswith(fs_entry.name, '.')
             end
-
             local toggle_dotfiles = function()
                 show_dotfiles = not show_dotfiles
                 local new_filter = show_dotfiles and filter_show or filter_hide
                 MiniFiles.refresh({ content = { filter = new_filter } })
             end
-
             vim.api.nvim_create_autocmd('User', {
                 pattern = 'MiniFilesBufferCreate',
                 callback = function(args)
@@ -214,6 +213,7 @@ local config = {
                     vim.keymap.set('n', 'g.', toggle_dotfiles, { buffer = buf_id })
                 end,
             })
+
         end,
     },
     git = {

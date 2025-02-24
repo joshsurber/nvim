@@ -39,6 +39,14 @@ require("mason-lspconfig").setup({
                 },
             })
         end,
+        emmet_language_server = function()
+            require("lspconfig").emmet_language_server.setup({
+                filetypes = { "astro", "css", "eruby", "html", "javascript",
+                    "javascriptreact", "less", "sass", "scss", "pug", "typescriptreact" },
+                settings = {
+                },
+            })
+        end,
     },
 })
 
@@ -80,3 +88,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.cmd([[ command! Format :lua vim.lsp.buf.format() ]])
     end,
 })
+
+add("olrtg/nvim-emmet") -- requires emmet-language-server
+vim.keymap.set({ "n", "v" }, '<leader>h',
+    require('nvim-emmet').wrap_with_abbreviation)
