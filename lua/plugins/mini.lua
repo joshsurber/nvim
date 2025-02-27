@@ -13,7 +13,6 @@ local modules = {
     "bufremove",   -- Remove buffers                                        -- minibufremove
     "clue",        -- Show next key clues                                   -- miniclue
     "comment",     -- Comment                                               -- minicomment
-    "completion",  -- Completion and signature help                         -- minicompletion
     "cursorword",  -- Autohighlight word under cursor                       -- minicursorword
     "deps",        -- Plugin manager                                        -- minideps
     "diff",        -- Work with diff hunks                                  -- minidiff
@@ -42,6 +41,7 @@ local modules = {
     "visits",      -- Track and reuse file system visits                    -- minivisits
     -- "base16" ,           -- Base16 colorscheme creation                           -- minibase16
     -- "colors",            -- Tweak and save any color scheme                       -- minicolors
+    -- "completion",  -- Completion and signature help                         -- minicompletion
     -- "doc" ,              -- Generate Neovim help files                            -- minidoc
     -- "fuzzy" ,            -- Fuzzy matching                                        -- minifuzzy
     -- "misc" ,             -- Miscellaneous functions                               -- minimisc

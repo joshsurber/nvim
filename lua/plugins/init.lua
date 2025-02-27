@@ -1,8 +1,8 @@
 local PluginFiles = {
     "lsp",
-    -- "cmp",
+    "cmp",
     "treesitter",
-    'null-ls',
+    -- 'null-ls',
     "mini",
     "colorschemes",
     "lazygit",
@@ -13,7 +13,7 @@ local Plugins = {
     -- 'mbbill/undotree', -- https://github.com/mbbill/undotree
     -- "tpope/vim-eunuch", -- Unix utilities -- https://github.com/tpope/vim-eunuch
     -- 'vifm/vifm.vim',
-    "davidgranstrom/nvim-markdown-preview", -- https://github.com/davidgranstrom/nvim-markdown-preview
+    -- "davidgranstrom/nvim-markdown-preview", -- https://github.com/davidgranstrom/nvim-markdown-preview
     "github/copilot.vim",
     "akinsho/toggleterm.nvim",           -- Easy terminal access -- https://github.com/akinsho/toggleterm.nvim
 }
