@@ -5,14 +5,11 @@ local PluginFiles = {
     -- 'null-ls',
     "mini",
     "colorschemes",
-    "lazygit",
+    -- "lazygit",
     'tmux',
 }
 local Plugins = {
     "nvim-lua/plenary.nvim", -- https://github.com/nvim-lua/plenary.nvim
-    -- 'mbbill/undotree', -- https://github.com/mbbill/undotree
-    -- "tpope/vim-eunuch", -- Unix utilities -- https://github.com/tpope/vim-eunuch
-    -- 'vifm/vifm.vim',
     -- "davidgranstrom/nvim-markdown-preview", -- https://github.com/davidgranstrom/nvim-markdown-preview
     "github/copilot.vim",
     "akinsho/toggleterm.nvim",           -- Easy terminal access -- https://github.com/akinsho/toggleterm.nvim
