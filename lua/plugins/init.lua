@@ -2,17 +2,16 @@ local PluginFiles = {
     "lsp",
     "cmp",
     "treesitter",
-    -- 'null-ls',
+    'null-ls',
     "mini",
     "colorschemes",
-    -- "lazygit",
     'tmux',
+    -- "lazygit",
 }
 local Plugins = {
-    "nvim-lua/plenary.nvim", -- https://github.com/nvim-lua/plenary.nvim
-    -- "davidgranstrom/nvim-markdown-preview", -- https://github.com/davidgranstrom/nvim-markdown-preview
     "github/copilot.vim",
-    "akinsho/toggleterm.nvim",           -- Easy terminal access -- https://github.com/akinsho/toggleterm.nvim
+    "akinsho/toggleterm.nvim",
+    -- "nvim-lua/plenary.nvim",
 }
 
 -- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'

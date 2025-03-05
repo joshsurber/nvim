@@ -1,11 +1,11 @@
 require("mini.deps").add({
-	source = "nvimtools/none-ls.nvim",
-	depends = {
-		"jay-babu/mason-null-ls.nvim",
-	},
+    source = "nvimtools/none-ls.nvim",
+    depends = {
+        "jay-babu/mason-null-ls.nvim",
+    },
 })
-local null_ls = require("null-ls")
 
+local null_ls = require("null-ls")
 local code_action = null_ls.builtins.code_actions
 local completion = null_ls.builtins.completion
 local diagnostics = null_ls.builtins.diagnostics
