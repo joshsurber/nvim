@@ -5,7 +5,6 @@ local PluginFiles = {
     'null-ls',
     "mini",
     "colorschemes",
-    -- 'tmux',
     -- "lazygit",
 }
 
