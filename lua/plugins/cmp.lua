@@ -1,12 +1,3 @@
-local add = require("mini.deps").add
-
-add({
-    source = "hrsh7th/nvim-cmp",
-    depends = {
-        "hrsh7th/cmp-nvim-lsp",
-        "abeldekat/cmp-mini-snippets" },
-})
-
 local lspconfig_defaults = require("lspconfig").util.default_config
 lspconfig_defaults.capabilities =
     vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())

@@ -1,14 +1,3 @@
-local add = require('mini.deps').add
--- Use treesitter to manage folds
-if not vim.wo.diff then
-    vim.opt.foldmethod = "expr"
-    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-end
-
-add({
-    source = "nvim-treesitter/nvim-treesitter",
-    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
-})
 require("nvim-treesitter.configs").setup({
     build = ":TSUpdate",
     auto_install = true,
@@ -103,7 +92,6 @@ require("nvim-treesitter.configs").setup({
     },
 })
 
-add("windwp/nvim-ts-autotag") -- Auto close tags and rename in pairs -- https://github.com/windwp/nvim-ts-autotag
 require("nvim-ts-autotag").setup({
     opts = {
         -- Defaults
@@ -121,7 +109,6 @@ require("nvim-ts-autotag").setup({
     },
 })
 
-add("nvim-treesitter/nvim-treesitter-context") -- Where am I in my code -- https://github.com/nvim-treesitter/nvim-treesitter-context
 require 'treesitter-context'.setup {
     enable = true,                             -- Enable this plugin (Can be enabled/disabled later via commands)
     multiwindow = false,                       -- Enable multiwindow support.
@@ -138,4 +125,8 @@ require 'treesitter-context'.setup {
     on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 }
 
-add('HiPhish/rainbow-delimiters.nvim')
+-- Use treesitter to manage folds
+if not vim.wo.diff then
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+end

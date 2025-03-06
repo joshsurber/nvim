@@ -1,15 +1,3 @@
-local add = require("mini.deps").add
-
-add({ source = "neovim/nvim-lspconfig" })
-add("rafamadriz/friendly-snippets")
-add({
-    source = "williamboman/mason.nvim",
-    depends = {
-        "williamboman/mason-lspconfig.nvim",
-        -- "mhartington/formatter.nvim",
-    },
-})
-
 require("mason").setup({})
 require("mason-lspconfig").setup({
 
@@ -97,7 +85,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-add("olrtg/nvim-emmet") -- requires emmet-language-server
 vim.keymap.set({ "n", "v" }, '<leader>h', require('nvim-emmet').wrap_with_abbreviation)
 
 -- -- Utilities for creating configurations

@@ -1,4 +1,3 @@
-MiniDeps.add('folke/tokyonight.nvim')
 require('tokyonight').setup({
     transparent = true,     -- Enable this to disable setting the background color
     terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
@@ -18,7 +17,6 @@ require('tokyonight').setup({
     dim_inactive = true,                  -- dims inactive windows
     lualine_bold = true,                  -- When `true`, section headers in the lualine theme will be bold
 })
--- MiniDeps.add('ellisonleao/gruvbox.nvim')
 
 vim.cmd.colorscheme('tokyonight')
 -- vim: fdl=1
