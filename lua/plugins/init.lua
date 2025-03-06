@@ -38,7 +38,7 @@ for _, repo in pairs({
         depends = {
             "windwp/nvim-ts-autotag",
             "nvim-treesitter/nvim-treesitter-context",
-            'HiPhish/rainbow-delimiters.nvim',
+            "HiPhish/rainbow-delimiters.nvim",
         },
     },
 }) do require("mini.deps").add(repo) end
@@ -47,7 +47,7 @@ for _, plugin in pairs({
     "lsp",
     "cmp",
     "treesitter",
-    'null-ls',
+    "null-ls",
     "mini",
     "colorschemes",
     "lazygit",
@@ -59,8 +59,8 @@ require("toggleterm").setup({
     shade_terminals = true,
 })
 
-require 'nvim-tmux-navigation'.setup {
-    disable_when_zoomed = true,         -- defaults to false
+require "nvim-tmux-navigation".setup({
+    disable_when_zoomed = true, -- defaults to false
     keybindings = {
         left        = "<C-h>",
         down        = "<C-n>",
@@ -69,4 +69,4 @@ require 'nvim-tmux-navigation'.setup {
         last_active = "<C-\\>",
         next        = "<C-Space>",
     }
-}
+})
