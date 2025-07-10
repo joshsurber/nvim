@@ -1,3 +1,19 @@
+local add = require("mini.deps").add
+add({ -- lsp
+    source = "neovim/nvim-lspconfig",
+    depends = {
+        "rafamadriz/friendly-snippets",
+        "olrtg/nvim-emmet",
+    },
+})
+add({ -- mason
+    source = "williamboman/mason.nvim",
+    depends = {
+        "williamboman/mason-lspconfig.nvim",
+        -- "mhartington/formatter.nvim",
+    },
+})
+
 require("mason").setup({})
 require("mason-lspconfig").setup({
 
