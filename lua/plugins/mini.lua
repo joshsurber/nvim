@@ -243,13 +243,13 @@ local config = {
             lmap({ "n", "x" }, "s", "<Cmd>lua MiniGit.show_at_cursor()<CR>", { desc = "Show at cursor" })
         end,
     },
-    operators = {
-        evaluate = { prefix = "<leader>=" },
-        exchange = { prefix = "<leader>x" },
-        multiply = { prefix = "<leader>d" },
-        replace = { prefix = "<leader>r" },
-        sort = { prefix = "<leader>S" },
-    },
+    -- operators = {
+    --     evaluate = { prefix = "<leader>=" },
+    --     exchange = { prefix = "<leader>x" },
+    --     multiply = { prefix = "<leader>d" },
+    --     replace = { prefix = "<leader>r" },
+    --     sort = { prefix = "<leader>S" },
+    -- },
     map = {
         after = function()
             local map=vim.keymap.set

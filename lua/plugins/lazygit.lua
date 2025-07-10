@@ -1,3 +1,6 @@
+local add = require("mini.deps").add
+add("kdheepak/lazygit.nvim")
+
 vim.g.lazygit_floating_window_winblend = 0 -- transparency of floating window
 vim.g.lazygit_floating_window_scaling_factor = 0.9 -- scaling factor for floating window
 vim.g.lazygit_floating_window_border_chars = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } -- customize lazygit popup window border characters
@@ -10,6 +13,9 @@ vim.g.lazygit_config_file_path = "" -- custom config file path
 vim.g.lazygit_config_file_path = {} -- table of custom config file paths
 
 vim.g.lazygit_on_exit_callback = nil -- optional function callback when exiting lazygit (useful for example to refresh some UI elements after lazy git has made some changes)
+
+vim.keymap.set("n", "<leader>lg", '<cmd>LazyGit<cr>', { desc = "LazyGit" })
+vim.keymap.set("n", "<leader>gl", '<cmd>LazyGit<cr>', { desc = "LazyGit" })
 
 local lazygit = function()
     --  get file name with extension
@@ -24,5 +30,5 @@ local lazygit = function()
         vim.api.nvim_input("<ESC>")
     end, 150) -- (milliseconds)
 end
-vim.keymap.set("n", "<leader>lg", lazygit, { desc = "LazyGit" })
-vim.keymap.set("n", "<leader>gl", lazygit, { desc = "LazyGit" })
+-- vim.keymap.set("n", "<leader>lg", lazygit, { desc = "LazyGit" })
+-- vim.keymap.set("n", "<leader>gl", lazygit, { desc = "LazyGit" })
