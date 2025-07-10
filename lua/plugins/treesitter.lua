@@ -93,7 +93,7 @@ require("nvim-treesitter.configs").setup({
         },
     },
     textsubjects = {
-        enable = true,
+        enable = false,
         prev_selection = ",", -- (Optional) keymap to select the previous selection
         keymaps = {
             ["."] = "textsubjects-smart",
@@ -136,8 +136,8 @@ require 'treesitter-context'.setup {
     on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 }
 
--- Use treesitter to manage folds
-if not vim.wo.diff then
-    vim.opt.foldmethod = "expr"
-    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-end
+-- -- Use treesitter to manage folds
+-- if not vim.wo.diff then
+--     vim.opt.foldmethod = "expr"
+--     vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- end

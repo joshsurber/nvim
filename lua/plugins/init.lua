@@ -7,5 +7,6 @@ require("plugins/treesitter")
 require("plugins/mini")
 require("plugins/colorschemes")
 require("plugins/lazygit")
+require("plugins/treesitter")
 
 add("github/copilot.vim")
