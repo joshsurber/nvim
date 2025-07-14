@@ -12,7 +12,6 @@ local modules = {
     "bracketed",   -- Go forward/backward with square brackets              -- minibracketed
     "bufremove",   -- Remove buffers                                        -- minibufremove
     "clue",        -- Show next key clues                                   -- miniclue
-    "comment",     -- Comment                                               -- minicomment
     "cursorword",  -- Autohighlight word under cursor                       -- minicursorword
     "deps",        -- Plugin manager                                        -- minideps
     "diff",        -- Work with diff hunks                                  -- minidiff
@@ -24,14 +23,13 @@ local modules = {
     "indentscope", -- Visualize and operate on indent scope                 -- miniindentscope
     "jump",        -- Jump forward/backward to a single character           -- minijump
     "jump2d",      -- Jump within visible lines                             -- minijump2d
-    "map",  -- Window with buffer text overview                      -- minimap
+    "map",         -- Window with buffer text overview                      -- minimap
     "move",        -- Move any selection in any direction                   -- minimove
     "notify",      -- Show notifications                                    -- mininotify
     "operators",   -- Text edit operators                                   -- minioperators
     "pairs",       -- Autopairs                                             -- minipairs
     "pick",        -- Pick anything                                         -- minipick
     "sessions",    -- Session management                                    -- minisessions
-    "snippets",    -- Manage and expand snippets                            -- minisnippets
     "splitjoin",   -- Split and join arguments                              -- minisplitjoin
     "starter",     -- Start screen                                          -- ministarter
     "statusline",  -- Statusline                                            -- ministatusline
@@ -41,10 +39,12 @@ local modules = {
     "visits",      -- Track and reuse file system visits                    -- minivisits
     -- "base16" ,           -- Base16 colorscheme creation                           -- minibase16
     -- "colors",            -- Tweak and save any color scheme                       -- minicolors
+    -- "comment",     -- Comment                                               -- minicomment
     -- "completion",  -- Completion and signature help                         -- minicompletion
     -- "doc" ,              -- Generate Neovim help files                            -- minidoc
     -- "fuzzy" ,            -- Fuzzy matching                                        -- minifuzzy
     -- "misc" ,             -- Miscellaneous functions                               -- minimisc
+    -- "snippets",    -- Manage and expand snippets                            -- minisnippets
     -- "test" ,             -- Test Neovim plugins                                   -- minitest
 
 }
@@ -186,7 +186,6 @@ local config = {
             width_preview = 50,
         },
         after = function()
-
             -- Show/hide filexplorer
             local minifiles_toggle = function(...)
                 if not MiniFiles.close() then MiniFiles.open(...) end
@@ -213,7 +212,6 @@ local config = {
                     vim.keymap.set('n', 'g.', toggle_dotfiles, { buffer = buf_id })
                 end,
             })
-
         end,
     },
     git = {
@@ -243,22 +241,23 @@ local config = {
             lmap({ "n", "x" }, "s", "<Cmd>lua MiniGit.show_at_cursor()<CR>", { desc = "Show at cursor" })
         end,
     },
-    -- operators = {
-    --     evaluate = { prefix = "<leader>=" },
-    --     exchange = { prefix = "<leader>x" },
-    --     multiply = { prefix = "<leader>d" },
-    --     replace = { prefix = "<leader>r" },
-    --     sort = { prefix = "<leader>S" },
-    -- },
+    operators = {
+        replace = { prefix = "gP" },
+        -- evaluate = { prefix = "<leader>=" },
+        -- exchange = { prefix = "<leader>x" },
+        -- multiply = { prefix = "<leader>d" },
+        -- replace = { prefix = "<leader>r" },
+        -- sort = { prefix = "<leader>S" },
+    },
     map = {
         after = function()
-            local map=vim.keymap.set
-map('n', '<Leader>mc', MiniMap.close,{desc='Close map'})
-map('n', '<Leader>mf', MiniMap.toggle_focus,{desc='Focus map'})
-map('n', '<Leader>mo', MiniMap.open,{desc='Open map'})
-map('n', '<Leader>mr', MiniMap.refresh,{desc='Refresh map'})
-map('n', '<Leader>ms', MiniMap.toggle_side,{desc='Switch map side'})
-map('n', '<Leader>mt', MiniMap.toggle,{desc='Toggle map'})
+            local map = vim.keymap.set
+            map('n', '<Leader>mc', MiniMap.close, { desc = 'Close map' })
+            map('n', '<Leader>mf', MiniMap.toggle_focus, { desc = 'Focus map' })
+            map('n', '<Leader>mo', MiniMap.open, { desc = 'Open map' })
+            map('n', '<Leader>mr', MiniMap.refresh, { desc = 'Refresh map' })
+            map('n', '<Leader>ms', MiniMap.toggle_side, { desc = 'Switch map side' })
+            map('n', '<Leader>mt', MiniMap.toggle, { desc = 'Toggle map' })
         end
     },
     pick = {

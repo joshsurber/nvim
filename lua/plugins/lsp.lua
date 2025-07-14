@@ -3,11 +3,12 @@ add("williamboman/mason.nvim")
 add("neovim/nvim-lspconfig")
 add("williamboman/mason-lspconfig.nvim")
 add("olrtg/nvim-emmet")
-add("rafamadriz/friendly-snippets")
+-- add("rafamadriz/friendly-snippets")
 
 vim.lsp.config('lua_ls', {
     settings = {
         Lua = { diagnostics = { globals = { "vim" } } },
+        runtime = { version = 'LuaJIT', },
         workspace = { library = { vim.env.VIMRUNTIME, }, },
     }
 })
@@ -20,7 +21,7 @@ vim.keymap.set({ "n", "v" }, '<leader>h', require('nvim-emmet').wrap_with_abbrev
 require("mason").setup({})
 require("mason-lspconfig").setup({})
 
-vim.opt.signcolumn = "yes"
+vim.opt.winborder = 'rounded'
 vim.diagnostic.config({
     virtual_text = true,
     virtual_lines = { current_line = true },

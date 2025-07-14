@@ -9,8 +9,8 @@ map("n", "j", "e")
 map("n", "k", "nzzzv")
 map("n", "l", "i")
 
-map("n", "K", "Nzzzv")
 map("n", "L", "I")
+map("n", "K", "Nzzzv")
 map("n", 'E', 'K')
 
 map("n", "n", "gj")

@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local buf = vim.lsp.buf
         local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 
-        map("n", "gh", buf.hover, { desc = "Floating information window" })
+        map("n", "E", buf.hover, { desc = "Floating information window" })
         map("n", "gH", buf.signature_help, { desc = "Signature information floating window" })
         map("n", "<leader>ld", buf.definition, { desc = "Go to definition" })
         map("n", "<leader>lD", buf.declaration, { desc = "Go to declaration" })
@@ -39,7 +39,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
             -- Optional: trigger autocompletion on EVERY keypress. May be slow!
             local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
             client.server_capabilities.completionProvider.triggerCharacters = chars
-
             vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
         end
 
