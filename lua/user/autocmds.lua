@@ -23,17 +23,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 
         map("n", "E", buf.hover, { desc = "Floating information window" })
-        map("n", "gH", buf.signature_help, { desc = "Signature information floating window" })
-        map("n", "<leader>ld", buf.definition, { desc = "Go to definition" })
-        map("n", "<leader>lD", buf.declaration, { desc = "Go to declaration" })
-        map("n", "<leader>li", buf.implementation, { desc = "Go to implementation" })
-        map("n", "<leader>lo", buf.type_definition, { desc = "Go to type definition" })
-        map("n", "<leader>lR", buf.references, { desc = "List referencess in quickfix window" })
-        map("n", "<leader>lr", buf.rename, { desc = "Rename symbol under cursor" })
-        map("n", "<leader>la", buf.code_action, { desc = "Select a code action" })
-        map("n", "<leader>lf", buf.format, { desc = "Format buffer" })
-        -- map('n', '<leader>lF', '<cmd>%!prettier --stdin-filepath %<cr>', { desc = 'Format with prettier' })
-        map("n", "<leader>ll", vim.diagnostic.open_float, { desc = "Show diagnostics in floating window" })
+        map("n", "grf", buf.format, { desc = "Format buffer" })
 
         if client:supports_method('textDocument/completion') then
             -- Optional: trigger autocompletion on EVERY keypress. May be slow!
