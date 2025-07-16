@@ -19,4 +19,5 @@ require("formatter").setup {
             }
         end
     },
+    prettier = util.withl(defaults.prettier)
 }
