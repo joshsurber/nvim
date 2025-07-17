@@ -1,14 +1,15 @@
 local add = require("mini.deps").add
 add('mini.nvim')
+require("plugins.mini")
 
--- require("plugins.cmp")
 -- require("plugins.formatter")
--- require("plugins.lazygit")
 -- require("plugins.null-ls")
 -- require("plugins.toggleterm")
 
 add("github/copilot.vim")
-require("plugins.mini")
+
+-- add("kdheepak/lazygit.nvim")
+-- require("plugins.lazygit")
 
 add("folke/tokyonight.nvim")
 add("ellisonleao/gruvbox.nvim")
@@ -19,8 +20,8 @@ add("neovim/nvim-lspconfig")
 add("williamboman/mason-lspconfig.nvim")
 add("olrtg/nvim-emmet")
 -- add("rafamadriz/friendly-snippets")
-require("plugins.lsp")
 
+require("plugins.lsp")
 add("alexghergh/nvim-tmux-navigation")
 require("plugins.tmux")
 
