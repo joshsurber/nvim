@@ -6,10 +6,11 @@ vim.api.nvim_create_user_command('CD', function()
 end, {})
 
 -- Help window on right, navigate helptags with enter and backspace
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = "help",
+vim.api.nvim_create_autocmd('BufWinEnter', {
+    pattern = { "*.txt" },
     callback = function()
-        vim.cmd "wincmd I"
+        if not vim.o.filetype == "help" then return end
+        vim.cmd.wincmd('L')
         vim.keymap.set('n', '<CR>', '<C-]>', { noremap = true, silent = true, buffer = true })
         vim.keymap.set('n', '<BS>', '<C-T>', { noremap = true, silent = true, buffer = true })
     end
