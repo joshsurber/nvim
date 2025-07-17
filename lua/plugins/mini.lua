@@ -9,7 +9,7 @@ local modules = {
     "ai",          -- Extend and create `a`/`i` textobjects                 -- miniai
     "align",       -- Align text interactively                              -- minialign
     "basics",      -- Common config presets                                 -- minibasics
-    "bracketed",   -- Go forward/backward with square brackets              -- minibracketed
+    -- "bracketed",   -- Go forward/backward with square brackets              -- minibracketed
     "bufremove",   -- Remove buffers                                        -- minibufremove
     "clue",        -- Show next key clues                                   -- miniclue
     "completion",  -- Completion and signature help                         -- minicompletion

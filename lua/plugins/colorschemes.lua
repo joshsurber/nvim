@@ -1,4 +1,7 @@
 local add = require("mini.deps").add
+add("folke/tokyonight.nvim")
+add("ellisonleao/gruvbox.nvim")
+
 require('tokyonight').setup({
     transparent = true,     -- Enable this to disable setting the background color
     terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
