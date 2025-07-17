@@ -12,6 +12,7 @@ local modules = {
     "bracketed",   -- Go forward/backward with square brackets              -- minibracketed
     "bufremove",   -- Remove buffers                                        -- minibufremove
     "clue",        -- Show next key clues                                   -- miniclue
+    "completion",  -- Completion and signature help                         -- minicompletion
     "cursorword",  -- Autohighlight word under cursor                       -- minicursorword
     "deps",        -- Plugin manager                                        -- minideps
     "diff",        -- Work with diff hunks                                  -- minidiff
@@ -40,11 +41,10 @@ local modules = {
     -- "base16" ,           -- Base16 colorscheme creation                           -- minibase16
     -- "colors",            -- Tweak and save any color scheme                       -- minicolors
     -- "comment",     -- Comment                                               -- minicomment
-    -- "completion",  -- Completion and signature help                         -- minicompletion
     -- "doc" ,              -- Generate Neovim help files                            -- minidoc
     -- "fuzzy" ,            -- Fuzzy matching                                        -- minifuzzy
     -- "misc" ,             -- Miscellaneous functions                               -- minimisc
-    -- "snippets",    -- Manage and expand snippets                            -- minisnippets
+    -- "snippets", -- Manage and expand snippets                            -- minisnippets
     -- "test" ,             -- Test Neovim plugins                                   -- minitest
 
 }
@@ -133,7 +133,7 @@ local config = {
             { mode = "i", keys = "<C-x><C-u>", desc = "With 'completefunc'" },
             { mode = "n", keys = "<leader>f",  desc = "Find with MiniPick" },
             { mode = "n", keys = "<leader>g",  desc = "Git" },
-            { mode = "n", keys = "<leader>l",  desc = "LSP" },
+            -- { mode = "n", keys = "<leader>l",  desc = "LSP" },
             { mode = "n", keys = "<leader>m",  desc = "MiniMap" },
             { mode = "n", keys = "<leader>p",  desc = "Pick stuff" },
             { mode = "n", keys = "<leader>v",  desc = "Vim config" },
@@ -252,6 +252,7 @@ local config = {
     map = {
         after = function()
             local map = vim.keymap.set
+            local MiniMap = Minimap
             map('n', '<Leader>mc', MiniMap.close, { desc = 'Close map' })
             map('n', '<Leader>mf', MiniMap.toggle_focus, { desc = 'Focus map' })
             map('n', '<Leader>mo', MiniMap.open, { desc = 'Open map' })
@@ -276,6 +277,7 @@ local config = {
     },
     sessions = {
         after = function()
+            local MiniSessions = MiniSessions
             vim.api.nvim_create_user_command("Screate", function()
                 vim.ui.input({
                     prompt = "Session name? ",

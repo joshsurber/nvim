@@ -1,13 +1,4 @@
 local add = require("mini.deps").add
-add({      -- treesitter
-    source = "nvim-treesitter/nvim-treesitter",
-    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
-    depends = {
-        "windwp/nvim-ts-autotag",
-        "nvim-treesitter/nvim-treesitter-context",
-        "HiPhish/rainbow-delimiters.nvim",
-    },
-})
 
 require("nvim-treesitter.configs").setup({
     build = ":TSUpdate",
