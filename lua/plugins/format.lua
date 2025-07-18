@@ -16,13 +16,8 @@ format_on_save.setup({
 		json = formatters.lsp,
 		lua = formatters.stylua,
 		markdown = formatters.prettierd,
-		openscad = formatters.lsp,
-		python = formatters.black,
-		rust = formatters.lsp,
-		scad = formatters.lsp,
 		scss = formatters.lsp,
 		sh = formatters.shfmt,
-		terraform = formatters.lsp,
 		typescript = formatters.prettierd,
 		typescriptreact = formatters.prettierd,
 		yaml = formatters.lsp,
@@ -32,10 +27,11 @@ format_on_save.setup({
 	fallback_formatter = {
 		formatters.remove_trailing_whitespace,
 		formatters.remove_trailing_newlines,
-		formatters.prettierd,
+		formatters.lsp,
 	},
 
 	-- By default, all shell commands are prefixed with "sh -c" (see PR #3)
 	-- To prevent that set `run_with_sh` to `false`.
 	run_with_sh = false,
+	error_notifier = require("format-on-save.error-notifiers.vim-notify"),
 })
