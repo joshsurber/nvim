@@ -10,4 +10,4 @@ require("plugins.treesitter")
 require("plugins/format")
 
 -- require("plugins.toggleterm")
--- require("plugins.lazygit")
+require("plugins.lazygit")
