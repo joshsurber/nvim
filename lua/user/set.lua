@@ -4,7 +4,8 @@ for key, value in pairs({ -- NeoVim settings
 	confirm = true, -- Instead of failing a command because of unsaved changes, raise a dialogue asking if you wish to save changed files.
 	dictionary = "/usr/share/dict/words",
 	expandtab = true, -- Use spaces instead of tabs
-	guifont = "CaskaydiaCove NF:h9", -- For Neovide etc
+	guifont = "Cascadia Code NF:h9", -- For Neovide etc
+	-- guifont = "CaskaydiaCove NF:h9", -- For Neovide etc
 	keywordprg = ":help", -- 'K' searches vim docs
 	lazyredraw = true, -- Don't redraw screen while executing macros
 	relativenumber = true,
@@ -39,6 +40,9 @@ for key, value in pairs({ -- globals (for older plugins)
 	t_co = 256,
 
 	nvim_markdown_preview_format = "markdown",
+	netrw_sort_by = "time",
+	netrw_liststyle = 1,
+	netrw_sort_direction = "reverse",
 
 	neovide_floating_blur_amount_x = 2.0,
 	neovide_floating_blur_amount_y = 2.0,

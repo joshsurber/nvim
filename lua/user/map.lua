@@ -47,3 +47,4 @@ map("n", "<leader>q", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 
 map("n", "<C-q>", ":q<cr>") -- Access `qq` macro
 map("n", "<leader>e", ":Lex<cr>")
+map("n", "<leader>E", ":Lex<cr>")

@@ -347,6 +347,9 @@ local config = {
 			vim.api.nvim_create_user_command("Start", function()
 				MiniStarter.open()
 			end, {})
+			vim.keymap.set("n", "<leader>'", function()
+				MiniStarter.open()
+			end)
 		end,
 	},
 	trailspace = {
