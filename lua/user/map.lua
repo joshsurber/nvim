@@ -8,7 +8,7 @@ local map = vim.keymap.set
 -- Command line conveniences
 map("c", "%%", "<C-R>=expand('%:h').'/'<cr>") -- expand %% to current directory in command-line mode
 -- THIS DOESN'T WORK ANYMORE ANYWAY --
-map("c", "w!!", "w !sudo tee % >/dev/null") -- No write permission? Fuck you, do it anyway!")
+map("c", "w!!", "w !sudo tee % >/dev/null")   -- No write permission? Fuck you, do it anyway!")
 map("t", "<C-w>", "<C-\\><C-n><C-w>")
 -- map('t', '<tab>', '<tab>')                    -- for some reason w/o this tab completion doesn't work
 -- Folding
@@ -33,6 +33,10 @@ map("n", "<esc>", "<cmd>noh<cr><cmd>echo<cr>") --  remove search highlighting
 map("v", "y", "y`]")
 map("v", "p", "p`]")
 map("n", "p", "p`]")
+
+map('n', '<leader>x', ':.lua<cr>', { desc = "Execute current line in lua" })
+map('v', '<leader>x', ':lua<cr>', { desc = "Execute selection in lua" })
+map('n', '<leader>X', '<cmd>source %<cr>', { desc = "Shout it out" })
 
 -- Change modes easier
 map("i", "nene", "<esc>")
