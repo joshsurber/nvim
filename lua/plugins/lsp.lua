@@ -36,7 +36,7 @@ vim.keymap.set(
 require("mason").setup({})
 require("mason-lspconfig").setup({})
 
-vim.opt.winborder = "rounded"
+vim.o.winborder = "rounded"
 vim.diagnostic.config({
     virtual_text = true,
     virtual_lines = { current_line = true },
