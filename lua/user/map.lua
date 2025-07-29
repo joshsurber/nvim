@@ -1,17 +1,8 @@
 local map = vim.keymap.set
 
--- -- Easy access to edit init.lua
--- map("n", "<leader>ve", ":tabedit $MYVIMRC<cr>", { desc = 'Edit init.lua' })
--- map("n", "<leader>vs", ":source $MYVIMRC<cr>", { desc = 'Reload init.lua' })
--- map("n", "<leader>vd", ":cd ~/.config/nvim<cr>", { desc = 'Change to Neovim config directory' })
-
 -- Command line conveniences
 map("c", "%%", "<C-R>=expand('%:h').'/'<cr>") -- expand %% to current directory in command-line mode
--- THIS DOESN'T WORK ANYMORE ANYWAY --
-map("c", "w!!", "w !sudo tee % >/dev/null") -- No write permission? Fuck you, do it anyway!")
 map("t", "<C-w>", "<C-\\><C-n><C-w>")
--- map('t', '<tab>', '<tab>')                    -- for some reason w/o this tab completion doesn't work
--- Folding
 map({ "n", "v" }, "<leader><leader>", "za", { desc = "Toggle fold" })
 
 -- Searching nicities
@@ -41,14 +32,11 @@ map("n", "<leader>x", ":.lua<cr>", { desc = "Execute current line in lua" })
 map("v", "<leader>x", ":lua<cr>", { desc = "Execute selection in lua" })
 map("n", "<leader>X", "<cmd>source %<cr>", { desc = "Shout it out" })
 
-
 -- Save and quit easier
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
 map("n", "<leader>W", "<cmd>wall<cr>", { desc = "Save all windows/tabs" })
 map("n", "<leader>q", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
--- map("n", "<leader>Q", "<cmd>qall<cr>", { desc = 'Close all windows/tabs' })
--- map("n", "QQ", ":q<cr>")
 
-map("n", "<C-q>", ":q<cr>") -- Access `qq` macro
+map("n", "<C-q>", ":q<cr>")
 map("n", "<leader>e", ":Lex<cr>")
 map("n", "<leader>E", ":Lex<cr>")
