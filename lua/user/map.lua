@@ -29,18 +29,18 @@ map("n", "<esc>", "<cmd>noh<cr><cmd>echo<cr>") --  remove search highlighting
 -- map("n", "Vab", "vabV", { desc = "Select a block" })
 -- map("n", "VaB", "vaBV", { desc = "Select a block" })
 
--- Go to end of visual selection
+-- Visual mode consistency
+map("v", ">", ">gv")
+map("v", "<", "<gv")
 map("v", "y", "y`]")
 map("v", "p", "p`]")
 map("n", "p", "p`]")
 
+-- Execute lines
 map("n", "<leader>x", ":.lua<cr>", { desc = "Execute current line in lua" })
 map("v", "<leader>x", ":lua<cr>", { desc = "Execute selection in lua" })
 map("n", "<leader>X", "<cmd>source %<cr>", { desc = "Shout it out" })
 
--- Change modes easier
-map("i", "nene", "<esc>")
-map("t", "<Esc>", "<C-\\><C-n>")
 
 -- Save and quit easier
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
