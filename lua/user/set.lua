@@ -1,8 +1,15 @@
 for key, value in pairs({ -- NeoVim settings
+
     cindent = true, -- Indent using C-style rules
     confirm = true, -- Instead of failing a command because of unsaved changes, raise a dialogue asking if you wish to save changed files.
     dictionary = "/usr/share/dict/words",
     expandtab = true, -- Use spaces instead of tabs
+    -- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
+    foldcolumn = "auto",
+    foldlevel = 99,
+    foldlevelstart = 1,
+    foldnestmax = 3,
+    foldtext = "",
     guifont = "Cascadia Code NF:h9", -- For Neovide etc
     -- guifont = "CaskaydiaCove NF:h9", -- For Neovide etc
     keywordprg = ":help", -- 'K' searches vim docs
@@ -55,4 +62,3 @@ for key, value in pairs({ -- globals (for older plugins)
 }) do
     vim.g[key] = value
 end
--- vim: fdl=1
