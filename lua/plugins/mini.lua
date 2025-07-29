@@ -298,6 +298,11 @@ local config = {
             vim.api.nvim_create_user_command("Ssave", function()
                 MiniSessions.write()
             end, {})
+
+            vim.keymap.set("n", "<leader>'", function()
+                -- MiniStarter.open()
+                MiniSessions.select()
+            end, { desc = "Switch session" })
         end,
     },
     snippets = {
@@ -342,16 +347,6 @@ local config = {
             vim.keymap.set("i", "<S-Tab>", jump_prev)
         end,
     },
-    starter = {
-        after = function()
-            vim.api.nvim_create_user_command("Start", function()
-                MiniStarter.open()
-            end, {})
-            vim.keymap.set("n", "<leader>'", function()
-                MiniStarter.open()
-            end)
-        end,
-    },
     trailspace = {
         after = function()
             -- Delete trailing space on write
@@ -390,4 +385,3 @@ for _, module in pairs(modules) do
         pcall(config[module].after)
     end
 end
--- vim: fdl=0
