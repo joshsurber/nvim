@@ -46,5 +46,6 @@ map("n", "<leader>q", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 -- map("n", "QQ", ":q<cr>")
 
 map("n", "<C-q>", ":q<cr>") -- Access `qq` macro
-map("n", "<leader>e", ":Lex<cr>")
-map("n", "<leader>E", ":Lex<cr>")
+map("n", "<leader>e", ":Lex<cr>", { desc = "Toggle NETRW file explorer" })
+map("n", "<leader>E", ":Lex<cr>", { desc = "Toggle NETRW file explrer" })
+map("n", "<leader>;", "^:s/\\~/&\\r/ge<cr>ggVG:s/HL\\*1\\*/\\r&/ge<cr>gg:set ft=x12<cr>", { desc = "Format X12" })

@@ -58,7 +58,7 @@ if exists("b:segdl")
    set textwidth=0
    set wrapmargin=0
    set formatoptions-=t
-   exe 'set breakat=\' . segdl
+   exe 'set breakat=\' . b:segdl
    map j gj
    map <Down> gj
    map k gk
