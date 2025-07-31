@@ -22,7 +22,7 @@ vim.o.softtabstop = -1 -- If negative shiftwidth value is used
 vim.o.swapfile = false -- How often does vim crash anyway?
 vim.o.tabstop = 4 -- Spaces a tab is worth
 vim.o.timeoutlen = 500 -- MS to wait for mapping to complete
--- vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Save undo history
+vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Save undo history
 vim.o.wildignorecase = true -- Case insensitive completion
 
 vim.g.mapleader = " "

@@ -8,6 +8,7 @@ local modules = {
     "ai", -- Extend and create `a`/`i` textobjects                 -- miniai
     "align", -- Align text interactively                              -- minialign
     "basics", -- Common config presets                                 -- minibasics
+    "bracketed", -- Go forward/backward with square brackets              -- minibracketed
     "bufremove", -- Remove buffers                                        -- minibufremove
     "clue", -- Show next key clues                                   -- miniclue
     "completion", -- Completion and signature help                         -- minicompletion
@@ -36,15 +37,14 @@ local modules = {
     "tabline", -- Tabline                                               -- minitabline
     "visits", -- Track and reuse file system visits                    -- minivisits
     -- "base16" ,           -- Base16 colorscheme creation                           -- minibase16
-    -- "bracketed",   -- Go forward/backward with square brackets              -- minibracketed
     -- "colors",            -- Tweak and save any color scheme                       -- minicolors
     -- "comment",     -- Comment                                               -- minicomment
     -- "doc" ,              -- Generate Neovim help files                            -- minidoc
     -- "fuzzy" ,            -- Fuzzy matching                                        -- minifuzzy
     -- "misc" ,             -- Miscellaneous functions                               -- minimisc
     -- "snippets", -- Manage and expand snippets                            -- minisnippets
-    -- "trailspace",  -- Trailspace (highlight and remove)                     -- minitrailspace
     -- "test" ,             -- Test Neovim plugins                                   -- minitest
+    -- "trailspace",  -- Trailspace (highlight and remove)                     -- minitrailspace
 }
 
 local config = {
