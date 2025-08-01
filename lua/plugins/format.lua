@@ -5,6 +5,8 @@ require("conform").setup({
         lua = { "stylua" },
         html = { "prettierd" },
         javascript = { "prettierd" },
+        json = { "prettierd" },
+        jsonc = { "prettierd" },
         css = { "prettierd" },
         ["*"] = { "codespell" },
         ["_"] = { "trim_whitespace" },
