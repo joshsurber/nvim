@@ -37,4 +37,12 @@ vim.keymap.set("n", "<leader>q", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 vim.keymap.set("n", "<C-q>", ":q<cr>") -- Access `qq` macro
 vim.keymap.set("n", "<leader>e", ":Lex<cr>", { desc = "Toggle NETRW file explorer" })
 vim.keymap.set("n", "<leader>E", ":Lex<cr>", { desc = "Toggle NETRW file explrer" })
-vim.keymap.set("n", "<leader>;", "^:s/\\~/&\\r/ge<cr>ggVG:s/HL\\*1\\*/\\r&/ge<cr>gg:set ft=x12<cr>", { desc = "Format X12" })
+vim.keymap.set(
+    "n",
+    "<leader>;",
+    "^:s/\\~/&\\r/ge<cr>ggVG:s/HL\\*1\\*/\\r&/ge<cr>gg:set ft=x12<cr>",
+    { desc = "Format X12" }
+)
+-- Multiword step by step repeated editing
+vim.keymap.set("n", "<C-d>", "*Ncgn")
+vim.keymap.set("x", "<C-d>", [[y/\V<C-R>=escape(@", '/\')<CR><CR>Ncgn]])
