@@ -4,61 +4,60 @@ if not vim.g.neovide then
 end
 
 local modules = {
-
-    "ai", -- Extend and create `a`/`i` textobjects                 -- miniai
-    "align", -- Align text interactively                              -- minialign
-    "basics", -- Common config presets                                 -- minibasics
-    "bracketed", -- Go forward/backward with square brackets              -- minibracketed
-    "bufremove", -- Remove buffers                                        -- minibufremove
-    "clue", -- Show next key clues                                   -- miniclue
-    "completion", -- Completion and signature help                         -- minicompletion
-    "cursorword", -- Autohighlight word under cursor                       -- minicursorword
-    "deps", -- Plugin manager                                        -- minideps
-    "diff", -- Work with diff hunks                                  -- minidiff
-    "extra", -- Extra mini.nvim functionality                         -- miniextra
-    "files", -- Navigate and manipulate file system                   -- minifiles
-    "git", -- Git integration                                       -- minigit
-    "hipatterns", -- Highlight patterns in text                            -- minihipatterns
-    "icons", -- Icon provider                                         -- miniicons
-    "indentscope", -- Visualize and operate on indent scope                 -- miniindentscope
-    "jump", -- Jump forward/backward to a single character           -- minijump
-    "jump2d", -- Jump within visible lines                             -- minijump2d
-    "map", -- Window with buffer text overview                      -- minimap
-    "move", -- Move any selection in any direction                   -- minimove
-    "notify", -- Show notifications                                    -- mininotify
-    "operators", -- Text edit operators                                   -- minioperators
-    "pairs", -- Autopairs                                             -- minipairs
-    "pick", -- Pick anything                                         -- minipick
-    "sessions", -- Session management                                    -- minisessions
-    "splitjoin", -- Split and join arguments                              -- minisplitjoin
-    "starter", -- Start screen                                          -- ministarter
-    "statusline", -- Statusline                                            -- ministatusline
-    "surround", -- Surround actions                                      -- minisurround
-    "tabline", -- Tabline                                               -- minitabline
-    "visits", -- Track and reuse file system visits                    -- minivisits
-    -- "base16" ,           -- Base16 colorscheme creation                           -- minibase16
-    -- "colors",            -- Tweak and save any color scheme                       -- minicolors
-    -- "comment",     -- Comment                                               -- minicomment
-    -- "doc" ,              -- Generate Neovim help files                            -- minidoc
-    -- "fuzzy" ,            -- Fuzzy matching                                        -- minifuzzy
-    -- "misc" ,             -- Miscellaneous functions                               -- minimisc
-    -- "snippets", -- Manage and expand snippets                            -- minisnippets
-    -- "test" ,             -- Test Neovim plugins                                   -- minitest
-    -- "trailspace",  -- Trailspace (highlight and remove)                     -- minitrailspace
+    "ai", -- Extend and create `a`/`i` textobjects
+    "align", -- Align text interactively
+    "basics", -- Common config presets
+    "bracketed", -- Go forward/backward with square brackets
+    "bufremove", -- Remove buffers
+    "clue", -- Show next key clues
+    "cursorword", -- Autohighlight word under cursor
+    "deps", -- Plugin manager
+    "diff", -- Work with diff hunks
+    "files", -- Navigate and manipulate file system
+    "git", -- Git integration
+    "hipatterns", -- Highlight patterns in text
+    "icons", -- Icon provider
+    "indentscope", -- Visualize and operate on indent scope
+    "jump", -- Jump forward/backward to a single character
+    "jump2d", -- Jump within visible lines
+    "move", -- Move any selection in any direction
+    "notify", -- Show notifications
+    "pairs", -- Autopairs
+    "pick", -- Pick anything
+    "sessions", -- Session management
+    "splitjoin", -- Split and join arguments
+    "starter", -- Start screen
+    "statusline", -- Statusline
+    "surround", -- Surround actions
+    "tabline", -- Tabline
+    -- "base16" , -- Base16 colorscheme creation
+    -- "colors", -- Tweak and save any color scheme
+    -- "comment", -- Comment
+    -- "completion", -- Completion and signature help
+    -- "doc" , -- Generate Neovim help files
+    -- "extra", -- Extra mini.nvim functionality
+    -- "fuzzy" , -- Fuzzy matching
+    -- "map", -- Window with buffer text overview
+    -- "misc" , -- Miscellaneous functions
+    -- "operators", -- Text edit operators
+    -- "snippets", -- Manage and expand snippets
+    -- "test" , -- Test Neovim plugins
+    -- "trailspace", -- Trailspace (highlight and remove)
+    -- "visits", -- Track and reuse file system visits
 }
 
 local config = {
     basics = {
         options = {
-            extra_ui = true,
+            -- extra_ui = true,
             -- win_borders = 'default',
         },
         mappings = {
             -- windows = true,       -- Window navigation with <C-hjkl>, resize with <C-arrow>
-            move_with_alt = true, -- Move cursor in Insert, Command, and Terminal mode with <M-hjkl>
+            -- move_with_alt = true, -- Move cursor in Insert, Command, and Terminal mode with <M-hjkl>
         },
         autocommands = {
-            -- relnum_in_visual_mode = false,
+            relnum_in_visual_mode = true,
         },
     },
     bufremove = {
@@ -130,9 +129,9 @@ local config = {
             { mode = "i", keys = "<C-x><C-s>", desc = "Spelling suggestions" },
             { mode = "i", keys = "<C-x><C-u>", desc = "With 'completefunc'" },
             { mode = "n", keys = "<leader>f", desc = "Find with MiniPick" },
-            { mode = "n", keys = "<leader>g", desc = "Git" },
+            -- { mode = "n", keys = "<leader>g", desc = "Git" },
             -- { mode = "n", keys = "<leader>l",  desc = "LSP" },
-            { mode = "n", keys = "<leader>m", desc = "MiniMap" },
+            -- { mode = "n", keys = "<leader>m", desc = "MiniMap" },
             { mode = "n", keys = "<leader>p", desc = "Pick stuff" },
             { mode = "n", keys = "<leader>v", desc = "Vim config" },
         },
