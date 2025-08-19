@@ -7,7 +7,7 @@ require("plugins.colorschemes")
 require("plugins.lsp")
 require("plugins.tmux")
 require("plugins.treesitter")
-require("plugins/format")
+require("plugins.format")
 
 -- require("plugins.toggleterm")
 require("plugins.lazygit")
