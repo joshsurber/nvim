@@ -9,6 +9,7 @@ require("conform").setup({
         json = prettier,
         jsonc = prettier,
         css = prettier,
+        toml = { "taplo" },
         sh = { "shfmt" },
         bash = { "shfmt" },
         ["*"] = { "codespell" },
