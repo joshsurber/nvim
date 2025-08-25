@@ -2,7 +2,7 @@ local add = require("mini.deps").add
 add("mini.nvim")
 add("github/copilot.vim")
 
-require("plugins.mini")
+require("plugins.minnie")
 require("plugins.colorschemes")
 require("plugins.lsp")
 require("plugins.tmux")
