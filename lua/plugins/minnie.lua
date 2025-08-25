@@ -3,7 +3,7 @@ if not vim.g.neovide then
 end
 
 require("mini.ai").setup() -- Extend and create `a`/`i` textobjects
-require("mini.align").setup() -- Align text interactively
+-- require("mini.align").setup() -- Align text interactively
 -- require("mini.base16").setup() -- Base16 colorscheme creation
 require("mini.basics").setup({ -- Common config presets{{{
     options = {
@@ -109,8 +109,8 @@ require("mini.deps").setup() -- Plugin manager{{{
 vim.keymap.set("n", "<leader>vp", require("mini.deps").update, { desc = "Sync plugins" }) -- }}}
 require("mini.diff").setup({ -- Work with diff hunks{{{
     view = {
-        -- style = 'sign',
-        signs = { add = "+", change = "~", delete = "-" },
+        -- style = "sign",
+        signs = { add = "+", change = "!", delete = "-" },
     },
     -- Module mappings. Use `''` (empty string) to disable one.
     mappings = {
@@ -310,7 +310,7 @@ end, { desc = "Switch session" })
 -- vim.keymap.set("i", "<Tab>", expand_or_jump, { expr = true })
 -- vim.keymap.set("i", "<S-Tab>", jump_prev)
 -- -- }}}
-require("mini.splitjoin").setup() -- Split and join arguments
+-- require("mini.splitjoin").setup() -- Split and join arguments
 require("mini.starter").setup() -- Start screen
 require("mini.statusline").setup() -- Statusline
 require("mini.surround").setup() -- Surround actions
