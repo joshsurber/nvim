@@ -5,11 +5,11 @@ o.confirm = true -- Instead of failing a command because of unsaved changes rais
 o.dictionary = "/usr/share/dict/words"
 o.expandtab = true -- Use spaces instead of tabs
 -- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
--- o.foldcolumn = "auto"
--- o.foldlevel = 99
--- o.foldlevelstart = 1
--- o.foldnestmax = 3
--- o.foldtext = ""
+o.foldcolumn = "auto"
+o.foldlevel = 99
+o.foldlevelstart = 1
+o.foldnestmax = 3
+o.foldtext = ""
 o.guifont = "Cascadia Code NF:h9" -- For Neovide etc
 -- guifont = "CaskaydiaCove NF:h9" -- For Neovide etc
 -- o.keywordprg = ":help" -- 'K' searches vim docs
