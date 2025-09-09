@@ -103,7 +103,7 @@ require("mini.clue").setup({ -- Show next key clues{{{
 -- imap_expr("<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
 -- imap_expr("<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
 -- imap_expr("<CR>", [[pumvisible() ? "\<C-y>" : "\<CR>"]])
--- }}}
+-- -- }}}
 require("mini.cursorword").setup() -- Autohighlight word under cursor
 require("mini.deps").setup() -- Plugin manager{{{
 vim.keymap.set("n", "<leader>vp", require("mini.deps").update, { desc = "Sync plugins" }) -- }}}
@@ -131,6 +131,7 @@ require("mini.files").setup({ -- Navigate and manipulate file system{{{
         go_in_plus = "I",
     },
 })
+
 -- Show/hide filexplorer
 local minifiles_toggle = function(...)
     if not MiniFiles.close() then
@@ -169,6 +170,7 @@ require("mini.git").setup({ -- Git integration{{{
         split = "horizontal",
     },
 })
+
 local function lmap(mode, l, r, opts)
     local leader = "<leader>g"
     l = leader .. l
@@ -320,7 +322,7 @@ require("mini.tabline").setup() -- Tabline
 -- -- Delete trailing space on write
 -- vim.api.nvim_create_autocmd("BufWritePre", { callback = MiniTrailspace.trim })
 -- vim.api.nvim_create_autocmd("BufWritePre", { callback = MiniTrailspace.trim_last_lines })
--- }}}
+-- -- }}}
 -- require("mini.visits").setup() -- Track and reuse file system visits
 
 -- vim: fdm=marker fdl=0
