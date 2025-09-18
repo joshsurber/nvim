@@ -15,20 +15,20 @@ vim.g.lazygit_config_file_path = {} -- table of custom config file paths
 vim.g.lazygit_on_exit_callback = nil -- optional function callback when exiting lazygit (useful for example to refresh some UI elements after lazy git has made some changes)
 
 -- Same binding I use in tmux
-vim.keymap.set("n", "<C-t><C-y>", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+vim.keymap.set("n", "<C-space><C-y>", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
 local lazygit = function()
-	--  get file name with extension
-	local file = vim.fn.expand("%:t")
-	vim.cmd("LazyGit")
+    --  get file name with extension
+    local file = vim.fn.expand("%:t")
+    vim.cmd("LazyGit")
 
-	-- Wait a bit for LazyGit to load
-	vim.defer_fn(function()
-		-- search for the file, highlight, and exit search mode in lazygit
-		vim.api.nvim_feedkeys("/" .. file, "t", true)
-		vim.api.nvim_input("<CR>")
-		vim.api.nvim_input("<ESC>")
-	end, 150) -- (milliseconds)
+    -- Wait a bit for LazyGit to load
+    vim.defer_fn(function()
+        -- search for the file, highlight, and exit search mode in lazygit
+        vim.api.nvim_feedkeys("/" .. file, "t", true)
+        vim.api.nvim_input("<CR>")
+        vim.api.nvim_input("<ESC>")
+    end, 150) -- (milliseconds)
 end
 -- vim.keymap.set("n", "<leader>lg", lazygit, { desc = "LazyGit" })
 -- vim.keymap.set("n", "<leader>gl", lazygit, { desc = "LazyGit" })
