@@ -89,21 +89,21 @@ require("mini.clue").setup({ -- Show next key clues{{{
     },
 }) -- }}}
 -- require("mini.comment").setup() -- Comment
--- require("mini.completion").setup({ -- Completion and signature help{{{
---     lsp_completion = {
---         source_func = "omnifunc",
---         -- source_func = "completefunc",
---     },
---     after = function() end,
--- })
--- local imap_expr = function(lhs, rhs)
---     vim.keymap.set("i", lhs, rhs, { expr = true })
--- end
---
--- imap_expr("<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
--- imap_expr("<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
--- imap_expr("<CR>", [[pumvisible() ? "\<C-y>" : "\<CR>"]])
--- -- }}}
+require("mini.completion").setup({ -- Completion and signature help{{{
+    lsp_completion = {
+        source_func = "omnifunc",
+        -- source_func = "completefunc",
+    },
+    after = function() end,
+})
+local imap_expr = function(lhs, rhs)
+    vim.keymap.set("i", lhs, rhs, { expr = true })
+end
+
+imap_expr("<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
+imap_expr("<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
+imap_expr("<CR>", [[pumvisible() ? "\<C-y>" : "\<CR>"]])
+-- }}}
 require("mini.cursorword").setup() -- Autohighlight word under cursor
 require("mini.deps").setup() -- Plugin manager{{{
 vim.keymap.set("n", "<leader>vp", require("mini.deps").update, { desc = "Sync plugins" }) -- }}}
