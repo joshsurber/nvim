@@ -40,9 +40,10 @@ vim.keymap.set("n", "<leader>E", ":Lex<cr>", { desc = "Toggle NETRW file explrer
 vim.keymap.set(
     "n",
     "<leader>;",
-    "^:s/\\~/&\\r/ge<cr>ggVG:s/HL\\*1\\*/\\r&/ge<cr>gg:set ft=x12<cr>",
+    "^:s/\\~/&\\r/ge<cr>ggVG:s/^HL\\*/\\r&/ge<cr>gg:set ft=x12<cr>",
     { desc = "Format X12" }
 )
+vim.keymap.set("n", '<leader>"', ":ed ~/Downloads<cr>", { desc = "Open downloads" })
 -- Multiword step by step repeated editing
 vim.keymap.set("n", "<C-d>", "*Ncgn")
 vim.keymap.set("x", "<C-d>", [[y/\V<C-R>=escape(@", '/\')<CR><CR>Ncgn]])
