@@ -1,11 +1,15 @@
 local add = require("mini.deps").add
 add("stevearc/conform.nvim")
 local prettier = { "prettierd", "prettier", stop_after_first = true }
+local biome = { "biome", "biome-organize-imports" }
 require("conform").setup({
     formatters_by_ft = {
         lua = { "stylua" },
         html = prettier,
         javascript = prettier,
+        javascriptreact = prettier,
+        typescript = prettier,
+        typescriptreact = prettier,
         json = prettier,
         jsonc = prettier,
         css = prettier,
