@@ -1,8 +1,3 @@
--- Change CWD to current file's directory
-vim.api.nvim_create_user_command("CD", function()
-    vim.cmd.cd(vim.fn.expand("%:h"))
-end, {})
-
 -- Help window on right, navigate helptags with enter and backspace
 vim.api.nvim_create_autocmd("BufWinEnter", {
     pattern = { "*.txt" },
@@ -15,6 +10,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
         vim.keymap.set("n", "<BS>", "<C-T>", { noremap = true, silent = true, buffer = true })
     end,
 })
+
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "LSP actions",
     callback = function(event)
