@@ -59,8 +59,4 @@ if exists("b:segdl")
    set wrapmargin=0
    set formatoptions-=t
    exe 'set breakat=\' . b:segdl
-   map j gj
-   map <Down> gj
-   map k gk
-   map <Up> gk
 endif
