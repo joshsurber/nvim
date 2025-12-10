@@ -88,6 +88,7 @@ require("mini.clue").setup({ -- Show next key clues{{{
         { mode = "n", keys = "<leader>v", desc = "Vim config" },
     },
 }) -- }}}
+require("mini.cmdline").setup()
 -- require("mini.comment").setup() -- Comment
 require("mini.completion").setup({ -- Completion and signature help{{{
     lsp_completion = {
