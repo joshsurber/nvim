@@ -40,7 +40,8 @@ vim.keymap.set("n", "<leader>E", ":Lex<cr>", { desc = "Toggle NETRW file explrer
 vim.keymap.set(
     "n",
     "<leader>;",
-    "^:s/\\~/&\\r/ge<cr>ggVG:s/^HL\\*/\\r&/ge<cr>gg:set ft=x12<cr>",
+    -- "^:s/\\~/&\\r/ge<cr>ggVG:s/^HL\\*/\\r&/ge<cr>gg:set ft=x12<cr>",
+    ":set ft=x12<cr>",
     { desc = "Format X12" }
 )
 vim.keymap.set("n", '<leader>"', ":ed ~/Downloads<cr>", { desc = "Open downloads" })

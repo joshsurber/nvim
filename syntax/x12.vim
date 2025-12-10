@@ -24,6 +24,8 @@ let b:subdl = b:ISA[104:104]
 " otherwsise assume the delimiter is a line feed.
 if strlen(b:ISA) > 105
    let b:segdl = b:ISA[105:105]
+   %s/\~/&\r/g
+   %s/^HL/\r&/g
 endif
 
 exe 'syn match x12ElmDelimiter "\v\' . b:elmdl . '"'
