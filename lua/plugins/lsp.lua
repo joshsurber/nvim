@@ -34,7 +34,23 @@ vim.keymap.set(
 )
 
 require("mason").setup({})
-require("mason-lspconfig").setup({})
+require("mason-lspconfig").setup({
+    ensure_installed = {
+        "lua_ls",
+        "bashls",
+        "codespell",
+        "cssls",
+        "emmet_language_server",
+        "fish_lsp",
+        "html",
+        "hyprls",
+        "prettierd",
+        "shfmt",
+        "stylua",
+        "taplo",
+        "ts_ls",
+    },
+})
 
 vim.o.winborder = "rounded"
 vim.diagnostic.config({
