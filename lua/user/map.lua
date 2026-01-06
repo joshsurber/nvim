@@ -1,5 +1,8 @@
 -- local map = vim.keymap.set
 
+-- For on my laptop keeb: I'm spoiled by ctrl/esc on my caps lock
+vim.keymap.set({ "n", "i", "v" }, "<C-o>", "<Esc>")
+
 -- Command line conveniences
 vim.keymap.set("c", "%%", "<C-R>=expand('%:h').'/'<cr>") -- expand %% to current directory in command-line mode
 vim.keymap.set("t", "<C-w>", "<C-\\><C-n><C-w>")
