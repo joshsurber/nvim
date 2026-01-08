@@ -13,7 +13,7 @@ add({ -- treesitter
     },
 })
 
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter").setup({
     build = ":TSUpdate",
     auto_install = true,
     indent = { enable = true },
