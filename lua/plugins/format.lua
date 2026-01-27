@@ -16,6 +16,7 @@ require("conform").setup({
         css = prettier,
         toml = { "taplo" },
         sh = { "shfmt" },
+        fish = { "fish_indent" },
         bash = { "shfmt" },
         ["*"] = { "codespell" },
         ["_"] = { "trim_whitespace" },
