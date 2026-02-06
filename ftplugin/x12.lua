@@ -40,7 +40,7 @@ if stat.size <= max_file_size then
     end
 
     -- Optional toggle
-    vim.keymap.set("n", "<leader>v~", function()
+    vim.keymap.set("n", "<leader>aa", function()
         vim.opt_local.wrap = not vim.opt_local.wrap
     end, { buffer = true, desc = "Toggle virtual ~ line breaks" })
 end
@@ -89,17 +89,24 @@ local function pretty_x12_preview()
     print("X12 Pretty Preview applied (undo to restore original)")
 end
 
--- Map to <leader>p
+-- ftplugin/x12.lua
+local viewer = require("x12.viewer")
+
+vim.keymap.set("n", "<leader>ap", pretty_x12_preview, {
+    buffer = true,
+    desc = "X12: pretty segment preview",
+})
+
 vim.keymap.set("n", "<leader>;", pretty_x12_preview, {
     buffer = true,
     desc = "X12: pretty segment preview",
 })
 
--- ftplugin/x12.lua
-local viewer = require("x12.viewer")
-
--- Map <leader>v for virtual preview
-vim.keymap.set("n", "<leader>vv", function()
+vim.keymap.set("n", "<leader>av", function()
     viewer.preview(0)
     print("X12 virtual preview applied")
 end, { buffer = true, desc = "X12 virtual preview" })
+
+vim.keymap.set("n", "<leader>ab", function()
+    vim.cmd([[keepjumps %s/~/~\r/ge]])
+end, { buffer = true, desc = "X12: break segments on ~" })
