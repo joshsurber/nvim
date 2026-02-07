@@ -19,3 +19,6 @@ require("mini.deps").setup({ path = { package = path_package } })
 
 require("user")
 require("plugins")
+if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+    require("user.windows")
+end
