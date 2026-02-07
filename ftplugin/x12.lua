@@ -1,37 +1,52 @@
 -- ftplugin/x12.lua
+-- X12 EDI support for Neovim
+-- Handles small and large files, virtual vs real line breaks, fast HL indent/folding
 
--- Limit for virtual line breaking
-local max_file_size = 1024 * 1024 -- 1 MB
+local max_file_size = 1024 * 1024 -- 1 MB threshold
 
-local bufname = vim.api.nvim_buf_get_name(0)
+-- buffer info
+local buf = 0
+local bufname = vim.api.nvim_buf_get_name(buf)
 local ok, stat = pcall(vim.loop.fs_stat, bufname)
 if not ok or not stat then
     return
 end
+local is_large = stat.size >= max_file_size
 
--- Lua indent
+-- =============================
+-- Indent and folding
+-- =============================
 vim.opt_local.indentexpr = "v:lua.require'indent.x12'.get_indent(v:lnum)"
 vim.opt_local.indentkeys = "0{,0},0),0],:,!^F,o,O,e"
 vim.opt_local.autoindent = true
 vim.opt_local.smartindent = false
 
--- Syntax enable
+vim.opt_local.foldmethod = "expr"
+vim.opt_local.foldexpr = "v:lua.require'indent.x12'.get_indent(v:lnum)"
+vim.opt_local.foldlevel = 1
+vim.opt_local.foldenable = true
+
+-- =============================
+-- Syntax
+-- =============================
 vim.cmd("syntax enable")
 
--- Soft wrap / virtual breaks on ~ for small files
-if stat.size <= max_file_size then
+-- =============================
+-- Small file: virtual line breaks
+-- =============================
+if not is_large then
     vim.opt_local.wrap = true
     vim.opt_local.linebreak = true
     vim.opt_local.showbreak = " "
     vim.opt_local.conceallevel = 2
 
     local ns = vim.api.nvim_create_namespace("x12_virtual_segments")
-    vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+    vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
 
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
     for i, line in ipairs(lines) do
         for s, e in line:gmatch("()~()") do
-            vim.api.nvim_buf_set_extmark(0, ns, i - 1, e - 1, {
+            vim.api.nvim_buf_set_extmark(buf, ns, i - 1, e - 1, {
                 virt_text = { { "", "Normal" } },
                 virt_text_pos = "overlay",
                 hl_mode = "combine",
@@ -39,73 +54,57 @@ if stat.size <= max_file_size then
         end
     end
 
-    -- Optional toggle
+    -- toggle virtual breaks
     vim.keymap.set("n", "<leader>aa", function()
         vim.opt_local.wrap = not vim.opt_local.wrap
     end, { buffer = true, desc = "Toggle virtual ~ line breaks" })
 end
 
--- =====================================
--- X12 Pretty Preview (temporary)
--- =====================================
+-- =============================
+-- Large file: real line splits
+-- =============================
+local function large_file_split()
+    local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+    local text = table.concat(lines, "\n")
 
+    -- newline after each segment terminator
+    text = text:gsub("~", "~\n")
+
+    -- extra blank line before HL segments
+    text = text:gsub("\nHL%*", "\n\nHL*")
+
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(text, "\n", { plain = true }))
+end
+
+if is_large then
+    -- optional: disable Treesitter for large files
+    vim.treesitter.stop(buf)
+    large_file_split()
+end
+
+-- =============================
+-- Pretty preview for manual toggle
+-- =============================
 local function pretty_x12_preview()
-    local buf = 0
-    local ns_preview = vim.api.nvim_create_namespace("x12_preview")
-    vim.api.nvim_buf_clear_namespace(buf, ns_preview, 0, -1)
-
-    -- Save original cursor & view
     local cursor = vim.api.nvim_win_get_cursor(0)
     local view = vim.fn.winsaveview()
 
-    -- Temporarily split segments on ~
-    local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-    local new_lines = {}
-    for _, line in ipairs(lines) do
-        -- Split at ~ and keep ~ at the end of each segment
-        for seg in line:gmatch("([^~]*~?)") do
-            if seg ~= "" then
-                table.insert(new_lines, seg)
-            end
-        end
+    if is_large then
+        large_file_split()
+        print("X12 Pretty Preview applied (large-file mode)")
+    else
+        print("X12 Pretty Preview applied (small-file mode, virtual ~ lines)")
     end
 
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, new_lines)
-
-    -- Re-apply syntax highlighting (optional but safer)
-    vim.cmd("syntax enable")
-    vim.cmd("filetype detect")
-
-    -- Optional: fold HL hierarchies
-    vim.opt_local.foldmethod = "expr"
-    vim.opt_local.foldexpr = "v:lua.require'indent.x12'.get_indent(v:lnum)"
-    vim.opt_local.foldlevel = 1
-    vim.opt_local.foldenable = true
-
-    -- Restore cursor/view
     vim.api.nvim_win_set_cursor(0, cursor)
     vim.fn.winrestview(view)
-
-    print("X12 Pretty Preview applied (undo to restore original)")
 end
 
--- ftplugin/x12.lua
-local viewer = require("x12.viewer")
-
-vim.keymap.set("n", "<leader>ap", pretty_x12_preview, {
-    buffer = true,
-    desc = "X12: pretty segment preview",
-})
-
-vim.keymap.set("n", "<leader>;", pretty_x12_preview, {
-    buffer = true,
-    desc = "X12: pretty segment preview",
-})
-
-vim.keymap.set("n", "<leader>av", function()
-    viewer.preview(0)
-    print("X12 virtual preview applied")
-end, { buffer = true, desc = "X12 virtual preview" })
+-- =============================
+-- Keymaps
+-- =============================
+vim.keymap.set("n", "<leader>ap", pretty_x12_preview, { buffer = true, desc = "X12: pretty segment preview" })
+vim.keymap.set("n", "<leader>;", pretty_x12_preview, { buffer = true, desc = "X12: pretty segment preview" })
 
 vim.keymap.set("n", "<leader>ab", function()
     vim.cmd([[keepjumps %s/~/~\r/ge]])
