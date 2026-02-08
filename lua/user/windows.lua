@@ -35,3 +35,34 @@ vim.api.nvim_create_autocmd("FileType", {
         pcall(vim.treesitter.start)
     end,
 })
+
+local pick = require("mini.pick")
+
+local dirs = {
+    {
+        name = "Espanso",
+        path = "~/OneDrive - Office Ally Inc/Apps/Espanso-Win-Portable-x86_64/espanso-portable/.espanso/match",
+    },
+    { name = "OAWA", path = "~/OneDrive - Office Ally Inc/Documents/OAWA" },
+    { name = "Downloads", path = "~/Downloads" },
+    { name = "Config", path = "~/AppData/Local/nvim/" },
+}
+
+local function pick_cwd()
+    pick.start({
+        source = {
+            items = dirs,
+            name = "Change directory",
+            choose = function(item)
+                if not item then
+                    return
+                end
+                vim.cmd.cd(vim.fn.expand(item.path))
+                vim.notify("cwd → " .. vim.fn.getcwd())
+            end,
+        },
+    })
+end
+
+-- Optional keymap
+vim.keymap.set("n", "<leader>cd", pick_cwd, { desc = "Pick cwd" })

@@ -1,6 +1,7 @@
 -- ftplugin/x12.lua
 -- X12 EDI support for Neovim
 -- Handles small and large files, virtual vs real line breaks, fast HL indent/folding
+-- Adds STC visual status highlighting + inline explanations for 277CA
 
 local max_file_size = 1024 * 1024 -- 1 MB threshold
 
@@ -32,6 +33,87 @@ vim.opt_local.foldenable = true
 vim.cmd("syntax enable")
 
 -- =============================
+-- STC highlighting (277CA)
+-- =============================
+
+-- Highlight groups
+-- vim.api.nvim_set_hl(0, "X12STC_Accepted", { fg = "#4CAF50", bold = truelaim Control Number
+-- vim.api.nvim_set_hl(0, "X12STC_Info", { fg = "#FFC107", bold = true })
+-- vim.api.nvim_set_hl(0, "X12STC_Bad", { fg = "#F44336", bold = true })
+
+-- vim.api.nvim_set_hl(0, "X12STC_Accepted", { bg = "#1B5E20", fg = "white", bold = true })
+-- vim.api.nvim_set_hl(0, "X12STC_Info",     { bg = "#F9A825", fg = "black", bold = true })
+-- vim.api.nvim_set_hl(0, "X12STC_Bad",      { bg = "#B71C1C", fg = "white", bold = true })
+
+vim.api.nvim_set_hl(0, "X12STC_Accepted", { bg = "#1B5E20", fg = "white", bold = true })
+vim.api.nvim_set_hl(0, "X12STC_Info", { bg = "#F9A825", fg = "white", bold = true })
+vim.api.nvim_set_hl(0, "X12STC_Bad", { bg = "#B71C1C", fg = "white", bold = true })
+vim.api.nvim_set_hl(0, "X12STC_Accepted_Dim", { bg = "#2E7D32", fg = "white" })
+vim.api.nvim_set_hl(0, "X12STC_Info_Dim", { bg = "#FFF59D", fg = "white" })
+vim.api.nvim_set_hl(0, "X12STC_Bad_Dim", { bg = "#E57373", fg = "white" })
+
+-- Match rules
+-- vim.fn.matchadd("X12STC_Accepted", [[^STC\*A1:19]])
+-- vim.fn.matchadd("X12STC_Info",     [[^STC\*A0]])
+-- vim.fn.matchadd("X12STC_Bad",      [[^STC\*A[2367]]])
+vim.fn.matchadd("X12STC_Accepted", "^STC\\*A1.*2000E")
+vim.fn.matchadd("X12STC_Info", "^STC\\*A0.*2000E")
+vim.fn.matchadd("X12STC_Bad", "^STC\\*A[^01].*2000E")
+vim.fn.matchadd("X12STC_Accepted_Dim", "^STC\\*A1")
+vim.fn.matchadd("X12STC_Info_Dim", "^STC\\*A0")
+vim.fn.matchadd("X12STC_Bad_Dim", "^STC\\*A[^01]")
+
+-- =============================
+-- STC virtual text explanations
+-- =============================
+
+local stc_ns = vim.api.nvim_create_namespace("x12_stc")
+
+local stc_meanings = {
+    A0 = "Received / informational only",
+    A1 = "Accepted for adjudication",
+    A2 = "Rejected",
+    A3 = "Returned; correction required",
+    A6 = "Acknowledgement error",
+    A7 = "Response error",
+}
+
+local function explain_stc()
+    vim.api.nvim_buf_clear_namespace(buf, stc_ns, 0, -1)
+
+    for lnum = 0, vim.api.nvim_buf_line_count(buf) - 1 do
+        local line = vim.api.nvim_buf_get_lines(buf, lnum, lnum + 1, false)[1]
+        local cat, code = line:match("^STC%*(%w+):(%d+)")
+
+        if cat and code then
+            -- local msg = stc_meanings[cat] or "Unknown status"
+            local msg = (stc_meanings[cat] or "Unknown status")
+            local loop = line:match("2000E") and "Claim level"
+                or line:match("2000D") and "Subscriber level"
+                or line:match("2000C") and "Provider level"
+                or "Envelope level"
+            msg = msg .. " (" .. loop .. ")"
+
+            if cat == "A1" and code == "19" then
+                msg = msg .. " (GOOD)"
+            elseif code:match("^7") then
+                msg = msg .. " (ERROR)"
+            end
+
+            vim.api.nvim_buf_set_extmark(buf, stc_ns, lnum, 0, {
+                virt_text = { { "← " .. msg, "Comment" } },
+                virt_text_pos = "eol",
+            })
+        end
+    end
+end
+
+vim.api.nvim_create_autocmd({ "BufEnter", "TextChanged", "TextChangedI" }, {
+    buffer = buf,
+    callback = explain_stc,
+})
+
+-- =============================
 -- Small file: virtual line breaks
 -- =============================
 if not is_large then
@@ -45,7 +127,7 @@ if not is_large then
 
     local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
     for i, line in ipairs(lines) do
-        for s, e in line:gmatch("()~()") do
+        for _, e in line:gmatch("()~()") do
             vim.api.nvim_buf_set_extmark(buf, ns, i - 1, e - 1, {
                 virt_text = { { "", "Normal" } },
                 virt_text_pos = "overlay",
@@ -77,7 +159,6 @@ local function large_file_split()
 end
 
 if is_large then
-    -- optional: disable Treesitter for large files
     vim.treesitter.stop(buf)
     large_file_split()
 end
