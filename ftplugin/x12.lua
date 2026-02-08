@@ -89,10 +89,11 @@ local function pretty_x12_preview()
     local cursor = vim.api.nvim_win_get_cursor(0)
     local view = vim.fn.winsaveview()
 
+    large_file_split()
     if is_large then
-        large_file_split()
         print("X12 Pretty Preview applied (large-file mode)")
     else
+        vim.opt_local.wrap = true
         print("X12 Pretty Preview applied (small-file mode, virtual ~ lines)")
     end
 
@@ -103,9 +104,8 @@ end
 -- =============================
 -- Keymaps
 -- =============================
-vim.keymap.set("n", "<leader>ap", pretty_x12_preview, { buffer = true, desc = "X12: pretty segment preview" })
 vim.keymap.set("n", "<leader>;", pretty_x12_preview, { buffer = true, desc = "X12: pretty segment preview" })
 
-vim.keymap.set("n", "<leader>ab", function()
-    vim.cmd([[keepjumps %s/~/~\r/ge]])
+vim.keymap.set("n", "<leader>:", function()
+    vim.cmd([[keepjumps %s/\~/\~\r/ge]])
 end, { buffer = true, desc = "X12: break segments on ~" })
