@@ -32,6 +32,7 @@ vim.keymap.set("n", "p", "p`]")
 vim.keymap.set("n", "<leader>x", ":.lua<cr>", { desc = "Execute current line in lua" })
 vim.keymap.set("v", "<leader>x", ":lua<cr>", { desc = "Execute selection in lua" })
 vim.keymap.set("n", "<leader>X", "<cmd>source %<cr>", { desc = "Shout it out" })
+vim.keymap.set("n", "<leader>vv", "<cmd>source $MYVIMRC<cr>", { desc = "Reload config" })
 
 -- Save and quit easier
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
