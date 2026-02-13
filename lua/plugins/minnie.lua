@@ -324,6 +324,29 @@ require("mini.tabline").setup() -- Tabline
 -- vim.api.nvim_create_autocmd("BufWritePre", { callback = MiniTrailspace.trim })
 -- vim.api.nvim_create_autocmd("BufWritePre", { callback = MiniTrailspace.trim_last_lines })
 -- -- }}}
--- require("mini.visits").setup() -- Track and reuse file system visits
+require("mini.visits").setup() -- Track and reuse file system vislaim Control Number{{{
+local function pick_visit_dir()
+    local visits = require("mini.visits")
+    local pick = require("mini.pick")
+    pick.start({
+        source = {
+            name = "Visited directories",
+            items = visits.list_paths({ sort = "last" }),
+            format = function(path)
+                -- show only the directory name
+                return vim.fn.fnamemodify(path, ":t")
+            end,
+            choose = function(path)
+                if not path then
+                    return
+                end
+                vim.cmd.cd(path)
+                vim.notify("cwd → " .. path)
+            end,
+        },
+    })
+end
 
+vim.keymap.set("n", "<leader>vd", pick_visit_dir, { desc = "Pick visited dir" })
+-- }}}
 -- vim: fdm=marker fdl=0
