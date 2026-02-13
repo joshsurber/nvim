@@ -45,20 +45,39 @@ local dirs = {
     },
     { name = "OAWA", path = "~/OneDrive - Office Ally Inc/Documents/OAWA" },
     { name = "Downloads", path = "~/Downloads" },
-    { name = "Config", path = "~/AppData/Local/nvim/" },
+    { name = "nvim", path = "~/AppData/Local/nvim/" },
 }
+
+-- local function pick_cwd()
+--     pick.start({
+--         source = {
+--             items = dirs,
+--             name = "Change directory",
+--             choose = function(item)
+--                 if not item then
+--                     return
+--                 end
+--                 vim.cmd.cd(vim.fn.expand(item.path))
+--                 vim.notify("cwd → " .. vim.fn.getcwd())
+--             end,
+--         },
+--     })
+-- end
 
 local function pick_cwd()
     pick.start({
         source = {
-            items = dirs,
             name = "Change directory",
+            items = dirs,
+            format = function(item)
+                -- expand ~ and get only the directory name
+                return item.name
+            end,
             choose = function(item)
                 if not item then
                     return
                 end
                 vim.cmd.cd(vim.fn.expand(item.path))
-                vim.notify("cwd → " .. vim.fn.getcwd())
             end,
         },
     })
