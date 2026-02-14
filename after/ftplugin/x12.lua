@@ -7,12 +7,17 @@ local max_file_size = 1024 * 1024 -- 1 MB threshold
 
 -- buffer info
 local buf = 0
+
 local bufname = vim.api.nvim_buf_get_name(buf)
-local ok, stat = pcall(vim.loop.fs_stat, bufname)
-if not ok or not stat then
-    return
+
+-- If buffer has no name yet, defer size detection
+local stat
+if bufname ~= "" then
+    local ok
+    ok, stat = pcall(vim.loop.fs_stat, bufname)
 end
-local is_large = stat.size >= max_file_size
+
+local is_large = stat and stat.size >= max_file_size
 
 -- =============================
 -- Indent and folding

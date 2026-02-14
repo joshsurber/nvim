@@ -1,4 +1,4 @@
--- after/ftdetect/x12.lua
+-- ftdetect/x12.lua
 vim.filetype.add({
     extension = {
         edi = "x12",
