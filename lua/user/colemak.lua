@@ -58,4 +58,6 @@ map("t", "<M-e>", "<Up>", { desc = "Up" })
 map("t", "<M-i>", "<Right>", { desc = "Right" })
 
 map("n", "<S-h>", ":bprev<cr>", { silent = true })
+map("n", "<S-n>", ":bprev<cr>", { silent = true })
+map("n", "<S-e>", ":bnext<cr>", { silent = true })
 map("n", "<S-i>", ":bnext<cr>", { silent = true })
