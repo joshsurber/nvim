@@ -61,10 +61,10 @@ vim.api.nvim_set_hl(0, "X12STC_Bad_Dim", { bg = "#E57373", fg = "white" })
 -- vim.fn.matchadd("X12STC_Accepted", [[^STC\*A1:19]])
 -- vim.fn.matchadd("X12STC_Info",     [[^STC\*A0]])
 -- vim.fn.matchadd("X12STC_Bad",      [[^STC\*A[2367]]])
-vim.fn.matchadd("X12STC_Accepted", "^STC\\*A1.*2000E")
+vim.fn.matchadd("X12STC_Accepted", "^STC\\*A2.*2000E")
 vim.fn.matchadd("X12STC_Info", "^STC\\*A0.*2000E")
 vim.fn.matchadd("X12STC_Bad", "^STC\\*A[^01].*2000E")
-vim.fn.matchadd("X12STC_Accepted_Dim", "^STC\\*A1")
+vim.fn.matchadd("X12STC_Accepted_Dim", "^STC\\*A2")
 vim.fn.matchadd("X12STC_Info_Dim", "^STC\\*A0")
 vim.fn.matchadd("X12STC_Bad_Dim", "^STC\\*A[^01]")
 
@@ -155,10 +155,12 @@ local function large_file_split()
     local text = table.concat(lines, "\n")
 
     -- newline after each segment terminator
-    text = text:gsub("~", "~\n")
+    -- text = text:gsub("~", "~\n")
+    text = text:gsub("~(.)", "~\n%1")
 
     -- extra blank line before HL segments
     text = text:gsub("\nHL%*", "\n\nHL*")
+    text = text:gsub("\nCLP%*", "\n\nCLP*")
 
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(text, "\n", { plain = true }))
 end
