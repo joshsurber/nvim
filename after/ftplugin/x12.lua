@@ -159,8 +159,10 @@ local function large_file_split()
     text = text:gsub("~(.)", "~\n%1")
 
     -- extra blank line before HL segments
-    text = text:gsub("\nHL%*", "\n\nHL*")
-    text = text:gsub("\nCLP%*", "\n\nCLP*")
+    -- text = text:gsub("\nHL%*", "\n\nHL*")
+    -- text = text:gsub("\nCLP%*", "\n\nCLP*")
+    text = text:gsub("\n(HL)([*|])", "\n\n%1%2")
+    text = text:gsub("\n(CLP)([*|])", "\n\n%1%2")
 
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(text, "\n", { plain = true }))
 end
