@@ -56,7 +56,9 @@ hi def link x12Envelope Statement
 execute 'syn match x12Provider "\%(^\|' . sep_e . '\)\zs\(N3\|N4\|PRV\)\ze' . sep_e . '"'
 execute 'syn match x12Provider "\%(^\|' . sep_e . '\)\zs\(NM1\|REF\)' . sep_e . '[^' . sep_e . ']\+\ze' . sep_e . '"'
 execute 'syn match x12Claim    "\%(^\|' . sep_e . '\)\zs\(CLP\|HI\|SV1\|SV2\|SVC\|CAS\|DTM\)\ze' . sep_e . '"'
+execute 'syn match x12Claim    "\%(^\|' . sep_e . '\)\zs\(DTP\|CAS\)' . sep_e . '[^' . sep_e . ']\+\ze' . sep_e . '"'
 execute 'syn match x12Status   "\%(^\|' . sep_e . '\)\zs\(STC\|AAA\|IK3\|IK4\|IK5\|AK3\|AK4\|AK5\)\ze' . sep_e . '"'
+execute 'syn match x12Status   "\%(^\|' . sep_e . '\)\zs\(SBR\)' . sep_e . '[^' . sep_e . ']\+\ze' . sep_e . '"'
 
 hi def link x12Provider Identifier
 hi def link x12Claim    Type
