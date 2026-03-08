@@ -124,7 +124,7 @@ require("mini.diff").setup({ -- Work with diff hunks{{{
 -- require("mini.fuzzy").setup() -- Fuzzy matching
 require("mini.files").setup({ -- Navigate and manipulate file system{{{
     windows = {
-        preview = true,
+        preview = false,
         width_preview = 50,
     },
     mappings = { -- Colemak
