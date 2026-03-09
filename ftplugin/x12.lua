@@ -146,33 +146,61 @@ vim.keymap.set("n", "<leader>:", function()
 end, { buffer = true, desc = "X12: break segments on ~" })
 
 -- =============================
--- PHI Redaction (prefix-based)
--- - Provide a list of prefix patterns using "." as a wildcard separator.
---   "." is intentionally a Lua wildcard so it matches both "*" and "|"
---   element separators (e.g. "NM1.IL." matches "NM1*IL*" and "NM1|IL|").
---   This is deliberate — not a bug.
--- - Visual mode: redact selection + copy redacted selection to system clipboard
--- - Normal mode: redact whole file, no clipboard copy
--- - fix #7: redact up to the next "~" so unsplit files don't eat the whole
---   rest of the line
+-- PHI Redaction
+-- Redacts the following fields:
+--   NM1*IL / NM1*QC  — last name (NM103) and first name (NM104) only;
+--                       all other elements including member ID are preserved
+--   DMG              — full segment content after the first separator
+--   N3               — full segment content (street address)
+--   REF*SY           — Social Security Number
+--   PER              — contact info (phone, email)
+--
+-- NM1 element positions:
+--   1=segment id, 2=qualifier, 3=last, 4=first, 5+=preserved
+--
+-- Implemented as an operator so it composes with any motion or text object:
+--   <leader>r<motion>   e.g. <leader>rip, <leader>r5j, <leader>rG
+--   <leader>rr          current line (doubled, like dd/yy)
+--   <visual><leader>r   visual selection
 -- =============================
-local redact_prefixes = {
-    "NM1.IL.",
-    "NM1.QC.",
-    "DMG.",
-    "N3.",
-    "N4.",
-}
 
 local function redact_line(line)
-    for _, prefix in ipairs(redact_prefixes) do
-        -- Redact from end of prefix up to the next segment terminator (~) or EOL.
-        -- The "." wildcard in prefix is intentional: matches * or | separators.
-        local pat = "^(%s*)(" .. prefix .. ")[^~]*"
+    local seg_id, sep_char = line:match("^%s*([A-Za-z0-9]+)([*|])")
+    if not seg_id then
+        return line
+    end
+    seg_id = seg_id:upper()
+
+    if seg_id == "NM1" then
+        -- split-and-rebuild to target only NM103 (last) and NM104 (first)
+        local parts = vim.split(line, sep_char, { plain = true })
+        -- parts[1]=NM1, parts[2]=qualifier, parts[3]=entity type, parts[4]=last, parts[5]=first, parts[6+]=keep
+        local qual = parts[2] or ""
+        if qual == "IL" or qual == "QC" then
+            for i = 4, 5 do
+                if parts[i] and parts[i] ~= "" then
+                    parts[i] = "REDACTED"
+                end
+            end
+            return table.concat(parts, sep_char)
+        end
+    elseif seg_id == "DMG" or seg_id == "N3" or seg_id == "PER" then
+        -- redact everything after the first separator, up to ~ or EOL
+        local pat = "^(%s*" .. seg_id .. "[*|])[^~]*"
         if line:match(pat) then
-            return line:gsub(pat, "%1%2REDACTED")
+            return line:gsub(pat, "%1REDACTED")
+        end
+    elseif seg_id == "REF" then
+        -- only redact REF*SY (Social Security Number); leave all other REF qualifiers alone
+        local qual = (line:match("^%s*REF[*|]([^*|~]+)") or ""):upper()
+        if qual == "SY" then
+            local pat = "^(%s*REF[*|]SY[*|])[^~]*"
+            if line:match(pat) then
+                return line:gsub(pat, "%1REDACTED")
+            end
         end
     end
+
     return line
 end
 
@@ -182,53 +210,46 @@ local function redact_range(bufnr, start_lnum_0, end_lnum_0)
         lines[i] = redact_line(lines[i])
     end
     vim.api.nvim_buf_set_lines(bufnr, start_lnum_0, end_lnum_0 + 1, false, lines)
-    return lines
 end
 
-local function redact_visual_and_copy()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local s = vim.fn.getpos("'<")
-    local e = vim.fn.getpos("'>")
-    local srow, erow = s[2], e[2]
-    if srow == 0 or erow == 0 then
-        return
-    end
-    if srow > erow then
-        srow, erow = erow, srow
-    end
-    local redacted_lines = redact_range(bufnr, srow - 1, erow - 1)
-    vim.fn.setreg("+", table.concat(redacted_lines, "\n"))
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-    vim.notify("X12: Redacted selection and copied to system clipboard (+).", vim.log.levels.INFO)
+-- Operator function: called by g@ with motion type ('line', 'char', 'block').
+-- All motion types are treated as linewise since segments are line-oriented.
+-- Exposed as a global because operatorfunc requires a string expression.
+_G.__x12_redact_operator = function(_motion_type)
+    local s = vim.fn.getpos("'[")
+    local e = vim.fn.getpos("']")
+    local srow, erow = s[2] - 1, e[2] - 1
+    redact_range(vim.api.nvim_get_current_buf(), srow, erow)
+    vim.notify("X12: Redacted " .. (erow - srow + 1) .. " line(s).", vim.log.levels.INFO)
 end
 
-local function redact_entire_file()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local line_count = vim.api.nvim_buf_line_count(bufnr)
-    if line_count == 0 then
-        return
-    end
-    redact_range(bufnr, 0, line_count - 1)
-    vim.notify("X12: Redacted entire file (no clipboard copy).", vim.log.levels.INFO)
-end
+vim.keymap.set("n", "<leader>r", function()
+    vim.opt.operatorfunc = "v:lua.__x12_redact_operator"
+    return "g@"
+end, { buffer = true, expr = true, desc = "X12: redact PHI (operator)" })
 
-vim.keymap.set("v", "<leader>-", redact_visual_and_copy, {
-    buffer = true,
-    desc = "X12: redact selection (prefix map) + copy to clipboard",
-})
-vim.keymap.set("n", "<leader>-", redact_entire_file, {
-    buffer = true,
-    desc = "X12: redact entire file (prefix map)",
-})
+vim.keymap.set("n", "<leader>rr", function()
+    vim.opt.operatorfunc = "v:lua.__x12_redact_operator"
+    return "g@_"
+end, { buffer = true, expr = true, desc = "X12: redact PHI (current line)" })
+
+vim.keymap.set("x", "<leader>r", function()
+    vim.opt.operatorfunc = "v:lua.__x12_redact_operator"
+    return "g@"
+end, { buffer = true, expr = true, desc = "X12: redact PHI (visual)" })
 
 -- =============================
 -- Unified Segment + Status Virtual Text
 -- fix #8: segment data and resolution logic live in lua/x12/segments.lua;
 --         this file only wires the renderer and autocmd.
 -- Supports 837 / 277 / 835 with STC loop-level hints
+-- Defaults to OFF; toggle with <leader>vt
 -- =============================
 local x12_seg = require("x12.segments")
 local segment_ns = vim.api.nvim_create_namespace("x12_segments")
+
+-- State: virtual text is off by default
+local vt_enabled = false
 
 -- fix #4: render only the visible window range; debounce on text changes
 local function explain_segments_range(first, last)
@@ -251,6 +272,9 @@ local function explain_segments_range(first, last)
 end
 
 local function explain_visible()
+    if not vt_enabled then
+        return
+    end
     local first = vim.fn.line("w0") - 1
     local last = vim.fn.line("w$") - 1
     explain_segments_range(first, last)
@@ -259,6 +283,9 @@ end
 -- debounce timer for text-change events
 local debounce_timer = nil
 local function explain_segments_debounced()
+    if not vt_enabled then
+        return
+    end
     if debounce_timer then
         debounce_timer:stop()
         debounce_timer:close()
@@ -274,3 +301,15 @@ vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
     buffer = buf,
     callback = explain_segments_debounced,
 })
+
+-- Toggle: enable renders the visible range immediately; disable clears all marks
+vim.keymap.set("n", "<leader>vt", function()
+    vt_enabled = not vt_enabled
+    if vt_enabled then
+        explain_visible()
+        vim.notify("X12: segment virtual text ON", vim.log.levels.INFO)
+    else
+        vim.api.nvim_buf_clear_namespace(buf, segment_ns, 0, -1)
+        vim.notify("X12: segment virtual text OFF", vim.log.levels.INFO)
+    end
+end, { buffer = true, desc = "X12: toggle segment virtual text" })
