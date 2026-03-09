@@ -2,7 +2,17 @@ if not vim.g.neovide then
     require("mini.animate").setup()
 end
 
-require("mini.ai").setup() -- Extend and create `a`/`i` textobjects
+require("mini.ai").setup({ -- Extend and create `a`/`i` textobjects {{{
+    custom_textobjects = {
+        f = function()
+            local n = vim.api.nvim_buf_line_count(0)
+            return {
+                from = { line = 1, col = 1 },
+                to = { line = n, col = math.max(#vim.fn.getline(n), 1) },
+            }
+        end,
+    },
+}) -- }}}
 -- require("mini.align").setup() -- Align text interactively
 -- require("mini.base16").setup() -- Base16 colorscheme creation
 require("mini.basics").setup({ -- Common config presets{{{
