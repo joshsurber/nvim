@@ -61,6 +61,8 @@ M.segments = {
     ["DTP.431"] = "Onset of Illness or Symptom",
     ["DTP.360"] = "Initial Treatment Date",
     ["DTP.304"] = "Last Seen Date",
+    ["DTM*405"] = "Payment issue/release date",
+    ["BPR16"] = "Payment effective date",
     -- REF qualifiers
     ["REF.1K"] = "Payer Claim ID",
     ["REF.6R"] = "Provider Control Number",
