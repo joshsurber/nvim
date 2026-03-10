@@ -5,63 +5,124 @@ endif
 
 " =====================================
 " Detect separators from ISA segment
+" Note: assumes no leading BOM or whitespace on line 1.
+" strlen() counts bytes; non-ASCII separators (unusual in X12) would need
+" strcharlen() / strgetchar() instead.
 " =====================================
-let firstline = getline(1)
+let s:firstline = getline(1)
+let s:sep  = '*'
+let s:comp = ':'
+let s:term = '~'
 
-" Default separators if ISA is missing
-let sep  = '*'
-let comp = ':'
-let term = '~'
-
-if firstline =~# '^ISA' && strlen(firstline) >= 106
-  let sep  = firstline[3]     " 4th char: element separator
-  let comp = firstline[104]   " 105th char: component separator
-  let term = firstline[105]   " 106th char: segment terminator
+if s:firstline =~# '^ISA' && strlen(s:firstline) >= 106
+  let s:sep  = s:firstline[3]
+  let s:comp = s:firstline[104]
+  let s:term = s:firstline[105]
 endif
 
-" Escape for regex (plain regex)
-let sep_e  = escape(sep,  '\.^$*~[]')
-let comp_e = escape(comp, '\.^$*~[]')
-let term_e = escape(term, '\.^$*~[]')
+" Escape for use in regex atom context (outside character classes)
+let s:sep_e  = escape(s:sep,  '\.^$*~[]')
+let s:comp_e = escape(s:comp, '\.^$*~[]')
+let s:term_e = escape(s:term, '\.^$*~[]')
+
+" Escape for use inside a [] character class:
+" Inside [], the meaningful specials are ] \ ^ - so escape those.
+let s:sep_c  = escape(s:sep,  '\]^-')
+let s:comp_c = escape(s:comp, '\]^-')
+let s:term_c = escape(s:term, '\]^-')
+
+" Convenience: "not a separator" atom used repeatedly
+let s:ns = '[^' . s:sep_c . s:term_c . ']'
 
 " =====================================
 " Core delimiters
+" Define separate groups so each can be re-linked independently later.
 " =====================================
-execute 'syn match x12SegmentTerm "' . term_e . '"'
-execute 'syn match x12ElementSep  "' . sep_e  . '"'
-execute 'syn match x12ComponentSep "' . comp_e . '"'
+execute 'syn match x12SegmentTerm   "' . s:term_e . '"'
+execute 'syn match x12ElementSep    "' . s:sep_e  . '"'
+execute 'syn match x12ComponentSep  "' . s:comp_e . '"'
 
-hi def link x12SegmentTerm  Delimiter
-hi def link x12ElementSep   Delimiter
-hi def link x12ComponentSep Delimiter
+hi def link x12SegmentTerm   Delimiter
+hi def link x12ElementSep    Delimiter
+hi def link x12ComponentSep  Delimiter
 
 " =====================================
-" Segment IDs (2-3 alphanumeric chars before element separator)
-" Match only at start of line or after element separator
+" Segment ID anchor: \%(^\|<sep>\)\zs
+" Reused as a string to keep patterns readable.
 " =====================================
-execute 'syn match x12SegmentID "\%(^\|' . sep_e . '\)\zs[A-Z0-9]\{2,3\}\ze' . sep_e . '"'
+let s:anchor = '\%(^\|' . s:sep_e . '\)\zs'
+
+" =====================================
+" Generic segment IDs (2-3 alphanum before sep).
+" Explicitly excludes envelope IDs so the groups are mutually exclusive
+" by pattern rather than by definition order.
+" =====================================
+execute 'syn match x12SegmentID'
+  \ '"' . s:anchor
+  \ . '\%(\%(ISA\|GS\|ST\|SE\|GE\|IEA\)\|'
+  \ . '\%(NM1\|REF\|DTP\|CAS\|SBR\|STC\|AAA\|IK3\|IK4\|IK5\|AK3\|AK4\|AK5\|'
+  \ .         'CLP\|HI\|SV1\|SV2\|SVC\|N3\|N4\|PRV\)\)\@!'
+  \ . '[A-Z0-9]\{2,3\}\ze' . s:sep_e . '"'
+
 hi def link x12SegmentID Keyword
 
 " =====================================
-" Envelope segments
-" Match only at start of line or after element separator
+" Envelope segments (highest priority — defined after x12SegmentID)
 " =====================================
-execute 'syn match x12Envelope "\%(^\|' . sep_e . '\)\zs\(ISA\|GS\|ST\|SE\|GE\|IEA\)\ze' . sep_e . '"'
+execute 'syn match x12Envelope'
+  \ '"' . s:anchor
+  \ . '\%(ISA\|GS\|ST\|SE\|GE\|IEA\)\ze' . s:sep_e . '"'
+
 hi def link x12Envelope Statement
 
 " =====================================
-" Common high-value segments
-" Match only at start of line or after element separator
+" Provider / name / reference segments
+"
+" Two tiers per segment type:
+"   x12Provider      — segment ID alone         (e.g. "PRV", "N3")
+"   x12ProviderQual  — segment ID + qualifier   (e.g. "NM1*85", "REF*1K")
+"
+" Qualifier-bearing matches are intentionally broad so qualifiers are
+" visible when scanning the file.  They are defined AFTER the bare-ID
+" matches so Vim's last-match rule makes qualifier patterns win on overlap.
 " =====================================
-execute 'syn match x12Provider "\%(^\|' . sep_e . '\)\zs\(N3\|N4\|PRV\)\ze' . sep_e . '"'
-execute 'syn match x12Provider "\%(^\|' . sep_e . '\)\zs\(NM1\|REF\)' . sep_e . '[^' . sep_e . ']\+\ze' . sep_e . '"'
-execute 'syn match x12Claim    "\%(^\|' . sep_e . '\)\zs\(CLP\|HI\|SV1\|SV2\|SVC\|CAS\|DTM\)\ze' . sep_e . '"'
-execute 'syn match x12Status   "\%(^\|' . sep_e . '\)\zs\(STC\|AAA\|IK3\|IK4\|IK5\|AK3\|AK4\|AK5\)\ze' . sep_e . '"'
+execute 'syn match x12Provider'
+  \ '"' . s:anchor . '\%(N3\|N4\|PRV\)\ze' . s:sep_e . '"'
 
-hi def link x12Provider Identifier
-hi def link x12Claim    Type
-hi def link x12Status   Constant
+execute 'syn match x12ProviderQual'
+  \ '"' . s:anchor . '\%(NM1\|REF\)' . s:sep_e . s:ns . '\+\ze' . s:sep_e . '"'
+
+hi def link x12Provider     Identifier
+hi def link x12ProviderQual Identifier
+
+" =====================================
+" Claim segments
+" =====================================
+execute 'syn match x12Claim'
+  \ '"' . s:anchor . '\%(CLP\|HI\|SV1\|SV2\|SVC\)\ze' . s:sep_e . '"'
+
+execute 'syn match x12ClaimQual'
+  \ '"' . s:anchor . '\%(DTP\|CAS\)' . s:sep_e . s:ns . '\+\ze' . s:sep_e . '"'
+
+hi def link x12Claim     Type
+hi def link x12ClaimQual Type
+
+" =====================================
+" Status segments
+" =====================================
+execute 'syn match x12Status'
+  \ '"' . s:anchor . '\%(STC\|AAA\|IK3\|IK4\|IK5\|AK3\|AK4\|AK5\)\ze' . s:sep_e . '"'
+
+execute 'syn match x12StatusQual'
+  \ '"' . s:anchor . 'SBR' . s:sep_e . s:ns . '\+\ze' . s:sep_e . '"'
+
+hi def link x12Status     Constant
+hi def link x12StatusQual Constant
+
+" =====================================
+" Sync: segments always start at column 0 after ftplugin splitting,
+" so a single-line sync is sufficient and avoids full-file rescans.
+" =====================================
+syn sync minlines=1
 
 let b:current_syntax = "x12"
-
-
