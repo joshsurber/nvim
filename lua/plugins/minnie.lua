@@ -205,16 +205,15 @@ require("mini.jump").setup() -- Jump forward/backward to a single character
 require("mini.jump2d").setup() -- Jump within visible lines
 -- require("mini.keymap").setup({ -- Special key mappings {{{
 -- }) -- }}}
--- require("mini.map").setup() -- Window with buffer text overview{{{
--- local map = vim.keymap.set
--- local MiniMap = Minimap
--- map("n", "<Leader>mc", MiniMap.close, { desc = "Close map" })
--- map("n", "<Leader>mf", MiniMap.toggle_focus, { desc = "Focus map" })
--- map("n", "<Leader>mo", MiniMap.open, { desc = "Open map" })
--- map("n", "<Leader>mr", MiniMap.refresh, { desc = "Refresh map" })
--- map("n", "<Leader>ms", MiniMap.toggle_side, { desc = "Switch map side" })
--- map("n", "<Leader>mt", MiniMap.toggle, { desc = "Toggle map" })
--- -- }}}
+require("mini.map").setup() -- Window with buffer text overview{{{
+local map = vim.keymap.set
+map("n", "<Leader>mc", require("mini.map").close, { desc = "Close map" })
+map("n", "<Leader>mf", require("mini.map").toggle_focus, { desc = "Focus map" })
+map("n", "<Leader>mo", require("mini.map").open, { desc = "Open map" })
+map("n", "<Leader>mr", require("mini.map").refresh, { desc = "Refresh map" })
+map("n", "<Leader>ms", require("mini.map").toggle_side, { desc = "Switch map side" })
+map("n", "<Leader>mm", require("mini.map").toggle, { desc = "Toggle map" })
+-- }}}
 -- require("mini.misc").setup() -- Miscellaneous functions
 require("mini.move").setup({ -- Move any selection in any direction{{{
     mappings = {
