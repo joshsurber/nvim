@@ -13,7 +13,7 @@ require("mini.ai").setup({ -- Extend and create `a`/`i` textobjects {{{
         end,
     },
 }) -- }}}
--- require("mini.align").setup() -- Align text interactively
+require("mini.align").setup() -- Align text interactively
 -- require("mini.base16").setup() -- Base16 colorscheme creation
 require("mini.basics").setup({ -- Common config presets{{{
     options = {
