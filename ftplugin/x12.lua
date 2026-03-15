@@ -177,9 +177,9 @@ local function redact_line(line)
         -- parts[1]=NM1, parts[2]=qualifier, parts[3]=entity type, parts[4]=last, parts[5]=first, parts[6+]=keep
         local qual = parts[2] or ""
         if qual == "IL" or qual == "QC" then
-            for i = 4, 5 do
+            for i = 4, 6 do
                 if parts[i] and parts[i] ~= "" then
-                    parts[i] = "REDACTED"
+                    parts[i] = "redacted"
                 end
             end
             return table.concat(parts, sep_char)
@@ -188,7 +188,7 @@ local function redact_line(line)
         -- redact everything after the first separator, up to ~ or EOL
         local pat = "^(%s*" .. seg_id .. "[*|])[^~]*"
         if line:match(pat) then
-            return line:gsub(pat, "%1REDACTED")
+            return line:gsub(pat, "%1redacted")
         end
     elseif seg_id == "REF" then
         -- only redact REF*SY (Social Security Number); leave all other REF qualifiers alone
@@ -196,7 +196,7 @@ local function redact_line(line)
         if qual == "SY" then
             local pat = "^(%s*REF[*|]SY[*|])[^~]*"
             if line:match(pat) then
-                return line:gsub(pat, "%1REDACTED")
+                return line:gsub(pat, "%1redacted")
             end
         end
     end
