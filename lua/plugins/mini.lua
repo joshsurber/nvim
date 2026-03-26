@@ -130,7 +130,7 @@ require("mini.diff").setup({ -- Work with diff hunks{{{
     },
 }) -- }}}
 -- require("mini.doc").setup() -- Generate Neovim help files
--- require("mini.extra").setup() -- Extra mini.nvim functionality
+require("mini.extra").setup() -- Extra mini.nvim functionality
 -- require("mini.fuzzy").setup() -- Fuzzy matching
 require("mini.files").setup({ -- Navigate and manipulate file system{{{
     windows = {

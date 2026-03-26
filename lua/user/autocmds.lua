@@ -20,6 +20,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         map("n", "E", buf.hover, { desc = "Floating information window" })
         map("n", "grf", buf.format, { desc = "Format buffer" })
+        map("n", "<leader>fs", "<cmd>Pick lsp scope='document_symbol'<cr>", { desc = "Document symbols" })
+        map("n", "<leader>fS", "<cmd>Pick lsp scope='workspace_symbol'<cr>", { desc = "Workspace symbols" })
 
         if client:supports_method("textDocument/completion") then
             -- Optional: trigger autocompletion on EVERY keypress. May be slow!
