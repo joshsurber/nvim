@@ -90,12 +90,12 @@ require("mini.clue").setup({ -- Show next key clues{{{
         { mode = "i", keys = "<C-x><C-o>", desc = "Omni completion" },
         { mode = "i", keys = "<C-x><C-s>", desc = "Spelling suggestions" },
         { mode = "i", keys = "<C-x><C-u>", desc = "With 'completefunc'" },
-        { mode = "n", keys = "<leader>f", desc = "Find with MiniPick" },
-        -- { mode = "n", keys = "<leader>g", desc = "Git" },
-        -- { mode = "n", keys = "<leader>l",  desc = "LSP" },
-        -- { mode = "n", keys = "<leader>m", desc = "MiniMap" },
-        { mode = "n", keys = "<leader>p", desc = "Pick stuff" },
-        { mode = "n", keys = "<leader>v", desc = "Vim config" },
+        { mode = "n", keys = "<leader>f", desc = "+Find" },
+        { mode = "n", keys = "<leader>g", desc = "+Git" },
+        { mode = "n", keys = "<leader>l", desc = "+LSP" },
+        { mode = "n", keys = "<leader>m", desc = "+Map" },
+        { mode = "n", keys = "<leader>p", desc = "+Pick" },
+        { mode = "n", keys = "<leader>v", desc = "+Vim config" },
     },
 }) -- }}}
 require("mini.cmdline").setup()
