@@ -284,46 +284,20 @@ vim.keymap.set("n", "<leader>'", function()
     MiniSessions.select()
 end, { desc = "Switch session" })
 -- }}}
--- require("mini.snippets").setup({ -- Manage and expand snippets{{{
---     snippets = {
---         -- Load custom file with global snippets first (adjust for Windows)
---         require("mini.snippets").gen_loader.from_file("~/.config/nvim/snippets/global.json"),
---
---         -- Load snippets based on current language by reading files from
---         -- "snippets/" subdirectories from 'runtimepath' directories.
---         require("mini.snippets").gen_loader.from_lang(),
---     },
---     mappings = {
---         -- Expand snippet at cursor position. Created globally in Insert mode.
---         expand = "<C-n>",
---         jump_next = "<C-e>",
---         jump_prev = "<C-h>",
---     },
--- })
--- local snippets = require("mini.snippets")
--- local match_strict = function(snips)
---     -- Do not match with whitespace to cursor's left
---     return snippets.default_match(snips, { pattern_fuzzy = "%S+" })
--- end
--- local expand_or_jump = function()
---     local can_expand = #MiniSnippets.expand({ insert = false }) > 0
---     if can_expand then
---         vim.schedule(MiniSnippets.expand)
---         return ""
---     end
---     local is_active = MiniSnippets.session.get() ~= nil
---     if is_active then
---         MiniSnippets.session.jump("next")
---         return ""
---     end
---     return "\t"
--- end
--- local jump_prev = function()
---     MiniSnippets.session.jump("prev")
--- end
--- vim.keymap.set("i", "<Tab>", expand_or_jump, { expr = true })
--- vim.keymap.set("i", "<S-Tab>", jump_prev)
--- -- }}}
+require("mini.snippets").setup({ -- Manage and expand snippets{{{
+    snippets = {
+        -- Load snippets based on current language by reading files from
+        -- "snippets/" subdirectories from 'runtimepath' directories.
+        require("mini.snippets").gen_loader.from_lang(),
+    },
+    mappings = {
+        -- Expand snippet at cursor position. Created globally in Insert mode.
+        expand = "<C-j>", -- Since you use Colemak/j for 'e', let's use C-j for expand
+        jump_next = "<C-e>",
+        jump_prev = "<C-n>",
+    },
+})
+-- }}}
 -- require("mini.splitjoin").setup() -- Split and join arguments
 require("mini.starter").setup() -- Start screen
 require("mini.statusline").setup() -- Statusline

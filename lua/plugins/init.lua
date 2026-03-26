@@ -1,6 +1,7 @@
 local add = require("mini.deps").add
 add("mini.nvim")
 add("github/copilot.vim")
+add("rafamadriz/friendly-snippets")
 
 require("plugins.mini")
 require("plugins.colorschemes")
