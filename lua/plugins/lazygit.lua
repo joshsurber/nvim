@@ -16,6 +16,7 @@ vim.g.lazygit_on_exit_callback = nil -- optional function callback when exiting 
 
 -- Same binding I use in tmux
 vim.keymap.set("n", "<C-t><C-y>", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+vim.keymap.set("n", "<C-y>", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
 local lazygit = function()
     --  get file name with extension
