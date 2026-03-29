@@ -41,6 +41,7 @@ M.segments = {
     -- NM1 qualifiers
     ["NM1.77"] = "Facility",
     ["NM1.82"] = "Rendering Provider",
+    ["NM1.71"] = "Attending Provider",
     ["NM1.85"] = "Billing Provider",
     ["NM1.87"] = "Pay-to Provider",
     ["NM1.IL"] = "Subscriber",
