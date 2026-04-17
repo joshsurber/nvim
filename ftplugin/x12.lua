@@ -176,7 +176,7 @@ local function redact_line(line)
         local parts = vim.split(line, sep_char, { plain = true })
         -- parts[1]=NM1, parts[2]=qualifier, parts[3]=entity type, parts[4]=last, parts[5]=first, parts[6+]=keep
         local qual = parts[2] or ""
-        if qual == "IL" or qual == "QC" then
+        if qual == "IL" or qual == "QC" or qual == "71" then
             for i = 4, 6 do
                 if parts[i] and parts[i] ~= "" then
                     parts[i] = "redacted"
@@ -184,7 +184,7 @@ local function redact_line(line)
             end
             return table.concat(parts, sep_char)
         end
-    elseif seg_id == "DMG" or seg_id == "N3" or seg_id == "PER" then
+    elseif seg_id == "DMG" or seg_id == "N3" or seg_id == "N4" or seg_id == "PER" then
         -- redact everything after the first separator, up to ~ or EOL
         local pat = "^(%s*" .. seg_id .. "[*|])[^~]*"
         if line:match(pat) then
