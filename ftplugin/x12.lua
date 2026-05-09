@@ -1,27 +1,18 @@
 -- ftplugin/x12.lua
 -- X12 EDI support for Neovim
--- Handles small and large files, virtual vs real line breaks, fast HL indent/folding
+-- Fast HL indent/folding
 -- Adds STC visual status highlighting + inline explanations for 277CA, 835, 837
+--
+-- Change: no automatic formatting on open; no large vs small logic; no virtual line breaks.
+-- Formatting only occurs when you press the mapped key (<leader>; or <leader>:).
 
 -- =============================
--- Buffer handle (fix #1: never use 0 sentinel)
+-- Buffer handle (never use 0 sentinel)
 -- =============================
 local buf = vim.api.nvim_get_current_buf()
 
 -- =============================
--- File size detection
--- =============================
-local max_file_size = 1024 * 1024 -- 1 MB threshold
-local bufname = vim.api.nvim_buf_get_name(buf)
-local stat
-if bufname ~= "" then
-    local ok
-    ok, stat = pcall(vim.loop.fs_stat, bufname)
-end
-local is_large = stat and stat.size >= max_file_size
-
--- =============================
--- Indent and folding (fix #2: separate foldexpr from indentexpr)
+-- Indent and folding (separate foldexpr from indentexpr)
 -- =============================
 vim.opt_local.indentexpr = "v:lua.require'indent.x12'.get_indent(v:lnum)"
 vim.opt_local.indentkeys = "0{,0},0),0],:,!^F,o,O,e"
@@ -55,83 +46,53 @@ vim.fn.matchadd("X12STC_Info_Dim", "^STC\\*A0")
 vim.fn.matchadd("X12STC_Bad_Dim", "^STC\\*A[^01]")
 
 -- =============================
--- Small file: virtual line breaks
+-- Pretty formatting (manual only)
+-- Splits segments on ~ and adds extra blank lines before HL and CLP
+-- Guarded so it does not re-run unless you reset b:x12_split_done
 -- =============================
-if not is_large then
-    vim.opt_local.wrap = true
-    vim.opt_local.linebreak = true
-    vim.opt_local.showbreak = " "
-    vim.opt_local.conceallevel = 2
+local function x12_pretty_split()
+    if vim.b[buf].x12_split_done then
+        return
+    end
 
-    local ns = vim.api.nvim_create_namespace("x12_virtual_segments")
-    vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+    -- For very large buffers, treesitter can amplify the cost during edits.
+    -- Stop it only when you explicitly format.
+    pcall(vim.treesitter.stop, buf)
 
-    -- fix #3: batch extmarks; defer off the render hot-path
-    vim.schedule(function()
-        local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-        for i, line in ipairs(lines) do
-            for _, e in line:gmatch("()~()") do
-                vim.api.nvim_buf_set_extmark(buf, ns, i - 1, e - 1, {
-                    virt_text = { { "", "Normal" } },
-                    virt_text_pos = "overlay",
-                    hl_mode = "combine",
-                })
-            end
-        end
-    end)
-
-    vim.keymap.set("n", "<leader>aa", function()
-        vim.opt_local.wrap = not vim.opt_local.wrap:get()
-    end, { buffer = true, desc = "Toggle virtual ~ line breaks" })
-end
-
--- =============================
--- Large file: real line splits
--- fix #5: wrap in an undo block and guard against re-running
--- =============================
-local function large_file_split()
     local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
     local text = table.concat(lines, "\n")
+
+    -- Insert newline after each segment terminator, preserve next char
     text = text:gsub("~(.)", "~\n%1")
+
+    -- Visual grouping
     text = text:gsub("\n(HL)([*|])", "\n\n%1%2")
     text = text:gsub("\n(CLP)([*|])", "\n\n%1%2")
-    -- open a single undo block so the whole split is one <u> step
-    vim.cmd("undojoin")
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(text, "\n", { plain = true }))
-end
 
-local split_done = vim.b[buf].x12_split_done
-if is_large and not split_done then
-    vim.treesitter.stop(buf)
-    large_file_split()
+    -- Single undo step if possible
+    pcall(vim.cmd, "silent! undojoin")
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(text, "\n", { plain = true }))
+
     vim.b[buf].x12_split_done = true
 end
 
 -- =============================
 -- Pretty preview for manual toggle
--- fix #6: re-seek to the segment ID at the cursor rather than restoring
---         a line number that is invalidated by the split
+-- Re-seek to the segment ID at the cursor rather than restoring a line number
 -- =============================
 local function pretty_x12_preview()
-    -- remember the segment ID on the cursor line so we can re-find it
     local cursor = vim.api.nvim_win_get_cursor(0)
     local cursor_line = vim.api.nvim_buf_get_lines(buf, cursor[1] - 1, cursor[1], false)[1] or ""
     local anchor_seg = cursor_line:match("^%s*([A-Za-z0-9]+[*|])")
 
-    large_file_split()
+    x12_pretty_split()
 
-    -- try to land on the same segment after line numbers shift
     if anchor_seg then
         local escaped = vim.fn.escape(anchor_seg, "*|\\")
         pcall(vim.cmd, "keepjumps /" .. escaped)
     end
 
-    if is_large then
-        print("X12 Pretty Preview applied (large-file mode)")
-    else
-        vim.opt_local.wrap = true
-        print("X12 Pretty Preview applied (small-file mode, virtual ~ lines)")
-    end
+    vim.notify("X12 Pretty Preview applied", vim.log.levels.INFO)
 end
 
 -- =============================
@@ -139,11 +100,12 @@ end
 -- =============================
 vim.keymap.set("n", "<leader>;", pretty_x12_preview, {
     buffer = true,
-    desc = "X12: pretty segment preview",
+    desc = "X12: pretty segment preview (manual)",
 })
+
 vim.keymap.set("n", "<leader>:", function()
     vim.cmd([[keepjumps %s/\~/\~\r/ge]])
-end, { buffer = true, desc = "X12: break segments on ~" })
+end, { buffer = true, desc = "X12: break segments on ~ (manual)" })
 
 -- =============================
 -- PHI Redaction
@@ -156,7 +118,7 @@ end, { buffer = true, desc = "X12: break segments on ~" })
 --   PER              — contact info (phone, email)
 --
 -- NM1 element positions:
---   1=segment id, 2=qualifier, 3=last, 4=first, 5+=preserved
+--   1=segment id, 2=qualifier, 3=entity type, 4=last, 5=first, 6+=preserved
 --
 -- Implemented as an operator so it composes with any motion or text object:
 --   <leader>r<motion>   e.g. <leader>rip, <leader>r5j, <leader>rG
@@ -172,9 +134,7 @@ local function redact_line(line)
     seg_id = seg_id:upper()
 
     if seg_id == "NM1" then
-        -- split-and-rebuild to target only NM103 (last) and NM104 (first)
         local parts = vim.split(line, sep_char, { plain = true })
-        -- parts[1]=NM1, parts[2]=qualifier, parts[3]=entity type, parts[4]=last, parts[5]=first, parts[6+]=keep
         local qual = parts[2] or ""
         if qual == "IL" or qual == "QC" or qual == "71" then
             for i = 4, 6 do
@@ -185,13 +145,11 @@ local function redact_line(line)
             return table.concat(parts, sep_char)
         end
     elseif seg_id == "DMG" or seg_id == "N3" or seg_id == "N4" or seg_id == "PER" then
-        -- redact everything after the first separator, up to ~ or EOL
         local pat = "^(%s*" .. seg_id .. "[*|])[^~]*"
         if line:match(pat) then
             return line:gsub(pat, "%1redacted")
         end
     elseif seg_id == "REF" then
-        -- only redact REF*SY (Social Security Number); leave all other REF qualifiers alone
         local qual = (line:match("^%s*REF[*|]([^*|~]+)") or ""):upper()
         if qual == "SY" then
             local pat = "^(%s*REF[*|]SY[*|])[^~]*"
@@ -212,9 +170,6 @@ local function redact_range(bufnr, start_lnum_0, end_lnum_0)
     vim.api.nvim_buf_set_lines(bufnr, start_lnum_0, end_lnum_0 + 1, false, lines)
 end
 
--- Operator function: called by g@ with motion type ('line', 'char', 'block').
--- All motion types are treated as linewise since segments are line-oriented.
--- Exposed as a global because operatorfunc requires a string expression.
 _G.__x12_redact_operator = function(_motion_type)
     local s = vim.fn.getpos("'[")
     local e = vim.fn.getpos("']")
@@ -240,18 +195,16 @@ end, { buffer = true, expr = true, desc = "X12: redact PHI (visual)" })
 
 -- =============================
 -- Unified Segment + Status Virtual Text
--- fix #8: segment data and resolution logic live in lua/x12/segments.lua;
---         this file only wires the renderer and autocmd.
+-- Segment data and resolution logic live in lua/x12/segments.lua;
+-- this file only wires the renderer and autocmd.
 -- Supports 837 / 277 / 835 with STC loop-level hints
 -- Defaults to OFF; toggle with <leader>vt
 -- =============================
 local x12_seg = require("x12.segments")
 local segment_ns = vim.api.nvim_create_namespace("x12_segments")
 
--- State: virtual text is off by default
 local vt_enabled = false
 
--- fix #4: render only the visible window range; debounce on text changes
 local function explain_segments_range(first, last)
     vim.api.nvim_buf_clear_namespace(buf, segment_ns, first, last + 1)
     for lnum = first, last do
@@ -280,7 +233,6 @@ local function explain_visible()
     explain_segments_range(first, last)
 end
 
--- debounce timer for text-change events
 local debounce_timer = nil
 local function explain_segments_debounced()
     if not vt_enabled then
@@ -302,7 +254,6 @@ vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
     callback = explain_segments_debounced,
 })
 
--- Toggle: enable renders the visible range immediately; disable clears all marks
 vim.keymap.set("n", "<leader>vt", function()
     vt_enabled = not vt_enabled
     if vt_enabled then
