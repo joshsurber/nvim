@@ -2,12 +2,12 @@
 
 -- For on my laptop keeb: I'm spoiled by ctrl/esc on my caps lock
 vim.keymap.set({ "n", "i", "v" }, "<C-o>", "<Esc>")
-vim.keymap.set({ "n", "i", "v" }, "tn", "<esc>")
 
 -- Command line conveniences
 vim.keymap.set("c", "%%", "<C-R>=expand('%:h').'/'<cr>") -- expand %% to current directory in command-line mode
 vim.keymap.set("t", "<C-w>", "<C-\\><C-n><C-w>")
 vim.keymap.set({ "n", "v" }, "<leader><leader>", "za", { desc = "Toggle fold" })
+vim.keymap.set({ "c", "i" }, "<C-S-v>", "<C-r>+")
 
 -- Searching nicities
 vim.keymap.set("n", "*", "*N", { desc = "Search word under cursor" }) -- Fix * (Keep the cursor position, don't move to next match)
