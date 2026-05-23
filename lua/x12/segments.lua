@@ -46,6 +46,7 @@ M.segments = {
     ["NM1.87"] = "Pay-to Provider",
     ["NM1.IL"] = "Subscriber",
     ["NM1.QC"] = "Patient",
+    ["NM1.74"] = "Patient (corrected)",
     ["NM1.PR"] = "Payer",
     ["NM1.DN"] = "Referring Provider",
     ["NM1.P3"] = "Primary Care Provider",
