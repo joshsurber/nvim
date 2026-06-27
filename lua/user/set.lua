@@ -1,6 +1,7 @@
 local o = vim.o
 local g = vim.g
 -- o.cindent = true -- Indent using C-style rules
+o.background = "dark"
 o.confirm = true -- Instead of failing a command because of unsaved changes raise a dialogue asking if you wish to save changed files.
 o.dictionary = "/usr/share/dict/words"
 o.expandtab = true -- Use spaces instead of tabs
