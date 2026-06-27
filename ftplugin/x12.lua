@@ -62,10 +62,11 @@ local function x12_pretty_split()
     local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
     local text = table.concat(lines, "\n")
 
-    -- Insert newline after each segment terminator, preserve next char
-    text = text:gsub("~(.)", "~\n%1")
+    -- Insert newline after ~ only if it is not already followed by a newline or whitespace
+    text = text:gsub("~([^\n\r%s])", "~\n%1")
 
     -- Visual grouping
+    text = text:gsub("\n(BHT)([*|])", "\n\n%1%2")
     text = text:gsub("\n(HL)([*|])", "\n\n%1%2")
     text = text:gsub("\n(CLP)([*|])", "\n\n%1%2")
 
