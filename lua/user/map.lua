@@ -37,7 +37,8 @@ vim.keymap.set("n", "<leader>vv", "<cmd>source $MYVIMRC<cr>", { desc = "Reload c
 -- Save and quit easier
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
 vim.keymap.set("n", "<leader>W", "<cmd>wall<cr>", { desc = "Save all windows/tabs" })
-vim.keymap.set("n", "<leader>q", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
+vim.keymap.set("n", "<leader>q", "<cmd>bwipeout<cr>", { desc = "Close tab" })
+vim.keymap.set("n", "<leader>Q", "<cmd>%bdelete|edit #|bnext|bwipeout<cr>", { desc = "Close other tabs" })
 
 vim.keymap.set("n", "<C-q>", ":q<cr>") -- Access `qq` macro
 vim.keymap.set("n", "<leader>e", ":Lex<cr>", { desc = "Toggle NETRW file explorer" })
